@@ -87,7 +87,7 @@ header .my a {
   margin-right: 25px;
   height: 29px;
 }
-header .my button {
+header .my .myAccount {
   padding: 11px 19px;
   background-color: #f16d7f;
   color: #ffffff;
@@ -95,7 +95,7 @@ header .my button {
   font-weight: 400;
   border: none;
 }
-header .my button i {
+header .my .myAccount i {
   font-size: 14px;
 }
 nav {
@@ -245,4 +245,17 @@ main {
 }
 .product a:hover .shadowHover {
   display: flex;
+}
+.browseAll {
+  display: block;
+  margin: 0 auto;
+  padding: 11px 19px;
+  background-color: #f16d7f;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 400;
+  border: none;
+}
+.browseAll i {
+  font-size: 14px;
 }
