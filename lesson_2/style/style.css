@@ -6,6 +6,7 @@ body {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 header {
   margin: 0 auto;
@@ -99,7 +100,6 @@ header .my button i {
 }
 nav {
   height: 51px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.17);
   border: 1px solid #ececec;
   background-color: #ffffff;
 }
@@ -111,12 +111,138 @@ nav ul {
   align-items: center;
   list-style-type: none;
 }
-nav ul li {
-  padding: 16px 0px;
-}
 nav ul li a {
   text-decoration: none;
   color: #222222;
   font-size: 14px;
   font-weight: 700;
+  display: block;
+  padding: 17px 0px;
+}
+.headerImgBlock {
+  background-color: #e8e8e8;
+}
+.headerImg {
+  height: 665px;
+  background-image: url(../img/Layer_24.jpg);
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  width: 1142px;
+  color: #222222;
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 40px;
+}
+.headerImg .headImgText {
+  position: relative;
+  top: 224px;
+  padding-left: 10px;
+  border-left: 12px solid #f16d7f;
+}
+.headerImg .headImgText .theBrand {
+  font-size: 60px;
+  letter-spacing: 1.5px;
+}
+.headerImg .headImgText .fashion {
+  color: #f16d7f;
+}
+main {
+  margin: 0 auto;
+  width: 1142px;
+}
+.category {
+  column-count: 2;
+  margin-top: 98px;
+}
+.category div {
+  position: relative;
+  margin-bottom: 20px;
+}
+.category span {
+  position: absolute;
+  left: 0px;
+  top: 26px;
+  background: #ffffff;
+  color: #222222;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.45px;
+  padding: 12px 16px;
+}
+.category span p {
+  color: #f16d7f;
+  font-size: 30px;
+  letter-spacing: 0.75px;
+}
+.feturedItems {
+  margin: 70px 0 60px 0;
+  text-align: center;
+}
+.feturedItems h1 {
+  color: #222222;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.75px;
+}
+.feturedItems p {
+  color: #9f9f9f;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.35px;
+}
+.product {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+.product a {
+  text-decoration: none;
+  margin-bottom: 39px;
+}
+.product a:hover {
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
+}
+.product figure {
+  position: relative;
+}
+.product figcaption {
+  color: #222222;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 15px 13px 20px;
+}
+.product figcaption p {
+  color: #f16d7f;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-top: 13px;
+}
+.product .shadowHover {
+  position: absolute;
+  top: 0;
+  background-image: url(../img/product/Background.png);
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  display: none;
+  justify-content: center;
+}
+.product .shadowHover .addToCart {
+  border: 1px solid #fff;
+  position: absolute;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: stretch;
+  margin-top: 98px;
+  padding: 10px 10px 3px;
+}
+.product .shadowHover .addToCart:before {
+  content: url(../img/product/Forma_1_copy.png);
+}
+.product a:hover .shadowHover {
+  display: flex;
 }
