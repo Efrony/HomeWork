@@ -204,6 +204,7 @@ main {
 }
 .product figure {
   position: relative;
+  max-width: 261px;
 }
 .product figcaption {
   color: #222222;
@@ -211,6 +212,7 @@ main {
   font-weight: 700;
   text-transform: uppercase;
   padding: 15px 13px 20px;
+  max-width: 261px;
 }
 .product figcaption p {
   color: #f16d7f;
