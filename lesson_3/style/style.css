@@ -324,9 +324,8 @@ main {
 }
 .subscribeBcg {
   background: url(../img/foter_bcg.jpg) no-repeat;
-  width: 1609px;
+  background-position: center;
   height: 438px;
-  margin: 0 auto;
   /*background-blend-mode: overlay;*/
 }
 .subscribeBcg .subscribe {
