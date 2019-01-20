@@ -102,7 +102,7 @@ header {
 }
 
 nav {
-    height: 51px;
+    height: 56px;
     border: 1px solid #ececec;
     background-color: #ffffff;
     ul {
@@ -113,14 +113,19 @@ nav {
         align-items: center;
         list-style-type: none;
         li {
+            height: 56px;
             a {
                 text-decoration: none;
                 color: #222222;
                 font-size: 14px;
                 font-weight: 700;
                 display: block;
-                padding: 17px 0px;
+                padding: 17px 10px;
             }
+        }
+        a:hover,
+        li:nth-child(1) a {
+            border-bottom: 3px solid #ef5b70;
         }
     }
 }
