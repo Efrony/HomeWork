@@ -165,6 +165,9 @@ main {
   grid-template-rows: 37px repeat(3, 1fr);
   grid-template-columns: 7fr 3fr 3fr 2fr 2fr;
 }
+.cart div {
+  border-bottom: 1px solid #eaeaea;
+}
 .cart div:nth-child(n+2) {
   text-align: center;
 }
@@ -175,7 +178,6 @@ main {
   line-height: 20px;
   text-transform: uppercase;
   letter-spacing: -0.2px;
-  border-bottom: 1px solid #eaeaea;
 }
 .cart figure {
   padding: 25px 0 25px 0;
@@ -194,13 +196,11 @@ main {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
-  border-bottom: 1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .cart .quantity {
-  border-bottom: 1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,7 +221,6 @@ main {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
-  border-bottom: 1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,7 +229,6 @@ main {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
-  border-bottom: 1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,7 +237,6 @@ main {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
-  border-bottom: 1px solid #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
