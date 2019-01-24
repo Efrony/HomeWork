@@ -47,7 +47,7 @@ header .search input[type="search"] {
   font-weight: 300;
   line-height: 32px;
   margin-left: -1px;
-  padding: 0px 14px;
+  padding: 0 14px;
 }
 header .search .searchButton {
   border-radius: 0 3px 3px 0;
@@ -78,6 +78,43 @@ header .my .myAccount {
 header .my .myAccount i {
   font-size: 14px;
 }
+@media (max-width: 1142px) {
+  header {
+    width: auto;
+    padding: 0 10px 15px 10px;
+  }
+}
+@media (max-width: 820px) {
+  header {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 631px) {
+  header .logoSearch {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+  }
+}
+@media (max-width: 631px) {
+  header .search {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}
+@media (max-width: 631px) {
+  header .my {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 631px) {
+  header .search input[type="search"] {
+    width: 50%;
+  }
+}
 .logo {
   background-image: url(../img/Group_2.png);
   background-repeat: no-repeat;
@@ -85,7 +122,7 @@ header .my .myAccount i {
   height: 51px;
 }
 .logo .styleBran {
-  padding-top: color: #222222;
+  color: #222222;
   font-size: 27px;
   font-weight: 300;
   line-height: 58px;
@@ -122,8 +159,26 @@ header .my .myAccount i {
   display: block;
   padding: 17px 10px;
 }
-.nav ul a:hover {
+.nav ul a:hover,
+.nav ul li:nth-child(3) a {
   border-bottom: 3px solid #ef5b70;
+}
+@media (max-width: 700px) {
+  .nav ul {
+    width: auto;
+    padding: 0 10px;
+  }
+}
+@media (max-width: 590px) {
+  .nav {
+    height: auto;
+  }
+}
+@media (max-width: 590px) {
+  .nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 .newArrivalsBlock {
   background-color: #f8f3f4;
@@ -143,9 +198,7 @@ header .my .myAccount i {
   text-transform: uppercase;
 }
 .newArrivals nav {
-  color: #f16d7f;
   font-size: 14px;
-  font-weight: 700;
   text-transform: uppercase;
   color: #636363;
   font-weight: 300;
@@ -154,210 +207,120 @@ header .my .myAccount i {
   font-weight: 700;
   color: #f16d7f;
 }
-main {
+@media (max-width: 1142px) {
+  .newArrivals {
+    padding: 0 10px;
+    width: auto;
+  }
+}
+/*____________**************************____________MAIN____________**********************__________*/
+.women {
   margin: 0 auto;
   width: 1142px;
 }
-.cart {
-  padding-top: 90px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: 37px repeat(3, 1fr);
-  grid-template-columns: 7fr 3fr 3fr 2fr 2fr;
+@media (max-width: 1142px) {
+  .women {
+    padding: 0 10px;
+    width: auto;
+  }
 }
-.cart div {
+section {
+  display: flex;
   border-bottom: 1px solid #eaeaea;
 }
-.cart div:nth-child(n+2) {
-  text-align: center;
+section .data-1 {
+  flex-grow: 4;
+  padding-left: 25px;
+  margin-top: 85px;
 }
-.cart .hat {
+section .data-1 input[type='submit'] {
+  margin-top: 10px;
+}
+section .data-2 {
+  flex-grow: 5;
+  margin-top: 110px;
+}
+section h5 {
+  margin: 0 0 33px -25px;
+  color: #222222;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+section .point {
   color: #222222;
   font-size: 13px;
   font-weight: 700;
-  line-height: 20px;
   text-transform: uppercase;
-  letter-spacing: -0.2px;
+  margin: 27px 0 8px 0;
 }
-.cart figure {
-  padding: 25px 0 25px 0;
-  border-bottom: 1px solid #eaeaea;
+section .point input {
+  margin-bottom: 10px;
 }
-.cart figure a {
-  float: left;
-}
-.cart figure p {
-  padding-top: 33px;
-}
-.cart figure figcaption {
-  padding: 10px 0 0px 121px;
-}
-.cart .unitePrice {
-  color: #656565;
+section .about {
+  color: #b3b2b2;
   font-size: 13px;
   font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 20px;
 }
-.cart .quantity {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+section .aboutLast {
+  margin-top: -15px;
 }
-.cart .quantity div {
-  width: 54px;
-  height: 30px;
+section .red {
+  color: #ff0d0d;
+  font-size: 13px;
+  font-weight: 400;
+}
+section .inp {
+  margin-top: 20px;
+}
+section input[type='submit'] {
+  margin: 30px 0 75px 0;
   border: 1px solid #eaeaea;
   background-color: #ffffff;
-  text-align: center;
-  color: #656565;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 30px;
-  margin: 0 auto;
-}
-.cart .shipping {
-  color: #656565;
-  font-size: 13px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cart .subtotal {
-  color: #656565;
-  font-size: 13px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cart .action {
-  color: #656565;
-  font-size: 13px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.buttonCart {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 42px;
-}
-.buttonCart a {
-  text-decoration: none;
-}
-.buttonCart a:hover div {
-  background-color: #f16d7f;
-  color: #fff;
-}
-.buttonCart div {
-  border: 1px solid #eaeaea;
-  background-color: #fff;
+  padding: 16px 50px;
   color: #4a4a4a;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 17px 37px;
 }
-.inputBlock {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 63px;
-}
-.inputBlock div {
-  -webkit-flex-basis: 355px;
-  flex-basis: 355px;
-}
-.inputBlock .shippingAdress,
-.inputBlock .couponDiscount {
-  display: flex;
-  flex-direction: column;
-}
-.inputBlock .shippingAdress input[type="submit"],
-.inputBlock .couponDiscount input[type="submit"] {
-  color: #4a4a4a;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  align-self: baseline;
-}
-.inputBlock .shippingAdress input[type="submit"]:hover,
-.inputBlock .couponDiscount input[type="submit"]:hover {
+section input[type='submit']:hover {
   background-color: #f16d7f;
   color: #fff;
 }
-.inputBlock .shippingAdress form,
-.inputBlock .couponDiscount form {
-  display: flex;
-  flex-direction: column;
-}
-.inputBlock .shippingAdress span,
-.inputBlock .couponDiscount span {
-  color: #222222;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.inputBlock .shippingAdress p,
-.inputBlock .couponDiscount p {
-  margin-top: 28px;
-}
-.inputBlock input {
-  padding: 10px 13px;
+section input[type='email'],
+section input[type='password'] {
+  line-height: 43px;
   border: 1px solid #eaeaea;
-  background-color: #fff;
+  background-color: #ffffff;
+  padding: 0 15px;
+  width: 70%;
 }
-.inputBlock input:nth-child(n+1) {
-  margin-top: 21px;
+details h5 {
+  line-height: 70px;
+  margin: 0;
 }
-.inputBlock .grandTotal {
-  background-color: #f5f3f3;
-  height: 210px;
-  padding: 42px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+details summary::-webkit-details-marker {
+  display: none;
 }
-.inputBlock .grandTotal .price {
-  text-align: right;
-  color: #4a4a4a;
-  font-size: 11px;
-  font-weight: 400;
-  text-transform: uppercase;
-  border-bottom: 1px solid #e2e2e2;
-  flex-basis: 61px;
+@media (max-width: 630px) {
+  section {
+    flex-direction: column;
+    align-items: center;
+  }
 }
-.inputBlock .grandTotal .price p {
-  color: #222222;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-top: 10px;
+@media (max-width: 630px) {
+  section .data-1,
+  section .data-2 {
+    margin: 15px;
+  }
+  section input[type='submit'] {
+    margin: 15px;
+  }
 }
-.inputBlock .grandTotal .price span {
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #f16d7f;
-}
-.inputBlock .grandTotal a {
-  display: block;
-  text-decoration: none;
-  width: 100%;
-  padding: 17px 0;
-  background-color: #f16d7f;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-}
+/*____________**************************____________FOOTER____________**********************__________*/
 .subscribeBcg {
-  margin-top: 79px;
+  margin-top: 91px;
   background: url(../img/foter_bcg.jpg) no-repeat;
   background-position: center;
   height: 438px;
@@ -423,7 +386,6 @@ main {
 .subscribeBcg .email {
   text-align: center;
   color: #222224;
-  font-size: 14px;
   font-weight: 400;
   font-size: 24px;
   letter-spacing: 0.6px;
@@ -459,6 +421,38 @@ main {
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.35px;
+}
+@media (max-width: 1142px) {
+  .subscribeBcg {
+    background-position: left;
+  }
+  .subscribeBcg .subscribe {
+    width: auto;
+  }
+}
+@media (max-width: 990px) {
+  .subscribeBcg .subscribe {
+    width: auto;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .subscribeBcg .subscribe .emailBlock,
+  .subscribeBcg .subscribe .commentBlock {
+    width: 100%;
+    justify-content: center;
+    margin-top: 5%;
+  }
+  .subscribeBcg .comment,
+  .subscribeBcg .email {
+    position: static;
+    padding-right: 0;
+  }
+  .subscribeBcg .email input[type='email'] {
+    width: auto;
+  }
+  .line {
+    display: none;
+  }
 }
 .footer {
   padding: 109px 0 87px 0;
@@ -498,6 +492,25 @@ main {
   line-height: 26px;
   letter-spacing: 0.45px;
 }
+@media (max-width: 1142px) {
+  .footer {
+    width: auto;
+    padding-left: 15px;
+  }
+}
+@media (max-width: 900px) {
+  .footer {
+    flex-direction: column;
+    padding: 15px;
+  }
+  .footer .aboutBrand {
+    width: auto;
+  }
+  .footer .aboutAll h4 {
+    letter-spacing: 0;
+    font-size: 16px;
+  }
+}
 .copySocialBlock {
   background-color: #e6e6e6;
 }
@@ -534,4 +547,10 @@ main {
 .copySocial .social div:hover {
   background-color: #f16d7f;
   color: #fff;
+}
+@media (max-width: 1142px) {
+  .copySocial {
+    width: auto;
+    padding: 15px;
+  }
 }
