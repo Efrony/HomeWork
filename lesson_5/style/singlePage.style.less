@@ -160,7 +160,7 @@ header {
             }
         }
         a:hover,
-        li:nth-child(3) a {
+        li:nth-child(7) a {
             border-bottom: 3px solid #ef5b70;
         }
     }
@@ -224,20 +224,67 @@ main {
             }
         }
     }
-    aside {
-        p:nth-child(1) {
-            color: #f16d7f;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 24px;
-            text-transform: uppercase;
+}
+
+aside {
+    padding: 70px 250px 122px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .collection {
+        color: #f16d7f;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 24px;
+        text-transform: uppercase;
+    }
+    .head {
+        color: #4d4d4d;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 24px;
+        text-transform: uppercase;
+    }
+    .discr {
+        color: #5e5e5e;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 24px;
+    }
+    .material {
+        color: #2f2f2f;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 24px;
+        text-transform: uppercase;
+        span {
+            color: #b9b9b9;
         }
-        p:nth-child(2) {
-            color: #4d4d4d;
-            font-size: 18px;
-            font-weight: 900;
-            line-height: 24px;
-            text-transform: uppercase;
+    }
+    .price {
+        color: #ef5b70;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+    form {
+        border-top: 1px solid #eaeaea;
+        width: 100%;
+        padding: 60px 53px 0 53px;
+        .characteristic {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            width: 100%;
+            background-color: #fff;
+            border: 1px solid #ef5b70;
+            color: #ef5b70;
+            font-size: 16px;
+            font-weight: 700;
+            &:before {
+                content: url(../img/hot_deals/cart_1.jpg);
+            }
         }
     }
 }
