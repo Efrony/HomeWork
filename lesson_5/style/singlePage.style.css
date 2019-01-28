@@ -333,14 +333,9 @@ aside form .characteristic input option[disabled] {
 }
 aside form .characteristic .color select {
   padding-left: 30px;
-  /*
-                    background: url(../img/hot_deals/red_color.jpg) no-repeat 13px 12px;
-                }*/
-}
-aside form .characteristic .color select option:checked select {
   background: url(../img/hot_deals/red_color.jpg) no-repeat 13px 12px;
 }
-aside form button {
+aside form input[type="submit"] {
   width: 100%;
   background-color: #fff;
   border: 1px solid #ef5b70;
@@ -352,7 +347,7 @@ aside form button {
   justify-content: center;
   align-items: center;
 }
-aside form button:before {
+aside form input[type="submit"]:before {
   content: url(../img/hot_deals/cart_1.jpg);
 }
 .likeAlso {
