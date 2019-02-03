@@ -245,7 +245,7 @@ details {
 }
 
 .productFilter {
-    h3 {
+    m h3 {
         .h3-style;
         padding-bottom: 15px;
     }
@@ -272,6 +272,9 @@ details {
         }
     }
     .size {
+        @media (max-width: 768px) {
+            padding: 10px 0 0 40px;
+        }
         .checkboxBlock {
             width: 235px;
             input {
@@ -280,6 +283,12 @@ details {
         }
     }
     .price {
+        @media (max-width: 768px) {
+            padding: 10px 0 0 40px;
+        }
+        @media (max-width: 990px) {
+            margin: 0 auto;
+        }
         img {
             margin-top: -20px;
         }
@@ -310,7 +319,12 @@ details {
 }
 
 .productItems {
+    display: flex;
+    justify-content: space-between;
     margin: 48px 0 0 45px;
+    @media (max-width: 1200px) {
+        justify-content: space-around;
+    }
     a {
         text-decoration: none;
         margin-bottom: 20px;
@@ -320,6 +334,7 @@ details {
     }
     figure {
         position: relative;
+        min-width: 261px;
     }
     figcaption {
         color: #222222;
@@ -327,7 +342,6 @@ details {
         font-weight: 700;
         text-transform: uppercase;
         padding: 15px 13px 0;
-        max-width: 261px;
         overflow: hidden;
         p {
             color: #f16d7f;
@@ -390,7 +404,7 @@ nav[aria-label] {
     padding: 8px 43px;
     text-decoration: none !important;
     display: block;
-    color: #ef5b70;
+    color: @pink-color;
     font-size: 16px;
     font-weight: bold;
     border-radius: 3px;

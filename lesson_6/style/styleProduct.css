@@ -251,7 +251,7 @@ details summary {
 details summary::-webkit-details-marker {
   display: none;
 }
-.productFilter h3 {
+.productFilter m h3 {
   color: #6f6e6e;
   font-size: 14px;
   font-weight: 700;
@@ -272,17 +272,32 @@ details summary::-webkit-details-marker {
 }
 .productFilter .trendingNow .border-grey {
   height: 20px;
-  width: 0px;
+  width: 0;
   outline: 1px solid lightgrey;
 }
 .productFilter .trendingNow .justify-content-between {
   width: 176px;
+}
+@media (max-width: 768px) {
+  .productFilter .size {
+    padding: 10px 0 0 40px;
+  }
 }
 .productFilter .size .checkboxBlock {
   width: 235px;
 }
 .productFilter .size .checkboxBlock input {
   margin-right: 8px;
+}
+@media (max-width: 768px) {
+  .productFilter .price {
+    padding: 10px 0 0 40px;
+  }
+}
+@media (max-width: 990px) {
+  .productFilter .price {
+    margin: 0 auto;
+  }
 }
 .productFilter .price img {
   margin-top: -20px;
@@ -310,7 +325,14 @@ details summary::-webkit-details-marker {
   margin-left: 10px;
 }
 .productItems {
+  display: flex;
+  justify-content: space-between;
   margin: 48px 0 0 45px;
+}
+@media (max-width: 1200px) {
+  .productItems {
+    justify-content: space-around;
+  }
 }
 .productItems a {
   text-decoration: none;
@@ -321,6 +343,7 @@ details summary::-webkit-details-marker {
 }
 .productItems figure {
   position: relative;
+  min-width: 261px;
 }
 .productItems figcaption {
   color: #222222;
@@ -328,7 +351,6 @@ details summary::-webkit-details-marker {
   font-weight: 700;
   text-transform: uppercase;
   padding: 15px 13px 0;
-  max-width: 261px;
   overflow: hidden;
 }
 .productItems figcaption p {
@@ -370,7 +392,6 @@ nav[aria-label] {
 }
 nav[aria-label] .page-link {
   color: #c4c4c4;
-  font-family: Lato;
   font-size: 16px;
   font-weight: bold;
   line-height: 26px;
@@ -426,19 +447,18 @@ nav[aria-label] ul li:nth-child(2) a {
   line-height: 24px;
 }
 .bannerDiscriptionBlock .bannerDiscription .discription1 {
-  background: url(../img/Forma_1111.png) no-repeat 50% 0%;
+  background: url(../img/Forma_1111.png) no-repeat 50% 0;
 }
 .bannerDiscriptionBlock .bannerDiscription .discription2 {
-  background: url(../img/Forma_11111.png) no-repeat 50% 0%;
+  background: url(../img/Forma_11111.png) no-repeat 50% 0;
 }
 .bannerDiscriptionBlock .bannerDiscription .discription3 {
-  background: url(../img/Forma_1111111.png) no-repeat 50% 0%;
+  background: url(../img/Forma_1111111.png) no-repeat 50% 0;
 }
 /*____________***********____________FOOTER____________***********__________*/
 .subscribeBcg {
   margin-top: 91px;
-  background: url(../img/foter_bcg.jpg) no-repeat;
-  background-position: center;
+  background: url(../img/foter_bcg.jpg) no-repeat center;
   height: 438px;
   /*background-blend-mode: overlay;*/
 }
