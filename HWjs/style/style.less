@@ -6,7 +6,17 @@ body {
 }
 
 button {
-    height: 100px;
-    width: 300px;
-    background-color: azure;
+    padding: 20px;
+    background-color: deepskyblue;
+    border: none;
+    outline: none;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+        background-color: lighten(deepskyblue, 20%);
+    }
+    &:focus {
+        background-color: darken(deepskyblue, 20%);
+    }
 }

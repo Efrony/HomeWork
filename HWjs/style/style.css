@@ -6,7 +6,17 @@ body {
   height: 800px;
 }
 button {
-  height: 100px;
-  width: 300px;
-  background-color: azure;
+  padding: 20px;
+  background-color: deepskyblue;
+  border: none;
+  outline: none;
+  font-size: 25px;
+  color: #fff;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #66d9ff;
+}
+button:focus {
+  background-color: #007399;
 }
