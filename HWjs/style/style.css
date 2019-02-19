@@ -14,3 +14,6 @@ button:hover {
 button:active {
   background-color: #007399;
 }
+h2 {
+  margin-top: 40px;
+}
