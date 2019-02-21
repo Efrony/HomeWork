@@ -153,6 +153,7 @@ function power(val, pow) {
             return val * power(val, pow)
         }
     } else {
+        
         if (pow == -1) return 1/val
         else {
             pow++
