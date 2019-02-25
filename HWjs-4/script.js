@@ -16,10 +16,10 @@ function case1() {
     console.log(numberObject(number))
 }
 /* --------------------------------- ЗАДАНИЕ №2 ---------------------------------*/
-var cart = []
-var count = 0
-var sumPrice = 0
 
+var cart = []
+
+/* ------- Добавления товара при нажатии-------*/
 function jersey() {
     cart.push(['jersey', 800, 1])
 }
@@ -32,6 +32,7 @@ function sweatshirt() {
     cart.push(['sweatshirt', 2000, 1])
 }
 
+/* ------- Вывод результата в виде текста. Очистка корзины -------*/
 function write(text) {
     document.getElementById("cart").innerHTML = text;
 }
@@ -41,12 +42,14 @@ function clearCart() {
     cart.splice(0, cart.length)
 }
 
-function countBasketPrice() {
-    for (var i in cart) {
-        sumPrice += cart[i][1]
-        count += cart[i][2]
+/* ------- Подсчёт суммы -------*/
+function countBasketPrice(cartSum) {
+    var count = 0
+    var sumPrice = 0
+    for (var i in cartSum) {
+        sumPrice += cartSum[i][1]
+        count += cartSum[i][2]
     }
     write('Итого: ' + count + ' шт. стоимостью ' + sumPrice + ' рублей. ')
-    sumPrice = 0
-    count = 0
+
 }
