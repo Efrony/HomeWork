@@ -5,7 +5,7 @@ function numberObject(num) {
     numObj.hundreds = parseInt(num / 100)
     numObj.tens = parseInt((num % 100) / 10)
     numObj.units = parseInt((num % 100) % 10)
-    return console.log(numObj)
+    return numObj
 }
 
 function case1() {
@@ -13,7 +13,7 @@ function case1() {
     while (isNaN(number)) {
         number = parseInt(prompt('Введите число от 0 до 999'))
     }
-    numberObject(number)
+    console.log(numberObject(number))
 }
 /* --------------------------------- ЗАДАНИЕ №2 ---------------------------------*/
 var cart = []
