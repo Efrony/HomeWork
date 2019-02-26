@@ -1,24 +1,24 @@
 /* --------------------------------- ЗАДАНИЕ №1 ---------------------------------*/
-var primeNumber = []
-
-function case1() {
-    var number = 1
-    while (number < 100) {
-        number++
-        var testPrime = 0
-        for (var digit = 2; digit <= 9; digit++) {
-            if (number > digit) {
-                if (number % digit == 0) {
-                    testPrime++
-                }
-            }
-        }
-        if (testPrime == 0) {
-            primeNumber.push(number)
+function testingPrime(number) {
+    var testPrime = true
+    
+    for (var digit = 2; digit <= 9; digit++) {
+        if (number > digit) {
+            if (number % digit == 0)  testPrime = false 
         }
     }
-    alert('Всего получается ' + primeNumber.length + ' простых чисел:\n' + primeNumber)
-    primeNumber = []
+    if ((number == 0) || (number == 1))  testPrime = false
+    return testPrime
+}
+
+function case1() {
+    var primeNumbers = []
+    var number = 0
+    while (number <= 100) {
+        if (testingPrime(number))  primeNumbers.push(number)
+        number++
+    }
+    alert('Всего получается ' + primeNumbers.length + ' простых чисел:\n' + primeNumbers)
 }
 /* --------------------------------- ЗАДАНИЕ №3 ---------------------------------*/
 var cart = []
@@ -44,8 +44,7 @@ function write(text) {
 function clearCart() {
     document.getElementById("cart").innerHTML = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.'
     cart.splice(0, cart.length)
-    }
-
+}
 
 function countBasketPrice() {
     for (var i in cart) {
@@ -58,10 +57,9 @@ function countBasketPrice() {
 }
 /* --------------------------------- ЗАДАНИЕ №4 ---------------------------------*/
 function case4() {
-    for(var a = 0 ; a<=9; alert(a++)) {}
+    for (var a = 0; a <= 9; alert(a++)) {}
 }
 /* --------------------------------- ЗАДАНИЕ №5 ---------------------------------*/
 function case5() {
-    for (var a = '*'; a.length <= 20; a += '*' )
-        console.log(a)
+    for (var a = '*'; a.length <= 20; a += '*') console.log(a)
 }
