@@ -16,40 +16,39 @@ function case1() {
     console.log(numberObject(number))
 }
 /* --------------------------------- ЗАДАНИЕ №2 ---------------------------------*/
-
 var cart = []
-
-/* ------- Добавления товара при нажатии-------*/
-function jersey() {
-    cart.push(['jersey', 800, 1])
+var jersey = {
+    type: 'jersey',
+    price: 800,
+    count: 1}
+var pants = {
+    type: 'pants',
+    price: 1500,
+    count: 1}
+var sweatshirt = {
+    type: 'sweatshirt',
+    price: 2000,
+    count: 1}
+    /* ------- Добавления товара при нажатии-------*/
+function addToCart(goods) {
+    cart.push(goods)
 }
-
-function pants() {
-    cart.push(['pants', 1500, 1])
-}
-
-function sweatshirt() {
-    cart.push(['sweatshirt', 2000, 1])
-}
-
 /* ------- Вывод результата в виде текста. Очистка корзины -------*/
 function write(text) {
-    document.getElementById("cart").innerHTML = text;
+    document.getElementById("cart").innerHTML = text
 }
 
-function clearCart() {
+function clearCart(cart) {
     document.getElementById("cart").innerHTML = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.'
     cart.splice(0, cart.length)
 }
-
 /* ------- Подсчёт суммы -------*/
 function countBasketPrice(cartSum) {
-    var count = 0
-    var sumPrice = 0
-    for (var i in cartSum) {
-        sumPrice += cartSum[i][1]
-        count += cartSum[i][2]
+    var countCart = 0
+    var sumPriceCart = 0
+    for (var i = 0; i < cartSum.length; i++) {
+        sumPriceCart += cartSum[i].price
+        countCart += cartSum[i].count
     }
-    write('Итого: ' + count + ' шт. стоимостью ' + sumPrice + ' рублей. ')
-
+    write('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ');
 }
