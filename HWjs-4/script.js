@@ -29,7 +29,7 @@ var sweatshirt = {
     type: 'sweatshirt',
     price: 2000,
     count: 1}
-    /* ------- Добавления товара при нажатии-------*/
+    /* ------- Добавление товара при нажатии-------*/
 function addToCart(goods) {
     cart.push(goods)
 }
