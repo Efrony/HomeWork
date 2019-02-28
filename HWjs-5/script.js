@@ -8,7 +8,7 @@ function abcRow() {
     var $number = document.createElement('td')
     $number.textContent = ''
     $tr.appendChild($number)
-    for (var j = 72; j >= 65; j--) {
+    for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j)
         $tr.appendChild($td)
@@ -23,10 +23,10 @@ function numberColumn(i) {
 }
 /* ---------- Генерация доски с обозначениями-----------*/
 abcRow() /* верхний буквенный ряд */
-for (var i = 1; i < 9; i++) {
+for (var i = 8; i > 0; i--) {
     var $tr = document.createElement('tr')
     numberColumn(i) /* левая номерная колонка */
-    for (var j = 72; j >= 65; j--) {
+    for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j) + i
         $tr.appendChild($td)
