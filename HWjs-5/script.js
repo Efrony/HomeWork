@@ -55,22 +55,22 @@ var product = [
         {type: 'pants', price: 1500, count: 1}, 
         {type: 'sweatshirt', price: 2000, count: 1}
 ]
-    /* ------------------------ Добавления товара при нажатии-------------------*/
+/* ---------------- Добавления товара при нажатии-------------*/
 function addToCart(goods) {
     cart.push(goods)
 }
-/* --------------------------- Вывод результата в виде текста.------------------*/
+/* --------------- Вывод результата в виде текста.------------*/
 document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.';
 
 function write(text) {
     document.getElementById('cart').textContent = text
 }
-/* -----------------------------  Очистка корзины ------------------------------*/
+/* ------------------  Очистка корзины ----------------------*/
 function clearCart(cart) {
     document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.'
     cart.splice(0, cart.length)
 }
-/* --------------------------------- Подсчёт суммы ------------------------------*/
+/* ----------------------- Подсчёт суммы --------------------*/
 function countBasketPrice(cartSum) {
     var countCart = 0
     var sumPriceCart = 0
@@ -80,3 +80,4 @@ function countBasketPrice(cartSum) {
     }
     write('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ');
 }
+
