@@ -7,12 +7,18 @@ function abcRow() {
     var $tr = document.createElement('tr')
     var $number = document.createElement('td')
     $number.textContent = ''
+    $number.classList.add('borderStyle')
     $tr.appendChild($number)
     for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j)
         $tr.appendChild($td)
+        $td.classList.add('borderStyle')
     }
+    var $number = document.createElement('td')
+    $number.textContent = ''
+    $number.classList.add('borderStyle')
+    $tr.appendChild($number)
     $table.appendChild($tr)
 }
 /* -------------- Колонка номерных обозначений ---------*/
@@ -20,6 +26,7 @@ function numberColumn(i) {
     var $number = document.createElement('td')
     $number.textContent = i
     $tr.appendChild($number)
+    $number.classList.add('borderStyle')
 }
 /* ---------- Генерация доски с обозначениями-----------*/
 abcRow() /* верхний буквенный ряд */
@@ -51,14 +58,10 @@ $chessBoard.appendChild($table)
 /* --------------------------------- ЗАДАНИЕ №2 ---------------------------------*/
 var cart = []
 var product = [
-        {type: 'jersey' , price: 800 , count: 1}, 
-        {type: 'pants', price: 1500, count: 1}, 
-        {type: 'sweatshirt', price: 2000, count: 1}
+        {type: 'jersey', price: 800, count: 1, color: 'red'} ,
+        {type: 'pants', price: 1500, count: 1, color: 'black'},
+        {type: 'sweatshirt', price: 2000, count: 1, color: 'blue'}
 ]
-/* ---------------- Добавления товара при нажатии-------------*/
-function addToCart(goods) {
-    cart.push(goods)
-}
 /* --------------- Вывод результата в виде текста.------------*/
 document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.';
 
@@ -66,9 +69,9 @@ function write(text) {
     document.getElementById('cart').textContent = text
 }
 /* ------------------  Очистка корзины ----------------------*/
-function clearCart(cart) {
+function clearCart(cartSum) {
     document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.'
-    cart.splice(0, cart.length)
+    cartSum.splice(0, cartSum.length)
 }
 /* ----------------------- Подсчёт суммы --------------------*/
 function countBasketPrice(cartSum) {
@@ -80,4 +83,8 @@ function countBasketPrice(cartSum) {
     }
     write('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ');
 }
-
+/* ---------------- Добавления товара при нажатии-------------*/
+function addToCart(goods) {
+    cart.push(goods)
+    countBasketPrice(cart)
+}
