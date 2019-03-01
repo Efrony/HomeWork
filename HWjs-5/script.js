@@ -27,10 +27,13 @@ for (var i = 8; i > 0; i--) {
     for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j) + i
-        if (i == 1) {$td.classList.add($figureWhite.pop())} /*--присвоение класса с названием белой фигуры--*/
-        if (i == 8) {$td.classList.add($figureBlack.pop())} /*--присвоение класса с названием черной фигуры--*/
-        if (i == 7) {$td.classList.add('pawnB')} /*--присвоение класса черной пешки--*/
-        if (i == 2) {$td.classList.add('pawnW')} /*--присвоение класса белой пешки--*/
+        if (i == 1) {createChild('div', '', $figureWhite.pop(), $td)}
+        /*--присвоение класса с названием белой фигуры--*/
+        if (i == 8) {createChild('div', '', $figureBlack.pop(), $td)}
+        /*--присвоение класса с названием черной фигуры--*/
+        if (i == 7) {createChild('div', '', 'pawnB', $td)}
+        /*--присвоение класса черной пешки--*/
+        if (i == 2) {createChild('div', '', 'pawnW', $td)} /*--присвоение класса белой пешки--*/
         $tr.appendChild($td)
         if ($blackIndicator) {
             $td.classList.add('siriusBlack') /* добавляем черный */

@@ -28,6 +28,13 @@ h2 {
     margin-top: 40px;
 }
 
+#chessBoard {
+    transform-style: preserve-3d;
+    transform-origin: center bottom;
+    transform: perspective(300px) rotateX(12deg);
+    
+}
+
 .siriusBlack {
     background: url(../img/dark.jpg);
     color: #3A1D11;
@@ -60,6 +67,7 @@ h2 {
     border-spacing: 0px;
     border-collapse: collapse;
     margin: 0 auto;
+    box-shadow: 1px 14px 44px 10px rgba(0,0,0,0.75);
 }
 
 #catalog {
@@ -77,42 +85,91 @@ h2 {
     margin-top: 30px;
 }
 
-.pawnW:before  {
+.perspective {
+    transform-origin: center bottom;
+    transform: rotateX(-15deg);
+}
+
+.pawnW {
+    .perspective;
+    &:before {
         content: url(../img/pawnWhite.png);
+    }
 }
-.pawnB:before  {
+
+.pawnB {
+    .perspective;
+    &:before {
         content: url(../img/pawnBlack.png);
+    }
 }
 
-.rookW:before  {
+.rookW {
+    .perspective;
+    &:before {
         content: url(../img/rookWhite.png);
+    }
 }
-.knightW:before  {
+
+.knightW {
+    .perspective;
+    &:before {
         content: url(../img/knightWhite.png);
+    }
 }
-.bishopW:before  {
+
+.bishopW {
+    .perspective;
+    &:before {
         content: url(../img/bishopWhite.png);
+    }
 }
-.kingW:before  {
+
+.kingW {
+    .perspective;
+    &:before {
         content: url(../img/kingWhite.png);
+    }
 }
-.queenW:before  {
+
+.queenW {
+    .perspective;
+    &:before {
         content: url(../img/queenWhite.png);
+    }
 }
 
-.rookB:before  {
+.rookB {
+    .perspective;
+    &:before {
         content: url(../img/rookBlack.png);
-}
-.knightB:before  {
-        content: url(../img/knightBlack.png);
-}
-.bishopB:before  {
-        content: url(../img/bishopBlack.png);
-}
-.kingB:before  {
-        content: url(../img/kingBlack.png);
-}
-.queenB:before  {
-        content: url(../img/queenBlack.png);
+    }
 }
 
+.knightB {
+    .perspective;
+    &:before {
+        content: url(../img/knightBlack.png);
+    }
+}
+
+.bishopB {
+    .perspective;
+    &:before {
+        content: url(../img/bishopBlack.png);
+    }
+}
+
+.kingB {
+    .perspective;
+    &:before {
+        content: url(../img/kingBlack.png);
+    }
+}
+
+.queenB {
+    .perspective;
+    &:before {
+        content: url(../img/queenBlack.png);
+    }
+}

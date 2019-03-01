@@ -25,6 +25,11 @@ h2 {
   font-size: 35px;
   margin-top: 40px;
 }
+#chessBoard {
+  transform-style: preserve-3d;
+  transform-origin: center bottom;
+  transform: perspective(300px) rotateX(12deg);
+}
 .siriusBlack {
   background: url(../img/dark.jpg);
   color: #3A1D11;
@@ -54,6 +59,7 @@ h2 {
   border-spacing: 0px;
   border-collapse: collapse;
   margin: 0 auto;
+  box-shadow: 1px 14px 44px 10px rgba(0, 0, 0, 0.75);
 }
 #catalog {
   width: 800px;
@@ -68,38 +74,90 @@ h2 {
   border-radius: 15px;
   margin-top: 30px;
 }
+.perspective {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
+.pawnW {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
 .pawnW:before {
   content: url(../img/pawnWhite.png);
+}
+.pawnB {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
 }
 .pawnB:before {
   content: url(../img/pawnBlack.png);
 }
+.rookW {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
 .rookW:before {
   content: url(../img/rookWhite.png);
+}
+.knightW {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
 }
 .knightW:before {
   content: url(../img/knightWhite.png);
 }
+.bishopW {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
 .bishopW:before {
   content: url(../img/bishopWhite.png);
+}
+.kingW {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
 }
 .kingW:before {
   content: url(../img/kingWhite.png);
 }
+.queenW {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
 .queenW:before {
   content: url(../img/queenWhite.png);
+}
+.rookB {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
 }
 .rookB:before {
   content: url(../img/rookBlack.png);
 }
+.knightB {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
 .knightB:before {
   content: url(../img/knightBlack.png);
+}
+.bishopB {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
 }
 .bishopB:before {
   content: url(../img/bishopBlack.png);
 }
+.kingB {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
+}
 .kingB:before {
   content: url(../img/kingBlack.png);
+}
+.queenB {
+  transform-origin: center bottom;
+  transform: rotateX(-15deg);
 }
 .queenB:before {
   content: url(../img/queenBlack.png);
