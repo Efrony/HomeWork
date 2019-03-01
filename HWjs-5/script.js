@@ -8,7 +8,7 @@ function createChild(teg, content, classStyle, parent) {
     var $elem = document.createElement(teg)
     $elem.textContent = content
     $elem.classList.add(classStyle)
-    $tr.appendChild($elem)
+    parent.appendChild($elem)
 }
 
 /* ------ Верхний буквенный ряд с пробелами побокам ------ */
@@ -58,48 +58,77 @@ $chessBoard.appendChild($table)
 /* --------------------------------- ЗАДАНИЕ №2 ---------------------------------*/
 var cart = []
 var product = [
-        {
-              type: 'jersey'
-            , price: 800
-            , count: 1
-            , color: 'red'
+    {
+        name: 'Футболка'
+        , price: 800
+        , count: 1
+        , color: 'red'
+        , size: 'S'
         }
         , {
-              type: 'pants'
-            , price: 1500
-            , count: 1
-            , color: 'black'
+        name: 'Штаны'
+        , price: 1500
+        , count: 1
+        , color: 'black'
+        , size: 'M'
         }
         , {
-              type: 'sweatshirt'
-            , price: 2000
-            , count: 1
-            , color: 'blue'
+        name: 'Толстовка'
+        , price: 2000
+        , count: 1
+        , color: 'blue'
+        , size: 'L'
         }
 ]
 /* --------------- Вывод результата в виде текста.------------*/
-document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.';
 
-function write(text) {
+function messageCart(text) {
     document.getElementById('cart').textContent = text
 }
-/* ------------------  Очистка корзины ----------------------*/
-function clearCart(cartSum) {
-    document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.'
-    cartSum.splice(0, cartSum.length)
-}
+
+messageCart('В корзине пусто. Добавьте товар и рассчитайте стоимость.')
+
 /* ----------------------- Подсчёт суммы --------------------*/
-function countBasketPrice(cartSum) {
+function countBasketPrice(cartUser) {
     var countCart = 0
     var sumPriceCart = 0
-    for (var i = 0; i < cartSum.length; i++) {
-        sumPriceCart += cartSum[i].price
-        countCart += cartSum[i].count
+    for (var i = 0; i < cartUser.length; i++) {
+        sumPriceCart += cartUser[i].price
+        countCart += cartUser[i].count
     }
-    write('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ');
+    messageCart('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ')
 }
 /* ---------------- Добавления товара при нажатии-------------*/
-function addToCart(goods) {
-    cart.push(goods)
-    countBasketPrice(cart)
+function addToCart(goods, cartUser) {
+    cartUser.push(goods)
+    countBasketPrice(cartUser)
+}
+/* ------------------  Очистка корзины ----------------------*/
+function clearCart(cartUser) {
+    messageCart('В корзине пусто. Добавьте товар и рассчитайте стоимость.')
+    cartUser.splice(0, cartUser.length)
+}
+
+/* --------------------------------- ЗАДАНИЕ №3 ---------------------------------*/
+
+function catalogVisual(productItem,i) {
+    var content = ''
+    for (j in productItem) {
+        content +=  j + ': ' + productItem[j] +'<br>'
+    }
+    var $elem = document.createElement('div')
+    $elem.innerHTML = content
+    $elem.classList.add('productItem')
+    catalog.appendChild($elem)
+    
+    var addToCartAtribute = ('addToCart(product[' + i + '],cart)')
+    var $button = document.createElement('button')
+    $button.textContent = 'Добавить в корзину '+ productItem['price'] + 'руб.'
+    $button.setAttribute('onclick', addToCartAtribute);
+    $elem.appendChild($button)
+}
+
+
+for (i = 0; i < product.length; i++) {
+    catalogVisual(product[i],i)
 }
