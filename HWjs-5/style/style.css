@@ -4,7 +4,6 @@ body {
 }
 button {
   padding: 15px;
-  margin-bottom: 20px;
   background-color: deepskyblue;
   border: none;
   outline: none;
@@ -32,6 +31,7 @@ h2 {
   height: 75px;
   width: 75px;
   text-align: center;
+  font-size: 10px;
 }
 .siriusWhite {
   background: url(../img/white.jpg);
@@ -39,6 +39,7 @@ h2 {
   height: 75px;
   width: 75px;
   text-align: center;
+  font-size: 10px;
 }
 .borderStyle {
   background: url(../img/white.jpg);
@@ -46,6 +47,8 @@ h2 {
   height: 75px;
   width: 75px;
   text-align: center;
+  font-weight: 600;
+  font-size: 22px;
 }
 .noBorderTable {
   border-spacing: 0px;
@@ -56,9 +59,12 @@ h2 {
   width: 800px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 .productItem {
   border: 2px solid deepskyblue;
   width: 30%;
+  border-radius: 15px;
+  margin-top: 30px;
 }
