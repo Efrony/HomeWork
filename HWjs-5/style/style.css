@@ -68,3 +68,39 @@ h2 {
   border-radius: 15px;
   margin-top: 30px;
 }
+.pawnW:before {
+  content: url(../img/pawnWhite.png);
+}
+.pawnB:before {
+  content: url(../img/pawnBlack.png);
+}
+.rookW:before {
+  content: url(../img/rookWhite.png);
+}
+.knightW:before {
+  content: url(../img/knightWhite.png);
+}
+.bishopW:before {
+  content: url(../img/bishopWhite.png);
+}
+.kingW:before {
+  content: url(../img/kingWhite.png);
+}
+.queenW:before {
+  content: url(../img/queenWhite.png);
+}
+.rookB:before {
+  content: url(../img/rookBlack.png);
+}
+.knightB:before {
+  content: url(../img/knightBlack.png);
+}
+.bishopB:before {
+  content: url(../img/bishopBlack.png);
+}
+.kingB:before {
+  content: url(../img/kingBlack.png);
+}
+.queenB:before {
+  content: url(../img/queenBlack.png);
+}

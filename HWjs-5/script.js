@@ -2,6 +2,9 @@
 var $chessBoard = document.getElementById('chessBoard')
 var $table = document.createElement('table')
 var $blackIndicator = false
+var $figureWhite = ['rookW', 'knightW', 'bishopW', 'kingW', 'queenW', 'bishopW', 'knightW','rookW']
+var $figureBlack = ['rookB', 'knightB', 'bishopB', 'kingB', 'queenB', 'bishopB', 'knightB','rookB']
+
     /* --- Функция создания child с указанием тега, контента, класса стилей и родителя----*/
 function createChild(teg, content, classStyle, parent) {
     var $elem = document.createElement(teg)
@@ -24,6 +27,10 @@ for (var i = 8; i > 0; i--) {
     for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j) + i
+        if (i == 1) {$td.classList.add($figureWhite.pop())} /*--присвоение класса с названием белой фигуры--*/
+        if (i == 8) {$td.classList.add($figureBlack.pop())} /*--присвоение класса с названием черной фигуры--*/
+        if (i == 7) {$td.classList.add('pawnB')} /*--присвоение класса черной пешки--*/
+        if (i == 2) {$td.classList.add('pawnW')} /*--присвоение класса белой пешки--*/
         $tr.appendChild($td)
         if ($blackIndicator) {
             $td.classList.add('siriusBlack') /* добавляем черный */
