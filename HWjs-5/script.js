@@ -2,37 +2,28 @@
 var $chessBoard = document.getElementById('chessBoard')
 var $table = document.createElement('table')
 var $blackIndicator = false
-    /* ---------- Ряд буквенных обозначений --------------*/
-function abcRow() {
-    var $tr = document.createElement('tr')
-    var $number = document.createElement('td')
-    $number.textContent = ''
-    $number.classList.add('borderStyle')
-    $tr.appendChild($number)
-    for (var j = 65; j <= 72; j++) {
-        var $td = document.createElement('td')
-        $td.textContent = String.fromCharCode(j)
-        $tr.appendChild($td)
-        $td.classList.add('borderStyle')
-    }
-    var $number = document.createElement('td')
-    $number.textContent = ''
-    $number.classList.add('borderStyle')
-    $tr.appendChild($number)
-    $table.appendChild($tr)
+
+/* --- Функция создания child с указанием тега, контента, класса стилей и родителя----*/
+function createChild(teg, content, classStyle, parent) {
+    var $elem = document.createElement(teg)
+    $elem.textContent = content
+    $elem.classList.add(classStyle)
+    $tr.appendChild($elem)
 }
-/* -------------- Колонка номерных обозначений ---------*/
-function numberColumn(i) {
-    var $number = document.createElement('td')
-    $number.textContent = i
-    $tr.appendChild($number)
-    $number.classList.add('borderStyle')
+
+/* ------ Верхний буквенный ряд с пробелами побокам ------ */
+var $tr = document.createElement('tr')
+createChild('td', '', 'borderStyle', $tr)
+for (var j = 65; j <= 72; j++) {
+    createChild('td', String.fromCharCode(j), 'borderStyle', $tr)
 }
-/* ---------- Генерация доски с обозначениями-----------*/
-abcRow() /* верхний буквенный ряд */
+createChild('td', '', 'borderStyle', $tr)
+$table.appendChild($tr)
+
+/* ------------------------- Доска  ---------------------- */
 for (var i = 8; i > 0; i--) {
     var $tr = document.createElement('tr')
-    numberColumn(i) /* левая номерная колонка */
+    createChild('td', i, 'borderStyle', $tr) /* левая номерная колонка */
     for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j) + i
@@ -45,22 +36,46 @@ for (var i = 8; i > 0; i--) {
         }
         $blackIndicator = !$blackIndicator
     }
-    numberColumn(i) /* правая номерная колонка */
+    createChild('td', i, 'borderStyle', $tr) /* правая номерная колонка */
     $table.appendChild($tr)
     $blackIndicator = !$blackIndicator
 }
-abcRow() /* нижний буквенный ряд */
-$table.classList.add('noBorderTable') /*-------убираем отступы таблицы---------*/
-$chessBoard.appendChild($table)
 
+/* ------ Нижний буквенный ряд с пробелами побокам ------ */
+var $tr = document.createElement('tr')
+createChild('td', '', 'borderStyle', $tr)
+for (var j = 65; j <= 72; j++) {
+    createChild('td', String.fromCharCode(j), 'borderStyle', $tr)
+}
+createChild('td', '', 'borderStyle', $tr)
+$table.appendChild($tr) 
+
+/*-------убираем отступы таблицы---------*/
+$table.classList.add('noBorderTable') 
+$chessBoard.appendChild($table)
 
 
 /* --------------------------------- ЗАДАНИЕ №2 ---------------------------------*/
 var cart = []
 var product = [
-        {type: 'jersey', price: 800, count: 1, color: 'red'} ,
-        {type: 'pants', price: 1500, count: 1, color: 'black'},
-        {type: 'sweatshirt', price: 2000, count: 1, color: 'blue'}
+        {
+              type: 'jersey'
+            , price: 800
+            , count: 1
+            , color: 'red'
+        }
+        , {
+              type: 'pants'
+            , price: 1500
+            , count: 1
+            , color: 'black'
+        }
+        , {
+              type: 'sweatshirt'
+            , price: 2000
+            , count: 1
+            , color: 'blue'
+        }
 ]
 /* --------------- Вывод результата в виде текста.------------*/
 document.getElementById('cart').textContent = 'В корзине пусто. Добавьте товар и рассчитайте стоимость.';
