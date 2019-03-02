@@ -81,12 +81,14 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .pawnW {
   transform-origin: center bottom;
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .pawnW:before {
   color: #fff;
@@ -99,6 +101,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .rookW:before {
   color: #fff;
@@ -110,6 +113,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .knightW:before {
   color: #fff;
@@ -120,6 +124,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .bishopW:before {
   color: #fff;
@@ -130,6 +135,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .kingW:before {
   color: #fff;
@@ -140,6 +146,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .queenW:before {
   color: #fff;
@@ -150,6 +157,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .rookB:before {
   color: black;
@@ -160,6 +168,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .knightB:before {
   color: black;
@@ -170,6 +179,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .bishopB:before {
   color: black;
@@ -180,6 +190,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .kingB:before {
   color: black;
@@ -190,6 +201,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .queenB:before {
   color: black;
@@ -200,6 +212,7 @@ h2 {
   transform: rotateX(-25deg);
   font-size: 72px;
   line-height: 75px;
+  text-shadow: 12px -3px 20px rgba(0, 0, 0, 0.92);
 }
 .pawnB:before {
   color: black;
