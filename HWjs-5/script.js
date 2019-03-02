@@ -2,8 +2,42 @@
 var $chessBoard = document.getElementById('chessBoard')
 var $table = document.createElement('table')
 var $blackIndicator = false
-var $figureWhite = ['rookW', 'knightW', 'bishopW', 'kingW', 'queenW', 'bishopW', 'knightW','rookW']
-var $figureBlack = ['rookB', 'knightB', 'bishopB', 'kingB', 'queenB', 'bishopB', 'knightB','rookB']
+/*var $figureWhite = ['rookW', 'knightW', 'bishopW', 'kingW', 'queenW', 'bishopW', 'knightW','rookW']
+var $figureBlack = ['rookB', 'knightB', 'bishopB', 'kingB', 'queenB', 'bishopB', 'knightB','rookB']*/
+var $figure= {
+    A1:'rookW',
+    H1:'rookW',
+    B1:'knightW',
+    G1:'knightW',
+    C1:'bishopW',
+    F1:'bishopW',
+    D1:'kingW',
+    E1:'queenW',
+    A2:'pawnW',
+    H2:'pawnW',
+    B2:'pawnW',
+    G2:'pawnW',
+    C2:'pawnW',
+    F2:'pawnW',
+    D2:'pawnW',
+    E2:'pawnW',
+    A8:'rookB',
+    H8:'rookB',
+    B8:'knightB',
+    G8:'knightB',
+    C8:'bishopB',
+    F8:'bishopB',
+    D8:'kingB',
+    E8:'queenB',
+    A7:'pawnB',
+    H7:'pawnB',
+    B7:'pawnB',
+    G7:'pawnB',
+    C7:'pawnB',
+    F7:'pawnB',
+    D7:'pawnB',
+    E7:'pawnB'
+}
 
     /* --- Функция создания child с указанием тега, контента, класса стилей и родителя----*/
 function createChild(teg, content, classStyle, parent) {
@@ -27,13 +61,16 @@ for (var i = 8; i > 0; i--) {
     for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
         $td.textContent = String.fromCharCode(j) + i
-        if (i == 1) {createChild('div', '', $figureWhite.pop(), $td)}
+        var $coordinates = String.fromCharCode(j) + i
+        createChild('div', '', $figure[$coordinates], $td)
+        /*if (i == 1) {createChild('div', '', $figureWhite.pop(), $td)}*/
         /*--присвоение класса с названием белой фигуры--*/
-        if (i == 8) {createChild('div', '', $figureBlack.pop(), $td)}
+        /*if (i == 8) {createChild('div', '', $figureBlack.pop(), $td)}*/
         /*--присвоение класса с названием черной фигуры--*/
-        if (i == 7) {createChild('div', '', 'pawnB', $td)}
+        /*if (i == 7) {createChild('div', '', 'pawnB', $td)}*/
         /*--присвоение класса черной пешки--*/
-        if (i == 2) {createChild('div', '', 'pawnW', $td)} /*--присвоение класса белой пешки--*/
+        /*if (i == 2) {createChild('div', '', 'pawnW', $td)}*/ /*--присвоение класса белой пешки--*/
+        
         $tr.appendChild($td)
         if ($blackIndicator) {
             $td.classList.add('siriusBlack') /* добавляем черный */
