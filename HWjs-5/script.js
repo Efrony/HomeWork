@@ -60,7 +60,7 @@ for (var i = 8; i > 0; i--) {
     createChild('td', i, 'borderStyle', $tr) /* левая номерная колонка */
     for (var j = 65; j <= 72; j++) {
         var $td = document.createElement('td')
-        $td.textContent = String.fromCharCode(j) + i
+        /*$td.textContent = String.fromCharCode(j) + i*/
         var $coordinates = String.fromCharCode(j) + i
         createChild('div', '', $figure[$coordinates], $td)
         /*if (i == 1) {createChild('div', '', $figureWhite.pop(), $td)}*/

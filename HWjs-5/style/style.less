@@ -1,5 +1,7 @@
 body {
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 button {
@@ -88,88 +90,105 @@ h2 {
 .perspective {
     transform-origin: center bottom;
     transform: rotateX(-25deg);
+    font-size: 72px;
+    line-height: 75px;
 }
 
 .pawnW {
     .perspective;
     &:before {
-        content: url(../img/pawnWhite.png);
-    }
-}
-
-.pawnB {
-    .perspective;
-    &:before {
-        content: url(../img/pawnBlack.png);
+        color: #fff;
+        font-size: 72px;
+        line-height: 75px;
+        content: '♟';
     }
 }
 
 .rookW {
     .perspective;
     &:before {
-        content: url(../img/rookWhite.png);
+        color: #fff;
+        content: '♜';
+        /*content: url(../img/rookWhite.png);*/
     }
 }
 
 .knightW {
     .perspective;
     &:before {
-        content: url(../img/knightWhite.png);
+        color: #fff;
+        content: '♞';
     }
 }
 
 .bishopW {
     .perspective;
     &:before {
-        content: url(../img/bishopWhite.png);
+        color: #fff;
+        content: '♝';
     }
 }
 
 .kingW {
     .perspective;
     &:before {
-        content: url(../img/kingWhite.png);
+        color: #fff;
+        content: '♚';
     }
 }
 
 .queenW {
     .perspective;
     &:before {
-        content: url(../img/queenWhite.png);
+        color: #fff;
+        content: '♛';
     }
 }
 
 .rookB {
     .perspective;
     &:before {
-        content: url(../img/rookBlack.png);
+        color: black;
+        content: '♜';
     }
 }
 
 .knightB {
     .perspective;
     &:before {
-        content: url(../img/knightBlack.png);
+        color: black;
+        content: '♞';
     }
 }
 
 .bishopB {
     .perspective;
     &:before {
-        content: url(../img/bishopBlack.png);
+        color: black;
+        content: '♝';
     }
 }
 
 .kingB {
     .perspective;
     &:before {
-        content: url(../img/kingBlack.png);
+        color: black;
+        content: '♚';
     }
 }
 
 .queenB {
     .perspective;
     &:before {
-        content: url(../img/queenBlack.png);
+        color: black;
+        content: '♛';
+    }
+}
+
+.pawnB {
+    .perspective;
+    &:before {
+        color: black;
+        content: '♟';
     }
 }
