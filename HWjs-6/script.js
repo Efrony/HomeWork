@@ -122,7 +122,6 @@ function changeBigPicture(event) {
     $previev.innerHTML = ''
     if (event.target.tagName === 'IMG') var $eventElement = event.target
     else if (event.target.tagName === 'DIV') {var $eventElement = event.target.querySelector('img')
-    console.log($eventElement)
     }
     else if (event.target.tagName === 'BUTTON') var $eventElement = event.target.parentElement.querySelector('img')
     var srcEnd = $eventElement.src.split('/').pop()
@@ -135,7 +134,10 @@ function changeBigPicture(event) {
 /* ---- Функция открытия модального окна ----*/
 
 function  openModalWindow(event) {
-    alert('modalWindow')
+    var $modalWindow = document.getElementById('modalWindow')
+    var $previev = document.getElementById('previev')
+    var src = $previev.querySelector('img').src
+    $modalWindow.src = src
 }
 
 
