@@ -38,12 +38,12 @@ main {
 .shadow {
   box-shadow: 1px 1px 33px 0px #00bfff;
 }
-.flex {
+.flexy {
   display: flex;
   justify-content: space-between;
 }
-.flex #previev,
-.flex .cartResult {
+.flexy #previev,
+.flexy .cartResult {
   width: 50%;
   display: flex;
   flex-direction: column;

@@ -121,8 +121,10 @@ function changeBigPicture(event) {
     var $previev = document.getElementById('previev')
     $previev.innerHTML = ''
     if (event.target.tagName === 'IMG') var $eventElement = event.target
-    else if (event.target.tagName === 'DIV') var $eventElement = event.target.children[3]
-    else if (event.target.tagName === 'BUTTON') var $eventElement = event.target.parentElement.children[3]
+    else if (event.target.tagName === 'DIV') {var $eventElement = event.target.querySelector('img')
+    console.log($eventElement)
+    }
+    else if (event.target.tagName === 'BUTTON') var $eventElement = event.target.parentElement.querySelector('img')
     var srcEnd = $eventElement.src.split('/').pop()
     var src = 'img/big/' + srcEnd
     var $bigImg = document.createElement('img')
@@ -130,15 +132,24 @@ function changeBigPicture(event) {
     $previev.appendChild($bigImg)
 }
 
+/* ---- Функция открытия модального окна ----*/
+
+function  openModalWindow(event) {
+    alert('modalWindow')
+}
+
+
 function init() {
     messageCart('В корзине пусто.')
     var $clear = document.getElementById('clear')
     $clear.textContent = 'Очистить корзину'
     $clear.addEventListener('click', handleClearCart)
     catalogVisual(product)
-    var imagesItem = document.getElementsByClassName("productItem")
+    var imagesItem = document.getElementsByClassName('productItem')
     for (var j = 0; j < imagesItem.length; j++) {
         imagesItem[j].onclick = changeBigPicture
     }
+    var $modalField = document.getElementById('previev')
+    $modalField.addEventListener('click', openModalWindow)
 }
 window.addEventListener('load', init)
