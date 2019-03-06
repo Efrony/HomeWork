@@ -1,7 +1,9 @@
+var namberImg = 0
 var cart = []
 var product = [
         {
             'Название товара': 'Футболка'
+            , _name: 'jersey'
             , _name: 'jersey'
             , _price: 800
             , _count: 1
@@ -84,7 +86,7 @@ function handleClearCart() {
 
 
 /* ------------------------------- ЗАДАНИЕ №2 ---------------------------*/
-/* ----Функция визуализирующая один объект каталога----*/
+/* ----Визуализация одного объекта каталога----*/
 function catalogVisualItem(productItem, indexItem) {
     /* ------- Вывод атрибутов объекта без префикса '_' -------*/
     var content = ''
@@ -106,17 +108,17 @@ function catalogVisualItem(productItem, indexItem) {
         /* -------- Маленькая картинка в каталоге  --------*/
     var $smallImg = document.createElement('img')
     $smallImg.classList.add('smallImg')
-    var src = 'img/small/' + productItem['_name'] + '_' + productItem['_color'] + '.jpg'
+    var src = 'img/small/' + productItem['_name'] + '_' + productItem['_color'] + '_' + '0' + '.jpg'
     $smallImg.src = src
     $elem.insertBefore($smallImg, $button)
 }
-/* ---- Функция визуализирующая все объекты каталога----*/
+/* ---- Визуализация всех объектов каталога----*/
 function catalogVisual(productObject) {
     for (i = 0; i < productObject.length; i++) {
         catalogVisualItem(productObject[i], i)
     }
 }
-/* ---- Функция отображения большого изображения в блоке ----*/
+/* ---- Отображение большого изображения в блоке ----*/
 function changeBigPicture(event) {
     var $previev = document.getElementById('previev')
     $previev.innerHTML = ''
@@ -131,12 +133,28 @@ function changeBigPicture(event) {
     $previev.appendChild($bigImg)
 }
 
-/* ---- Функция открытия модального окна ----*/
+/* ---- Открытие модального окна ----*/
 
-function  openModalWindow(event) {
+function openModalWindow(event) {
     var $modalWindow = document.getElementById('modalWindow')
     var $previev = document.getElementById('previev')
-    var src = $previev.querySelector('img').src
+    if ($previev.querySelector('img')) {
+        var src = $previev.querySelector('img').src
+        $modalWindow.src = src
+    } 
+}
+/* ---- Переключение изображения в модальном окне ----*/
+function arrowFoto(event) {
+    event.preventDefault()
+    var $modalWindow = document.getElementById('modalWindow')
+    var srcEnd = $modalWindow.src.split('/').pop()
+    if (event.target.id === 'rightArrowFoto') {
+        src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + namberImg++ + '.jpg'
+    }
+    if (event.target.id === 'leftArrowFoto') {
+        src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + namberImg-- + '.jpg'
+    }
+    console.log(src) 
     $modalWindow.src = src
 }
 
@@ -153,5 +171,10 @@ function init() {
     }
     var $modalField = document.getElementById('previev')
     $modalField.addEventListener('click', openModalWindow)
+    var $rightArrowFoto = document.getElementById('rightArrowFoto')
+    var leftArrowFoto = document.getElementById('leftArrowFoto')
+    $rightArrowFoto.addEventListener('click', arrowFoto)
+    leftArrowFoto.addEventListener('click', arrowFoto)
+    
 }
 window.addEventListener('load', init)
