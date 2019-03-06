@@ -1,57 +1,54 @@
 var namberImg = 0
 var cart = []
-var product = [
-        {
-            'Название товара': 'Футболка'
-            , _name: 'jersey'
-            , _name: 'jersey'
-            , _price: 800
-            , _count: 1
-            , _color: 'red'
-            , Цвет: 'Красный'
-            , Размер: 'S'
+var product = [{
+            'Название товара': 'Футболка',
+            _name: 'jersey', _name: 'jersey',
+            _price: 800,
+            _count: 1,
+            _color: 'red',
+            Цвет: 'Красный',
+            Размер: 'S'
+        }, { 
+            'Название товара': 'Штаны',
+            _name: 'pants',
+            _price: 1500,
+            _count: 1,
+            _color: 'black',
+            Цвет: 'Чёрный',
+            Размер: 'M'
         }, {
-            'Название товара': 'Штаны'
-            , _name: 'pants'
-            , _price: 1500
-            , _count: 1
-            , _color: 'black'
-            , Цвет: 'Чёрный'
-            , Размер: 'M'
+            'Название товара': 'Толстовка',
+            _name: 'sweatshirt',
+            _price: 2000,
+            _count: 1,
+            _color: 'blue',
+            Цвет: 'Синий',
+            Размер: 'L'
         }, {
-            'Название товара': 'Толстовка'
-            , _name: 'sweatshirt'
-            , _price: 2000
-            , _count: 1
-            , _color: 'blue'
-            , Цвет: 'Синий'
-            , Размер: 'L'
+            'Название товара': 'Футболка',
+            _name: 'jersey',
+            _price: 800,
+            _count: 1,
+            _color: 'black',
+            Цвет: 'Черный',
+            Размер: 'M'
         }, {
-            'Название товара': 'Футболка'
-            , _name: 'jersey'
-            , _price: 800
-            , _count: 1
-            , _color: 'black'
-            , Цвет: 'Черный'
-            , Размер: 'M'
-        }, {
-            'Название товара': 'Толстовка'
-            , _name: 'sweatshirt'
-            , _price: 1500
-            , _count: 1
-            , _color: 'red'
-            , Цвет: 'Красный'
-            , Размер: 'M'
-        , }, {
-            'Название товара': 'Штаны'
-            , _name: 'pants'
-            , _price: 1500
-            , _count: 1
-            , _color: 'green'
-            , Цвет: 'Зеленый'
-            , Размер: 'M'
-        , }
-
+            'Название товара': 'Толстовка',
+            _name: 'sweatshirt',
+            _price: 1500,
+            _count: 1,
+            _color: 'red',
+            Цвет: 'Красный',
+            Размер: 'M'
+        }, { 
+                'Название товара': 'Штаны',
+            _name: 'pants',
+            _price: 1500,
+            _count: 1,
+            _color: 'green',
+            Цвет: 'Зеленый',
+            Размер: 'M'
+            }
 ]
 /* -------------------- ЗАДАНИЕ №1 ---------------------------*/
 /* --------------- Вывод результата в виде текста.------------*/
@@ -111,17 +108,14 @@ function catalogVisualItem(productItem, indexItem) {
 }
 /* ---- Визуализация всех объектов каталога----*/
 function catalogVisual(productObject) {
-    for (i = 0; i < productObject.length; i++) {
-        catalogVisualItem(productObject[i], i)
-    }
+    for (i = 0; i < productObject.length; i++) catalogVisualItem(productObject[i], i)
 }
 /* ---- Отображение большого изображения в блоке ----*/
 function changeBigPicture(event) {
     var $previev = document.getElementById('previev')
     $previev.innerHTML = ''
     if (event.target.tagName === 'IMG') var $eventElement = event.target
-    else if (event.target.tagName === 'DIV') {var $eventElement = event.target.querySelector('img')
-    }
+    else if (event.target.tagName === 'DIV') var $eventElement = event.target.querySelector('img')
     else if (event.target.tagName === 'BUTTON') var $eventElement = event.target.parentElement.querySelector('img')
     var srcEnd = $eventElement.src.split('/').pop()
     var src = 'img/big/' + srcEnd
@@ -153,23 +147,20 @@ function arrowFoto(event) {
     }
     $modalWindow.src = src
 }
-
+/* ---- Функция объединяющая загрузку всего js после загрузки html ----*/
 function init() {
-    messageCart('В корзине пусто.')
-    var $clear = document.getElementById('clear')
-    $clear.textContent = 'Очистить корзину'
-    $clear.addEventListener('click', handleClearCart)
-    catalogVisual(product)
-    var imagesItem = document.getElementsByClassName('productItem')
-    for (var j = 0; j < imagesItem.length; j++) {
-        imagesItem[j].onclick = changeBigPicture
-    }
-    var $modalField = document.getElementById('previev')
-    $modalField.addEventListener('click', openModalWindow)
-    var $rightArrowFoto = document.getElementById('rightArrowFoto')
-    var leftArrowFoto = document.getElementById('leftArrowFoto')
+    messageCart('В корзине пусто.') // вывод сообщения о пустой корзине по умолчанию
+    var $clear = document.getElementById('clear') // кнопка очистки корзины ...
+    $clear.textContent = 'Очистить корзину' 
+    $clear.addEventListener('click', handleClearCart) //
+    catalogVisual(product)  // визуализация каталога
+    var imagesItem = document.getElementsByClassName('productItem') // при клике на карточку товара появляется превью ...
+    for (var j = 0; j < imagesItem.length; j++) imagesItem[j].onclick = changeBigPicture // 
+    var $modalField = document.getElementById('previev') // при клике на превью поялвятеся модальное окно ...
+    $modalField.addEventListener('click', openModalWindow) //
+    var $rightArrowFoto = document.getElementById('rightArrowFoto') //стрелки превью...
+    var $leftArrowFoto = document.getElementById('leftArrowFoto') 
     $rightArrowFoto.addEventListener('click', arrowFoto)
-    leftArrowFoto.addEventListener('click', arrowFoto)
-    
+    $leftArrowFoto.addEventListener('click', arrowFoto) //
 }
 window.addEventListener('load', init)
