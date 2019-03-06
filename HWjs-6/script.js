@@ -149,13 +149,20 @@ function arrowFoto(event) {
     var $modalWindow = document.getElementById('modalWindow')
     var srcEnd = $modalWindow.src.split('/').pop()
     if (event.target.id === 'rightArrowFoto') {
-        src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + namberImg++ + '.jpg'
+        src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + ++namberImg + '.jpg'
+        $modalWindow.src = src
+        $modalWindow.onerror = function () {
+            $modalWindow.src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' +  0 + '.jpg'
+         namberImg = 0                                  }
     }
     if (event.target.id === 'leftArrowFoto') {
-        src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + namberImg-- + '.jpg'
-    }
-    console.log(src) 
-    $modalWindow.src = src
+        src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + --namberImg + '.jpg'
+        $modalWindow.src = src
+        $modalWindow.onerror = function () {
+            $modalWindow.src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + 2 + '.jpg'
+            namberImg = 2
+        }
+        }
 }
 
 
