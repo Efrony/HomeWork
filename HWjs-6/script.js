@@ -53,8 +53,8 @@ var product = [
         , }
 
 ]
-    /* ------------------------------- ЗАДАНИЕ №1 ---------------------------*/
-    /* --------------- Вывод результата в виде текста.------------*/
+/* -------------------- ЗАДАНИЕ №1 ---------------------------*/
+/* --------------- Вывод результата в виде текста.------------*/
 function messageCart(text) {
     document.getElementById('cart').textContent = text
 }
@@ -68,7 +68,7 @@ function countBasketPrice(cartUser) {
     }
     messageCart('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ')
 }
-/* ---------------- Добавления товара при нажатии-------------*/
+/* -------------- Добавления товара при нажатии-------------*/
 function addToCart(goods, cartUser) {
     cartUser.push(goods)
     countBasketPrice(cartUser)
@@ -76,16 +76,13 @@ function addToCart(goods, cartUser) {
 /* ------------------  Очистка корзины ----------------------*/
 function clearCart(cartUser) {
     messageCart('В корзине пусто.')
-    cartUser.length = 0 /*cartUser.splice(0, cartUser.length)*/
+    cartUser.length = 0 
 }
 
 function handleClearCart() {
     clearCart(cart)
 }
-/*$clear.setAttribute('onclick', 'clearCart(cart)')*/
-
-
-/* ------------------------------- ЗАДАНИЕ №2 ---------------------------*/
+/* -------------------------- ЗАДАНИЕ №2 ---------------------------*/
 /* ----Визуализация одного объекта каталога----*/
 function catalogVisualItem(productItem, indexItem) {
     /* ------- Вывод атрибутов объекта без префикса '_' -------*/
@@ -132,9 +129,7 @@ function changeBigPicture(event) {
     $bigImg.src = src
     $previev.appendChild($bigImg)
 }
-
 /* ---- Открытие модального окна ----*/
-
 function openModalWindow(event) {
     var $modalWindow = document.getElementById('modalWindow')
     var $previev = document.getElementById('previev')
@@ -151,15 +146,12 @@ function arrowFoto(event) {
     if (event.target.id === 'rightArrowFoto') {
         if (namberImg == 2) namberImg = -1
         src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + ++namberImg + '.jpg'
-        $modalWindow.src = src
-
     }
     if (event.target.id === 'leftArrowFoto') {
         if (namberImg == 0) namberImg = 3
         src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + --namberImg + '.jpg'
-        $modalWindow.src = src
-
     }
+    $modalWindow.src = src
 }
 
 function init() {
