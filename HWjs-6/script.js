@@ -1,5 +1,5 @@
 var namberImg = 0
-var cart = []
+var cart = [] 
 var product = [{
             'Название товара': 'Футболка',
             _name: 'jersey', _name: 'jersey',
@@ -75,11 +75,9 @@ function clearCart(cartUser) {
     messageCart('В корзине пусто.')
     cartUser.length = 0 
 }
-
 function handleClearCart() {
     clearCart(cart)
 }
-/* -------------------------- ЗАДАНИЕ №2 ---------------------------*/
 /* ----Визуализация одного объекта каталога----*/
 function catalogVisualItem(productItem, indexItem) {
     /* ------- Вывод атрибутов объекта без префикса '_' -------*/
@@ -122,7 +120,8 @@ function changeBigPicture(event) {
     var $bigImg = document.createElement('img')
     $bigImg.src = src
     $previev.appendChild($bigImg)
-}
+} 
+/* -------------------------- ЗАДАНИЕ №2 ---------------------------*/
 /* ---- Открытие модального окна ----*/
 function openModalWindow(event) {
     var $modalWindow = document.getElementById('modalWindow')
