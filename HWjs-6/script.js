@@ -50,8 +50,7 @@ var product = [{
             Размер: 'M'
             }
 ]
-/* -------------------- ЗАДАНИЕ №1 ---------------------------*/
-/* --------------- Вывод результата в виде текста.------------*/
+/* --------------- Вывод текста.------------*/
 function messageCart(text) {
     document.getElementById('cart').textContent = text
 }
@@ -68,17 +67,47 @@ function countBasketPrice(cartUser) {
 /* -------------- Добавления товара при нажатии-------------*/
 function addToCart(goods, cartUser) {
     cartUser.push(goods)
+    cartVisual(goods, cartUser)
     countBasketPrice(cartUser)
+    var $clear = document.getElementById('clear')
+    $clear.classList.remove('invisible')
 }
 /* ------------------  Очистка корзины ----------------------*/
 function clearCart(cartUser) {
     messageCart('В корзине пусто.')
-    cartUser.length = 0 
+    cartUser.length = 0
+    var $cartVisual = document.getElementById('cartVisual')
+    var $elemProduct = $cartVisual.children
+    while ($elemProduct.length > 1) $cartVisual.removeChild($elemProduct[1])
+    $cartVisual.classList.add('invisible')
+    var $clear = document.getElementById('clear')
+    $clear.classList.add('invisible')
+    
+    
 }
 function handleClearCart() {
     clearCart(cart)
 }
-/* ----Визуализация одного объекта каталога----*/
+/* ------------------ Визуализация корзины ----------------------*/
+function cartVisual(goods, cartUser) {
+    var $cartVisual = document.getElementById('cartVisual')
+    var $cartProduct = document.getElementsByClassName('cartProduct')
+    var $elemProduct = $cartProduct[0].cloneNode(true)
+    console.log(cartUser)
+    console.log(goods)
+    console.log(!cartUser.includes(goods))
+    if (!cartUser.includes(goods)) {
+        $elemProduct.querySelector('._name').textContent = goods['Название товара']
+        $elemProduct.querySelector('._color').textContent = goods['Цвет']
+        $elemProduct.querySelector('._price').textContent = goods['_price']
+        $elemProduct.querySelector('._count').textContent = goods['_count']
+        $elemProduct.querySelector('.sumProduct').textContent = goods['_price']
+        $cartVisual.appendChild($elemProduct)
+        $cartVisual.classList.remove('invisible')
+    }
+    
+}
+/* ---------Визуализация одного объекта каталога------------*/
 function catalogVisualItem(productItem, indexItem) {
     /* ------- Вывод атрибутов объекта без префикса '_' -------*/
     var content = ''
@@ -121,7 +150,6 @@ function changeBigPicture(event) {
     $bigImg.src = src
     $previev.appendChild($bigImg)
 } 
-/* -------------------------- ЗАДАНИЕ №2 ---------------------------*/
 /* ---- Открытие модального окна ----*/
 function openModalWindow(event) {
     var $modalWindow = document.getElementById('modalWindow')

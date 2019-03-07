@@ -13,6 +13,7 @@ button {
     color: #fff;
     cursor: pointer;
     border-radius: 15px;
+    transition: 0.15s;
     &:hover {
         background-color: lighten(deepskyblue, 20%);
     }
@@ -30,7 +31,7 @@ h2 {
 }
 
 main {
-    width: 800px;
+    width: 1140px;
     margin: 0 auto;
 }
 
@@ -41,7 +42,8 @@ main {
 }
 
 .shadow {
-    box-shadow: 1px 1px 33px 0px rgba(0, 191, 255, 1);
+    box-shadow: 1px 1px 25px 0px rgba(0, 191, 255, 1);
+    transition: 0.15s;
 }
 
 .flexy {
@@ -49,11 +51,16 @@ main {
     justify-content: space-between;
     #previev,
     .cartResult {
-        width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+    }
+    #previev {
+        width: 31%;
+    }
+    .cartResult {
+        width: 69%;
     }
     a {
         outline: none;
@@ -74,13 +81,18 @@ main {
     button {
         width: 100%;
     }
+    &:hover {
+        border-color: lighten(deepskyblue, 20%);
+    }
 }
 
 #previev {
+    margin-right: 30px;
     height: 400px;
     border: 2px solid deepskyblue;
     img {
         height: 100%;
+        object-fit: fill;
     }
 }
 
@@ -89,56 +101,62 @@ main {
 }
 
 
-
 /* окно */
 
 .Window {
- position: fixed;
- top: 0;
- right: 0;
- bottom: 0;
- left: 0;
- background: rgba(0,0,0,0.7);
- z-index: 99999;
- transition: opacity 400ms ease-in;
- display: none;
- pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+    transition: opacity 400ms ease-in;
+    display: none;
+    pointer-events: none;
 }
 
 .Window:target {
- display: block;
- pointer-events: auto;
+    display: block;
+    pointer-events: auto;
 }
 
 .Window > div {
- width: 1100px;
- position: relative;
- margin: 3vh auto;
- padding: 20px;
- border-radius: 5px;
- background: #f2f2f2;
- box-shadow: 0px 0px 20px 2px;
+    width: 1100px;
+    position: relative;
+    margin: 3vh auto;
+    padding: 20px;
+    border-radius: 5px;
+    background: #f2f2f2;
+    box-shadow: 0px 0px 20px 2px;
 }
 
 .close {
- background: #cc3300;
- color: #FFFFFF;
- line-height: 25px;
- position: absolute;
- right: -12px;
- text-align: center;
- top: -10px;
- width: 24px;
- text-decoration: none;
- font-weight: bold;
- border-radius: 12px;
- box-shadow: 1px 1px 3px #000;
+    background: deepskyblue;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 1px 1px 3px #000;
 }
-.close:hover { background: #990000; }
+
+.close:hover {
+    background: #990000;
+}
+
 #modalWindow {
     height: 90vh;
     outline: none;
 }
+
+
+/* окно */
 
 .arrowFoto {
     width: 100px;
@@ -152,12 +170,69 @@ main {
     border-radius: 50%;
     background-color: deepskyblue;
     top: 47%;
-    
 }
 
 #leftArrowFoto {
     left: 15px;
 }
+
 #rightArrowFoto {
     right: 15px;
+}
+
+#cartVisual {
+  
+    width: 100%;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow: auto;
+    /*display: none;*/
+}
+
+.invisible {
+    display: none;
+}
+.cartProduct {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    border-radius: 10px;
+    margin: 5px 0;
+    &:hover > div {
+        box-shadow: 1px 1px 15px 0px rgba(0, 191, 255, 1);;
+    }
+    & > div {
+        border: 2px solid deepskyblue;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 0 10px;
+        transition: 0.15s;
+    }
+    ._name {
+        width: 40%;
+    }
+    ._color{
+        width: 10%;
+    }
+    ._price {
+        width: 8%;
+    }
+    ._count {
+        width: 10%;
+    }
+    .sumProduct {
+        width: 8%;
+    }
+    .deleteProduct {
+        width: 3%;
+        background-color: deepskyblue;
+        color: #FFFFFF;
+        text-align: center;
+        width: 24px;
+        font-weight: bold;
+        border-radius: 12px;
+        &:hover {
+            background-color: #990000;
+        }
+    }
 }

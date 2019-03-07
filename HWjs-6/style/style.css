@@ -13,6 +13,7 @@ button {
   color: #fff;
   cursor: pointer;
   border-radius: 15px;
+  transition: 0.15s;
 }
 button:hover {
   background-color: #66d9ff;
@@ -27,7 +28,7 @@ h2 {
   font-size: 35px;
 }
 main {
-  width: 800px;
+  width: 1140px;
   margin: 0 auto;
 }
 #catalog {
@@ -36,7 +37,8 @@ main {
   justify-content: space-between;
 }
 .shadow {
-  box-shadow: 1px 1px 33px 0px #00bfff;
+  box-shadow: 1px 1px 25px 0px #00bfff;
+  transition: 0.15s;
 }
 .flexy {
   display: flex;
@@ -44,11 +46,16 @@ main {
 }
 .flexy #previev,
 .flexy .cartResult {
-  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+.flexy #previev {
+  width: 31%;
+}
+.flexy .cartResult {
+  width: 69%;
 }
 .flexy a {
   outline: none;
@@ -63,17 +70,23 @@ main {
 .productItem:hover,
 .productItem:focus {
   outline: none;
-  box-shadow: 1px 1px 33px 0px #00bfff;
+  box-shadow: 1px 1px 25px 0px #00bfff;
+  transition: 0.15s;
 }
 .productItem button {
   width: 100%;
 }
+.productItem:hover {
+  border-color: #66d9ff;
+}
 #previev {
+  margin-right: 30px;
   height: 400px;
   border: 2px solid deepskyblue;
 }
 #previev img {
   height: 100%;
+  object-fit: fill;
 }
 .smallImg {
   height: 200px;
@@ -105,7 +118,7 @@ main {
   box-shadow: 0px 0px 20px 2px;
 }
 .close {
-  background: #cc3300;
+  background: deepskyblue;
   color: #FFFFFF;
   line-height: 25px;
   position: absolute;
@@ -125,6 +138,7 @@ main {
   height: 90vh;
   outline: none;
 }
+/* окно */
 .arrowFoto {
   width: 100px;
   line-height: 100px;
@@ -143,4 +157,58 @@ main {
 }
 #rightArrowFoto {
   right: 15px;
+}
+#cartVisual {
+  width: 100%;
+  border-radius: 10px;
+  max-height: 300px;
+  overflow: auto;
+  /*display: none;*/
+}
+.invisible {
+  display: none;
+}
+.cartProduct {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+.cartProduct:hover > div {
+  box-shadow: 1px 1px 15px 0px #00bfff;
+}
+.cartProduct > div {
+  border: 2px solid deepskyblue;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0 10px;
+  transition: 0.15s;
+}
+.cartProduct ._name {
+  width: 40%;
+}
+.cartProduct ._color {
+  width: 10%;
+}
+.cartProduct ._price {
+  width: 8%;
+}
+.cartProduct ._count {
+  width: 10%;
+}
+.cartProduct .sumProduct {
+  width: 8%;
+}
+.cartProduct .deleteProduct {
+  width: 3%;
+  background-color: deepskyblue;
+  color: #FFFFFF;
+  text-align: center;
+  width: 24px;
+  font-weight: bold;
+  border-radius: 12px;
+}
+.cartProduct .deleteProduct:hover {
+  background-color: #990000;
 }
