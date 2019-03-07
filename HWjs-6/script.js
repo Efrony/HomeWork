@@ -66,46 +66,46 @@ function countBasketPrice(cartUser) {
 }
 /* -------------- Добавления товара при нажатии-------------*/
 function addToCart(goods, cartUser) {
-    cartUser.push(goods)
-    cartVisual(goods, cartUser)
-    countBasketPrice(cartUser)
-    var $clear = document.getElementById('clear')
-    $clear.classList.remove('invisible')
+    if (cartUser.includes(goods)) {
+        cartUser[cartUser.indexOf(goods)]['_count']++ //если товар есть в корзине, count + 1
+            var isInclude = true  
+    } else {
+        cartUser.push(goods)  //если товара нет , добавляем объект в корзину
+        var isInclude = false
+    }
+    cartVisual(goods, cartUser, isInclude)  //визуализация товаров корзины
+    countBasketPrice(cartUser)  
+    var $clear = document.getElementById('clear')  //появляется кнопка "очистить корзину...
+    $clear.classList.remove('invisible') //
 }
 /* ------------------  Очистка корзины ----------------------*/
 function clearCart(cartUser) {
     messageCart('В корзине пусто.')
-    cartUser.length = 0
-    var $cartVisual = document.getElementById('cartVisual')
+    for (k = 0; k < cartUser.length; k++) cartUser[k]['_count'] = 1; //восстанавливаем count = 1 во всех объектах ...
+    cartUser.length = 0 
+    var $cartVisual = document.getElementById('cartVisual') //удаление визуальной части корзины ...
     var $elemProduct = $cartVisual.children
-    while ($elemProduct.length > 1) $cartVisual.removeChild($elemProduct[1])
-    $cartVisual.classList.add('invisible')
+    while ($elemProduct.length > 1) $cartVisual.removeChild($elemProduct[1]) // кроме children шапки(шаблона)
+    $cartVisual.classList.add('invisible') // исчезает шапка таблицы корзины
     var $clear = document.getElementById('clear')
-    $clear.classList.add('invisible')
-    
-    
+    $clear.classList.add('invisible') //кнопка Очистить корзину снова исчезает   
 }
 function handleClearCart() {
     clearCart(cart)
 }
 /* ------------------ Визуализация корзины ----------------------*/
-function cartVisual(goods, cartUser) {
+function cartVisual(goods, cartUser, isInclude) {
     var $cartVisual = document.getElementById('cartVisual')
     var $cartProduct = document.getElementsByClassName('cartProduct')
-    var $elemProduct = $cartProduct[0].cloneNode(true)
-    console.log(cartUser)
-    console.log(goods)
-    console.log(!cartUser.includes(goods))
-    if (!cartUser.includes(goods)) {
-        $elemProduct.querySelector('._name').textContent = goods['Название товара']
-        $elemProduct.querySelector('._color').textContent = goods['Цвет']
-        $elemProduct.querySelector('._price').textContent = goods['_price']
-        $elemProduct.querySelector('._count').textContent = goods['_count']
-        $elemProduct.querySelector('.sumProduct').textContent = goods['_price']
-        $cartVisual.appendChild($elemProduct)
-        $cartVisual.classList.remove('invisible')
-    }
-    
+    if (!isInclude) var $elemProduct = $cartProduct[0].cloneNode(true) //если объекта небыло в корзине, клонируем шаблон
+    else  var $elemProduct = $cartProduct[cartUser.indexOf(goods)+1]  // иначе берется переменная с соответствующим  индексом. +1 изза шаблона[0]
+    $elemProduct.querySelector('._count').textContent = goods['_count']
+    $elemProduct.querySelector('._name').textContent = goods['Название товара']
+    $elemProduct.querySelector('._color').textContent = goods['Цвет']
+    $elemProduct.querySelector('._price').textContent = goods['_price']
+    $elemProduct.querySelector('.sumProduct').textContent = +goods['_price'] * +goods['_count']
+    if (!isInclude) $cartVisual.appendChild($elemProduct) //если объекта небыло в корзине, добавляем шаблон
+    $cartVisual.classList.remove('invisible') //  шапка таблицы корзины становится видимой
 }
 /* ---------Визуализация одного объекта каталога------------*/
 function catalogVisualItem(productItem, indexItem) {
