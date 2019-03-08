@@ -40,22 +40,16 @@ main {
   box-shadow: 1px 1px 25px 0px #00bfff;
   transition: 0.15s;
 }
+.cartResult {
+  width: 100%;
+  margin-top: 30px;
+}
 .flexy {
   display: flex;
-  justify-content: space-between;
-}
-.flexy #previev,
-.flexy .cartResult {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 }
 .flexy #previev {
-  width: 31%;
-}
-.flexy .cartResult {
-  width: 69%;
+  width: 45%;
+  margin: 0 auto;
 }
 .flexy a {
   outline: none;
@@ -81,7 +75,7 @@ main {
 }
 #previev {
   margin-right: 30px;
-  height: 400px;
+  height: 500px;
   border: 2px solid deepskyblue;
 }
 #previev img {
@@ -211,4 +205,25 @@ main {
 }
 .cartProduct .deleteProduct:hover {
   background-color: #990000;
+}
+details {
+  margin-bottom: 15px;
+}
+details button {
+  margin-top: 15px;
+}
+summary {
+  font-size: 30px;
+  background-color: #007399;
+  color: #fff;
+  transition: 0.15s;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 15px;
+}
+summary:hover {
+  background-color: #66d9ff;
+}
+summary::-webkit-details-marker {
+  display: none;
 }

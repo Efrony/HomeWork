@@ -35,6 +35,9 @@ function addToCart(goods, cartUser) {
     countBasketPrice(cartUser)  
     var $clear = document.getElementById('clear')  //появляется кнопка "очистить корзину...
     $clear.classList.remove('invisible') //
+    var $inDelivery = document.getElementById('inDelivery')  //появляется кнопка "Указать адрес доставки ...
+    $inDelivery.classList.remove('invisible') //
+    
 }
 /* ------------------  Очистка корзины ----------------------*/
 function handleClearCart() {
@@ -45,8 +48,10 @@ function handleClearCart() {
     var $elemProduct = $cartVisual.children
     while ($elemProduct.length > 1) $cartVisual.removeChild($elemProduct[1]) // кроме children шапки(шаблона)
     $cartVisual.classList.add('invisible') // исчезает шапка таблицы корзины
-    var $clear = document.getElementById('clear')
-    $clear.classList.add('invisible') //кнопка Очистить корзину снова исчезает   
+    var $clear = document.getElementById('clear') //кнопка Очистить корзину снова исчезает  ...
+    $clear.classList.add('invisible')  //
+    var $inDelivery = document.getElementById('inDelivery')  // кнопка "Указать адрес доставки  исчезает при пустой корзине...
+    $inDelivery.classList.add('invisible') //
 }
 /* ------------------ Удаление одного товара ----------------------*/
 function handleClearProduct(event) {
@@ -63,6 +68,8 @@ function handleClearProduct(event) {
         var $clear = document.getElementById('clear')
         $clear.classList.add('invisible') //кнопка Очистить корзину снова исчезает
         messageCart('В корзине пусто.')
+        var $inDelivery = document.getElementById('inDelivery')  // кнопка "Указать адрес доставки  исчезает при пустой корзине...
+        $inDelivery.classList.add('invisible') //
     }
 }
 /* ------------------ Визуализация корзины ----------------------*/
@@ -166,5 +173,7 @@ function init() {
     $leftArrowFoto.addEventListener('click', arrowFoto) //
     var $deleteProduct = document.getElementsByClassName('deleteProduct') // крестик в шапке удаляет весь товар...
     $deleteProduct[0].addEventListener('click', handleClearCart) //
+    
+    
 }
 window.addEventListener('load', init)

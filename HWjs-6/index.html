@@ -15,22 +15,32 @@
             <div id="ModalOpen" class="Window">
                 <div><a href="#close" title="Закрыть" class="close">X</a><img src="" id='modalWindow' alt="Для подробного просмотра выберите товар" /><a href="leftArrowFoto" id="leftArrowFoto" title="Предыдущее фото" class="arrowFoto">&lt;</a><a href="rightArrowFoto" id="rightArrowFoto" title="Следующее фото" class="arrowFoto">&gt;</a></div>
             </div>
-            <div class="cartResult">
-                <div id="cart"></div>
-                <div id="cartVisual" class="invisible">
-                    <div class="cartProduct">
-                        <div class="_name">Наименование товара</div>
-                        <div class="_color">Цвет</div>
-                        <div class="_price">Цена</div>
-                        <div class="_count">Количество</div>
-                        <div class="sumProduct">Сумма</div>
-                        <div class="deleteProduct">X</div>
-                    </div>
-                </div>
-                <button id='clear' class="invisible"></button>
-            </div>
         </div>
         <div id="catalog"></div>
+        <details class="cartResult" id="cartResult" open="open">
+            <summary>Корзина</summary>
+            <div id="cart"></div>
+            <div id="cartVisual" class="invisible">
+                <div class="cartProduct">
+                    <div class="_name">Наименование товара</div>
+                    <div class="_color">Цвет</div>
+                    <div class="_price">Цена</div>
+                    <div class="_count">Количество</div>
+                    <div class="sumProduct">Сумма</div>
+                    <div class="deleteProduct">X</div>
+                </div>
+            </div>
+            <button id='clear' class="invisible"></button>
+            <button id='inDelivery' class="invisible">Указать адрес доставки</button>
+        </details>
+        <details class="delivery" id="delivery">
+            <summary>Адрес доставка</summary>
+            <button id='inComment' class="invisible">Указать комментарий</button>
+        </details>
+        <details class="comment" id="comment">
+            <summary>Комметарий к заказу</summary>
+            <button id='submit' class="invisible">Отправить заказ</button>
+        </details>
     </main>
 </body>
 

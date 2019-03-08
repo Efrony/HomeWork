@@ -46,21 +46,16 @@ main {
     transition: 0.15s;
 }
 
+.cartResult {
+    width: 100%;
+    margin-top: 30px;
+}
+
 .flexy {
     display: flex;
-    justify-content: space-between;
-    #previev,
-    .cartResult {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-    }
     #previev {
-        width: 31%;
-    }
-    .cartResult {
-        width: 69%;
+        width: 45%;
+        margin: 0 auto;
     }
     a {
         outline: none;
@@ -88,7 +83,7 @@ main {
 
 #previev {
     margin-right: 30px;
-    height: 400px;
+    height: 500px;
     border: 2px solid deepskyblue;
     img {
         height: 100%;
@@ -181,7 +176,6 @@ main {
 }
 
 #cartVisual {
-  
     width: 100%;
     border-radius: 10px;
     max-height: 300px;
@@ -192,6 +186,7 @@ main {
 .invisible {
     display: none;
 }
+
 .cartProduct {
     display: flex;
     width: 100%;
@@ -199,7 +194,8 @@ main {
     border-radius: 10px;
     margin: 5px 0;
     &:hover > div {
-        box-shadow: 1px 1px 15px 0px rgba(0, 191, 255, 1);;
+        box-shadow: 1px 1px 15px 0px rgba(0, 191, 255, 1);
+        ;
     }
     & > div {
         border: 2px solid deepskyblue;
@@ -211,7 +207,7 @@ main {
     ._name {
         width: 40%;
     }
-    ._color{
+    ._color {
         width: 10%;
     }
     ._price {
@@ -235,4 +231,27 @@ main {
             background-color: #990000;
         }
     }
+}
+
+details {
+    margin-bottom: 15px;
+        button {
+        margin-top: 15px;
+    }
+}
+summary {
+    font-size: 30px;
+    background-color: darken(deepskyblue, 20%);
+    color: #fff;
+    transition: 0.15s;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 15px;
+    &:hover {
+        background-color: lighten(deepskyblue, 20%);
+    }
+    &::-webkit-details-marker {
+        display: none;
+    }
+
 }
