@@ -33,11 +33,8 @@ function addToCart(goods, cartUser) {
     }
     cartVisual(goods, cartUser, isInclude)  //визуализация товаров корзины
     countBasketPrice(cartUser)  
-    var $clear = document.getElementById('clear')  //появляется кнопка "очистить корзину...
-    $clear.classList.remove('invisible') //
-    var $inDelivery = document.getElementById('inDelivery')  //появляется кнопка "Указать адрес доставки ...
-    $inDelivery.classList.remove('invisible') //
-    
+    document.getElementById('clear').classList.remove('invisible') //появляется кнопка "очистить корзину
+    document.getElementById('inDelivery').classList.remove('invisible') //появляется кнопка "Указать адрес доставки ...
 }
 /* ------------------  Очистка корзины ----------------------*/
 function handleClearCart() {
@@ -48,10 +45,10 @@ function handleClearCart() {
     var $elemProduct = $cartVisual.children
     while ($elemProduct.length > 1) $cartVisual.removeChild($elemProduct[1]) // кроме children шапки(шаблона)
     $cartVisual.classList.add('invisible') // исчезает шапка таблицы корзины
-    var $clear = document.getElementById('clear') //кнопка Очистить корзину снова исчезает  ...
-    $clear.classList.add('invisible')  //
-    var $inDelivery = document.getElementById('inDelivery')  // кнопка "Указать адрес доставки  исчезает при пустой корзине...
-    $inDelivery.classList.add('invisible') //
+    document.getElementById('clear').classList.add('invisible')  //кнопка Очистить корзину снова исчезает 
+    document.getElementById('inDelivery').classList.add('invisible')  // кнопка "Указать адрес доставки"  исчезает при пустой корзине
+    document.getElementById('inComment').classList.add('invisible')  // кнопка "Указать комментарий"  исчезает при пустой корзине
+    document.getElementById('submit').classList.add('invisible') // кнопка "Отправить заказ"  исчезает при пустой корзине
 }
 /* ------------------ Удаление одного товара ----------------------*/
 function handleClearProduct(event) {
@@ -65,11 +62,11 @@ function handleClearProduct(event) {
     countBasketPrice(cart) // пересчёт корзины
     if ($cartVisual.children.length == 1) { //если в корзине остаётся одна шапка
         $cartVisual.classList.add('invisible') // исчезает шапка таблицы корзины
-        var $clear = document.getElementById('clear')
-        $clear.classList.add('invisible') //кнопка Очистить корзину снова исчезает
+        document.getElementById('clear').classList.add('invisible') //кнопка Очистить корзину снова исчезает
+        document.getElementById('inDelivery').classList.add('invisible')   // кнопка "Указать адрес доставки"  исчезает при пустой корзине
+        document.getElementById('inComment').classList.add('invisible')  // кнопка "Указать комментарий"  исчезает при пустой корзине
+        document.getElementById('submit').classList.add('invisible') // кнопка "Отправить заказ"  исчезает при пустой корзине
         messageCart('В корзине пусто.')
-        var $inDelivery = document.getElementById('inDelivery')  // кнопка "Указать адрес доставки  исчезает при пустой корзине...
-        $inDelivery.classList.add('invisible') //
     }
 }
 /* ------------------ Визуализация корзины ----------------------*/
@@ -77,7 +74,7 @@ function cartVisual(goods, cartUser, isInclude) {
     var $cartVisual = document.getElementById('cartVisual')
     var $cartProduct = document.getElementsByClassName('cartProduct')
     if (!isInclude) var $elemProduct = $cartProduct[0].cloneNode(true) //если объекта небыло в корзине, клонируем шаблон
-    else  var $elemProduct = $cartProduct[cartUser.indexOf(goods)+1]  // иначе берется переменная с соответствующим  индексом. +1 изза шаблона[0]
+    else  var $elemProduct = $cartProduct[cartUser.indexOf(goods)+1]  // иначе берется переменная с соответствующим  индексом. (+1 изза шаблона[0])
     $elemProduct.querySelector('._count').textContent = goods['_count']
     $elemProduct.querySelector('._name').textContent = goods['Название товара']
     $elemProduct.querySelector('._color').textContent = goods['Цвет']
@@ -146,34 +143,42 @@ function arrowFoto(event) {
     event.preventDefault()
     var $modalWindow = document.getElementById('modalWindow')
     var srcEnd = $modalWindow.src.split('/').pop()
-    if (event.target.id === 'rightArrowFoto') {
+    if (event.target.id === 'rightArrowFoto' || event.keyCode == 39) {
         if (namberImg == 2) namberImg = -1
         src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + ++namberImg + '.jpg'
     }
-    if (event.target.id === 'leftArrowFoto') {
+    if (event.target.id === 'leftArrowFoto' || event.keyCode == 37) {
         if (namberImg == 0) namberImg = 3
         src = 'img/big/' + srcEnd.split('_').splice(0, 2).join('_') + '_' + --namberImg + '.jpg'
     }
     $modalWindow.src = src
 }
+/* ---- Сворачивание и разворачивание разделов Корзина, Доставка, Комментарий ----*/
+function inDelivery(event) {
+    event.target .parentElement.removeAttribute('open') //сворачивание текущего раздела при нажатии на кнопку
+    document.getElementById('delivery').setAttribute('open','open') // разворачивание следующего раздела
+    document.getElementById('inComment').classList.remove('invisible') // появление контента следующего раздела
+}
+function inComment(event) {
+    event.target .parentElement.removeAttribute('open') //сворачивание текущего раздела при нажатии на кнопку
+    document.getElementById('comment').setAttribute('open','open') // разворачивание следующего раздела
+    document.getElementById('submit').classList.remove('invisible') // появление контента следующего раздела
+}
 /* ---- Функция объединяющая загрузку всего js после загрузки html ----*/
 function init() {
     messageCart('В корзине пусто.') // вывод сообщения о пустой корзине по умолчанию
-    var $clear = document.getElementById('clear') // кнопка очистки корзины ...
-    $clear.textContent = 'Очистить корзину' 
-    $clear.addEventListener('click', handleClearCart) //
+    document.getElementById('clear').textContent = 'Очистить корзину'  // кнопка очистки корзины ...
+    document.getElementById('clear').addEventListener('click', handleClearCart) //
     catalogVisual(product)  // визуализация каталога
     var imagesItem = document.getElementsByClassName('productItem') // при клике на карточку товара появляется превью ...
     for (var j = 0; j < imagesItem.length; j++) imagesItem[j].onclick = changeBigPicture // 
-    var $modalField = document.getElementById('previev') // при клике на превью поялвятеся модальное окно ...
-    $modalField.addEventListener('click', openModalWindow) //
-    var $rightArrowFoto = document.getElementById('rightArrowFoto') //стрелки превью...
-    var $leftArrowFoto = document.getElementById('leftArrowFoto') 
-    $rightArrowFoto.addEventListener('click', arrowFoto)
-    $leftArrowFoto.addEventListener('click', arrowFoto) //
-    var $deleteProduct = document.getElementsByClassName('deleteProduct') // крестик в шапке удаляет весь товар...
-    $deleteProduct[0].addEventListener('click', handleClearCart) //
-    
-    
+    document.getElementById('previev') .addEventListener('click', openModalWindow) // при клике на превью поялвятеся модальное окно ...
+    document.getElementById('rightArrowFoto').addEventListener('click', arrowFoto) //стрелки превью...
+    document.getElementById('leftArrowFoto').addEventListener('click', arrowFoto) //
+    document.getElementsByClassName('deleteProduct')[0].addEventListener('click', handleClearCart)  // крестик в шапке удаляет весь товар...
+    document.getElementById('inDelivery').addEventListener('click', inDelivery) // при нажатии кнопки Далее открывается Доставка
+    document.getElementById('inComment').addEventListener('click', inComment)  // при нажатии кнопки Далее открывается Комметарий
+    window.addEventListener('keydown', arrowFoto) // перелистывание картинок клавишами
 }
 window.addEventListener('load', init)
+

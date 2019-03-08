@@ -227,3 +227,6 @@ summary:hover {
 summary::-webkit-details-marker {
   display: none;
 }
+.info {
+  height: 600px;
+}
