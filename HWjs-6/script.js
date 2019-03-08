@@ -1,54 +1,12 @@
 var namberImg = 0
 var cart = [] 
-var product = [{
-            'Название товара': 'Футболка',
-            _name: 'jersey', _name: 'jersey',
-            _price: 800,
-            _count: 1,
-            _color: 'red',
-            Цвет: 'Красный',
-            Размер: 'S'
-        }, { 
-            'Название товара': 'Штаны',
-            _name: 'pants',
-            _price: 1500,
-            _count: 1,
-            _color: 'black',
-            Цвет: 'Чёрный',
-            Размер: 'M'
-        }, {
-            'Название товара': 'Толстовка',
-            _name: 'sweatshirt',
-            _price: 2000,
-            _count: 1,
-            _color: 'blue',
-            Цвет: 'Синий',
-            Размер: 'L'
-        }, {
-            'Название товара': 'Футболка',
-            _name: 'jersey',
-            _price: 800,
-            _count: 1,
-            _color: 'black',
-            Цвет: 'Черный',
-            Размер: 'M'
-        }, {
-            'Название товара': 'Толстовка',
-            _name: 'sweatshirt',
-            _price: 1500,
-            _count: 1,
-            _color: 'red',
-            Цвет: 'Красный',
-            Размер: 'M'
-        }, { 
-                'Название товара': 'Штаны',
-            _name: 'pants',
-            _price: 1500,
-            _count: 1,
-            _color: 'green',
-            Цвет: 'Зеленый',
-            Размер: 'M'
-            }
+var product = [
+        {'Название товара': 'Футболка', _name: 'jersey', _name: 'jersey', _price: 800, _count: 1, _color: 'red', Цвет: 'Красный', Размер: 'S'}, 
+        {'Название товара': 'Штаны', _name: 'pants', _price: 1500, _count: 1, _color: 'black', Цвет: 'Чёрный', Размер: 'M'},
+        {'Название товара': 'Толстовка', _name: 'sweatshirt', _price: 2000, _count: 1, _color: 'blue', Цвет: 'Синий', Размер: 'L'},
+        {'Название товара': 'Футболка', _name: 'jersey', _price: 800, _count: 1, _color: 'black', Цвет: 'Черный', Размер: 'M'},
+        {'Название товара': 'Толстовка', _name: 'sweatshirt', _price: 1500, _count: 1, _color: 'red', Цвет: 'Красный', Размер: 'M'},
+        {'Название товара': 'Штаны', _name: 'pants', _price: 1500, _count: 1, _color: 'green', Цвет: 'Зеленый', Размер: 'M'}
 ]
 /* --------------- Вывод текста.------------*/
 function messageCart(text) {
@@ -59,7 +17,7 @@ function countBasketPrice(cartUser) {
     var countCart = 0
     var sumPriceCart = 0
     for (var i = 0; i < cartUser.length; i++) {
-        sumPriceCart += cartUser[i]._price
+        sumPriceCart += cartUser[i]._price * cartUser[i]._count
         countCart += cartUser[i]._count
     }
     messageCart('Итого: ' + countCart + ' шт. стоимостью ' + sumPriceCart + ' рублей. ')
@@ -79,10 +37,10 @@ function addToCart(goods, cartUser) {
     $clear.classList.remove('invisible') //
 }
 /* ------------------  Очистка корзины ----------------------*/
-function clearCart(cartUser) {
+function handleClearCart() {
     messageCart('В корзине пусто.')
-    for (k = 0; k < cartUser.length; k++) cartUser[k]['_count'] = 1; //восстанавливаем count = 1 во всех объектах ...
-    cartUser.length = 0 
+    for (k = 0; k < cart.length; k++) cart[k]['_count'] = 1; //восстанавливаем count = 1 во всех объектах ...
+    cart.length = 0 
     var $cartVisual = document.getElementById('cartVisual') //удаление визуальной части корзины ...
     var $elemProduct = $cartVisual.children
     while ($elemProduct.length > 1) $cartVisual.removeChild($elemProduct[1]) // кроме children шапки(шаблона)
@@ -90,8 +48,22 @@ function clearCart(cartUser) {
     var $clear = document.getElementById('clear')
     $clear.classList.add('invisible') //кнопка Очистить корзину снова исчезает   
 }
-function handleClearCart() {
-    clearCart(cart)
+/* ------------------ Удаление одного товара ----------------------*/
+function handleClearProduct(event) {
+    var $cartVisual = document.getElementById('cartVisual')
+    var $deleteString = event.target.parentElement // выделяем строку, на которой был клик по крестику
+    for (g = +$deleteString.id + 1; g < $cartVisual.children.length - 1; g++) // при удалении номер(id) следующих по списку уменьшается на 1
+        $cartVisual.children[g + 1].setAttribute('id', +$cartVisual.children[g + 1].id - 1)
+    $cartVisual.removeChild($deleteString) // удаление узла продукта из визуального списка корзины
+    cart[+$deleteString.id]['_count'] = 1 // //восстанавливаем count = 1 у объекта
+    cart.splice(+$deleteString.id, 1) // удаление объекта из массива корзины
+    countBasketPrice(cart) // пересчёт корзины
+    if ($cartVisual.children.length == 1) { //если в корзине остаётся одна шапка
+        $cartVisual.classList.add('invisible') // исчезает шапка таблицы корзины
+        var $clear = document.getElementById('clear')
+        $clear.classList.add('invisible') //кнопка Очистить корзину снова исчезает
+        messageCart('В корзине пусто.')
+    }
 }
 /* ------------------ Визуализация корзины ----------------------*/
 function cartVisual(goods, cartUser, isInclude) {
@@ -104,8 +76,11 @@ function cartVisual(goods, cartUser, isInclude) {
     $elemProduct.querySelector('._color').textContent = goods['Цвет']
     $elemProduct.querySelector('._price').textContent = goods['_price']
     $elemProduct.querySelector('.sumProduct').textContent = +goods['_price'] * +goods['_count']
+    $elemProduct.setAttribute('id', cartUser.indexOf(goods)) // передаём в id номер в массиве корзины
     if (!isInclude) $cartVisual.appendChild($elemProduct) //если объекта небыло в корзине, добавляем шаблон
     $cartVisual.classList.remove('invisible') //  шапка таблицы корзины становится видимой
+    var $deleteProduct = document.getElementsByClassName('deleteProduct')  //удаление товара при нажатии на крестик ... 
+    $deleteProduct[cartUser.indexOf(goods)+1].addEventListener('click', handleClearProduct)//
 }
 /* ---------Визуализация одного объекта каталога------------*/
 function catalogVisualItem(productItem, indexItem) {
@@ -189,5 +164,7 @@ function init() {
     var $leftArrowFoto = document.getElementById('leftArrowFoto') 
     $rightArrowFoto.addEventListener('click', arrowFoto)
     $leftArrowFoto.addEventListener('click', arrowFoto) //
+    var $deleteProduct = document.getElementsByClassName('deleteProduct') // крестик в шапке удаляет весь товар...
+    $deleteProduct[0].addEventListener('click', handleClearCart) //
 }
 window.addEventListener('load', init)
