@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="style/cart.style.css">
+    <script src="script/script_cart.js"></script>
     <title>Cart</title>
 </head>
 
 <body>
     <header>
         <div class="logoSearch">
-            <div class="logo">
-                <span class="styleBran">BRAN</span>
-                <span class="styleD">D</span>
-            </div>
+            <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
             <div class="search">
                 <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
                 <input type="search" placeholder="Search for Item...">
@@ -44,55 +42,66 @@
         </div>
     </div>
     <main>
-        <div class="cart" id="cart">
-            <div class="hat hat-1">Product Details </div>
-            <figure>
-                <a href="#"><img src="img/cart/prod1.jpg" alt="prod1"></a>
-                <figcaption>Mango People T-shirt
-                    <p><b>Color:</b> Red
-                        <br><b>Size:</b> Xll</p>
-                </figcaption>
-            </figure>
-            <figure>
-                <a href="#"><img src="img/cart/prod2.jpg" alt="prod2"></a>
-                <figcaption>Mango People T-shirt
-                    <p><b>Color:</b> Red
-                        <br><b>Size:</b> Xll</p>
-                </figcaption>
-            </figure>
-            <figure>
-                <a href="#"><img src="img/cart/prod3.jpg" alt="prod3"></a>
-                <figcaption>Mango People T-shirt
-                    <p><b>Color:</b> Red
-                        <br><b>Size:</b> Xll</p>
-                </figcaption>
-            </figure>
-            <div class="hat">unite Price</div>
-            <div class="unitePrice">$150</div>
-            <div class="unitePrice">$150</div>
-            <div class="unitePrice">$150</div>
-            <div class="hat">Quantity</div>
-            <div class="quantity">
-                <div>2</div>
+
+        <div class="cart">
+            <div class="hat">
+                <div class="">Product Details </div>
+                <div class="">unite Price</div>
+                <div class="">Quantity</div>
+                <div class="">shipping</div>
+                <div class="">Subtotal</div>
+                <div class="">ACTION</div>
             </div>
-            <div class="quantity">
-                <div>2</div>
+            <div class="productCart" id="productCart">
+                <div class="productItem" >
+                    <figure>
+                        <a href="#"><img src="img/cart/prod1.jpg" alt="prod1"></a>
+                        <figcaption>Mango People T-shirt
+                            <p><b>Color:</b> Red
+                                <br><b>Size:</b> Xll</p>
+                        </figcaption>
+                    </figure>
+                    <div class="unitePrice">$150</div>
+                    <div class="quantity">
+                        <div>2</div>
+                    </div>
+                    <div class="shipping">FREE</div>
+                    <div class="subtotal">$300</div>
+                    <div class="action"><img src="img/cart/delete.png" alt="del"></div>
+                </div>
+                <div class="productItem">
+                    <figure>
+                        <a href="#"><img src="img/cart/prod2.jpg" alt="prod2"></a>
+                        <figcaption>Mango People T-shirt
+                            <p><b>Color:</b> Red
+                                <br><b>Size:</b> Xll</p>
+                        </figcaption>
+                    </figure>
+                    <div class="unitePrice">$150</div>
+                    <div class="quantity">
+                        <div>2</div>
+                    </div>
+                    <div class="shipping">FREE</div>
+                    <div class="subtotal">$300</div>
+                    <div class="action"><img src="img/cart/delete.png" alt="del"></div>
+                </div>
+                <div class="productItem">
+                    <figure>
+                        <a href="#"><img src="img/cart/prod3.jpg" alt="prod1"></a>
+                        <figcaption>Mango People T-shirt
+                            <p><b>Color:</b> Red
+                                <br><b>Size:</b> Xll</p>
+                        </figcaption>
+                    </figure>
+                    <div class="unitePrice">$150</div>
+                    <div class="quantity">
+                        <div>2</div>
+                    </div>
+                    <div class="shipping">FREE</div>
+                    <div class="subtotal">$300</div>
+                    <div class="action"><img src="img/cart/delete.png" alt="del"></div>
+                </div>
             </div>
-            <div class="quantity">
-                <div>2</div>
-            </div>
-            <div class="hat">shipping</div>
-            <div class="shipping">FREE</div>
-            <div class="shipping">FREE</div>
-            <div class="shipping">FREE</div>
-            <div class="hat">Subtotal</div>
-            <div class="subtotal">$300</div>
-            <div class="subtotal">$300</div>
-            <div class="subtotal">$300</div>
-            <div class="hat">ACTION</div>
-            <div class="action"><img src="img/cart/delete.png" alt="del"></div>
-            <div class="action"><img src="img/cart/delete.png" alt="del"></div>
-            <div class="action"><img src="img/cart/delete.png" alt="del"></div>
         </div>
         <div class="buttonCart">
             <a href="#">
@@ -123,19 +132,17 @@
                     <input type="submit" value="Apply coupon"> </form>
             </div>
             <div class="grandTotal">
-                <div class="price">Sub total &nbsp;&nbsp;&nbsp;&nbsp;$900
-                    <p>GRAND TOTAL <span>&nbsp;&nbsp;&nbsp;$900</span></p>
-                </div> <a href="#">proceed to checkout</a> </div>
+                <div class="price" id="priceTotal">Sub total &nbsp;&nbsp;&nbsp;&nbsp;$900
+                    <p>GRAND TOTAL <span id="grandTotal">&nbsp;&nbsp;&nbsp;$900</span></p>
+                </div> <a href="#">proceed to checkout</a>
+            </div>
         </div>
     </main>
     <div class="subscribeBcg">
         <div class="subscribe">
             <div class="commentBlock">
-                <div class="comment">
-                    “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus condimentum a. Aliquam
-                    condimentum mattis neque sed pretium”
-                    <br>
-                    <address>Bin Burhan <p>Dhaka, Bd</p></address>
+                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus condimentum a. Aliquam condimentum mattis neque sed pretium”
+                    <br> <address>Bin Burhan <p>Dhaka, Bd</p></address>
                     <div class="scroll">
                         <a href="#"></a>
                         <a href="#"></a>
@@ -149,8 +156,7 @@
                     <p>FOR OUR NEWLETTER AND PROMOTION</p>
                     <form action="#">
                         <input type="email" placeholder="Enter Your Email">
-                        <input type="submit" value="Subscribe">
-                    </form>
+                        <input type="submit" value="Subscribe"> </form>
                 </div>
             </div>
         </div>
@@ -158,20 +164,10 @@
     <footer>
         <div class="footer">
             <div class="aboutBrand">
-                <div class="logo">
-                    <span class="styleBran">BRAN</span>
-                    <span class="styleD">D</span>
-                </div>
-                <p>
-                    Objectively transition extensive data rather than cross functional solutions. Monotonectally
-                    syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an
-                    expanded array of processes and cross-unit partnerships.
-                </p>
+                <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
+                <p> Objectively transition extensive data rather than cross functional solutions. Monotonectally syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an expanded array of processes and cross-unit partnerships. </p>
                 <br>
-                <p>
-                    Efficiently plagiarize 24/365 action items and focused infomediaries. Distinctively seize
-                    superior initiatives for wireless technologies. Dynamically optimize.
-                </p>
+                <p> Efficiently plagiarize 24/365 action items and focused infomediaries. Distinctively seize superior initiatives for wireless technologies. Dynamically optimize. </p>
             </div>
             <div class="aboutAll">
                 <div>

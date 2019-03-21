@@ -156,41 +156,62 @@ main {
   margin: 0 auto;
   width: 1142px;
 }
+#cart figure {
+  display: flex;
+}
 .cart {
   padding-top: 90px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: 37px repeat(3, 1fr);
-  grid-template-columns: 7fr 3fr 3fr 2fr 2fr;
 }
-.cart div {
-  border-bottom: 1px solid #eaeaea;
-}
-.cart div:nth-child(n+2) {
+.cart div:nth-child(n+2),
+.productCart div:nth-child(n+2) {
   text-align: center;
 }
-.cart .hat {
+.cart .hat,
+.productCart .hat {
+  display: grid;
+  grid-template-columns: 7fr 3fr 3fr 2fr 2fr 1fr;
+  padding-bottom: 15px;
   color: #222222;
   font-size: 13px;
   font-weight: 700;
   line-height: 20px;
   text-transform: uppercase;
   letter-spacing: -0.2px;
-}
-.cart figure {
-  padding: 25px 0 25px 0;
   border-bottom: 1px solid #eaeaea;
 }
-.cart figure a {
+.cart .productItem,
+.productCart .productItem {
+  display: grid;
+  grid-template-columns: 7fr 3fr 3fr 2fr 2fr 1fr;
+}
+.cart .productItem div,
+.productCart .productItem div {
+  border-bottom: 1px solid #eaeaea;
+}
+.cart figure,
+.productCart figure {
+  padding: 25px 0 25px 0;
+  border-bottom: 1px solid #eaeaea;
+  text-align: left;
+}
+.cart figure img,
+.productCart figure img {
+  height: 115px;
+}
+.cart figure a,
+.productCart figure a {
   float: left;
 }
-.cart figure p {
+.cart figure p,
+.productCart figure p {
   padding-top: 33px;
 }
-.cart figure figcaption {
+.cart figure figcaption,
+.productCart figure figcaption {
   padding: 10px 0 0 121px;
 }
-.cart .unitePrice {
+.cart .unitePrice,
+.productCart .unitePrice {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
@@ -198,12 +219,14 @@ main {
   align-items: center;
   justify-content: center;
 }
-.cart .quantity {
+.cart .quantity,
+.productCart .quantity {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.cart .quantity div {
+.cart .quantity div,
+.productCart .quantity div {
   width: 54px;
   height: 30px;
   border: 1px solid #eaeaea;
@@ -215,7 +238,8 @@ main {
   line-height: 30px;
   margin: 0 auto;
 }
-.cart .shipping {
+.cart .shipping,
+.productCart .shipping {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
@@ -223,7 +247,8 @@ main {
   align-items: center;
   justify-content: center;
 }
-.cart .subtotal {
+.cart .subtotal,
+.productCart .subtotal {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
@@ -231,7 +256,8 @@ main {
   align-items: center;
   justify-content: center;
 }
-.cart .action {
+.cart .action,
+.productCart .action {
   color: #656565;
   font-size: 13px;
   font-weight: 400;
