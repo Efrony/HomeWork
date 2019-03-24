@@ -55,8 +55,10 @@ function sendRequest(url) {
         xhr.open('GET', url)
         xhr.send()
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) resolve(JSON.parse(xhr.responseText))
-
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 400) fail('error' + xhr.status) 
+                else resolve(JSON.parse(xhr.responseText))
+            }
         }
     })
 }
@@ -64,7 +66,7 @@ function sendRequest(url) {
 function init() {
     const createCart = new CreateCartList() // создаём экземпляр класса создающего список товара
     sendRequest('http://localhost:3000/cart.json')
-        .then((cart) => createCart.getCartListServer(cart))  // вызываем у этого экземпляра метод получающий список товаров с сервера 
+        .then((cart) => createCart.getCartListServer(cart), (error) => console.log(error))  // вызываем у этого экземпляра метод получающий список товаров с сервера 
         .then(() => createCart.сreateHtmlCart()) // вызываем метод генерирующий разметку каждого товара поочерёдно
         .then(() => createCart.sumCart()) // суммарная стоимость всех продуктов
 }

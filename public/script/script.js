@@ -46,17 +46,20 @@ function sendRequest(url) {
         xhr.open('GET', url)
         xhr.send()
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) resolve(JSON.parse(xhr.responseText))
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 400) fail('error' + xhr.status) 
+                else resolve(JSON.parse(xhr.responseText))
+                
+            }
         }
     })
 }
 
 function init() {
     const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
-    sendRequest('http://localhost:3000/product.json').then((product) => createProducs.getProductListServer(product)) // вызываем у этого экземпляра метод получающий список товаров с сервера  
+    sendRequest('http://localhost:3000/product.json').then((product) => createProducs.getProductListServer(product), (error) => console.log(error)) // вызываем у этого экземпляра метод получающий список товаров с сервера
         .then(() => createProducs.сreateHtmlCatalog()) // вызываем метод генерирующий разметку каждого товара поочерёдно
 }
-
 
 
 window.addEventListener('load', init)
