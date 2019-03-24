@@ -1,18 +1,3 @@
-var product = [
-    {article: '000001', name: 'Mango People T-shirt', price: 52.00},
-    {article: '000002', name: 'Mango People Blouse', price: 68.00},
-    {article: '000003', name: 'Mango People Jacket', price: 48},
-    {article: '000004', name: 'Mango People Dress', price: 37},
-    {article: '000005', name: 'Mango People Dress', price: 67},
-    {article: '000006', name: 'Mango People Blazer', price: 62},
-    {article: '000007', name: 'Mango People Pants', price: 75},
-    {article: '000008', name: 'Mango People Sweatshirt', price: 45}
-]
-
-var cart = [
-    {article: '000001', name: 'Mango People T-shirt', price: 52.00, count: 1},
-    {article: '000002', name: 'Mango People Blouse', price: 68.00, count: 3}
-]
 
 
 /*------------------------- Вывод каталога -------------------------*/
@@ -38,9 +23,8 @@ class CreateProductList { // класс, создающий объект (экз
     constructor() {
         this.productList = [] 
     }
-    getProductListServer() {
+    getProductListServer(product) {
         this.productList = product  //запрашиваем товары для каталога
-        this.cartList = cart  //запрашиваем товары для корзины
     }
     sumCart() { // суммарная стоимость всех продуктов в корзине
         var sumPrice = this.cartList.reduce(function(sum, item) {
@@ -56,10 +40,23 @@ class CreateProductList { // класс, создающий объект (экз
     }
 }
 
-function init () {
+function sendRequest(url) {
+    return new Promise(function (resolve, fail) {
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.send()
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) resolve(JSON.parse(xhr.responseText))
+        }
+    })
+}
+
+function init() {
     const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
-    createProducs.getProductListServer() // вызываем у этого экземпляра метод получающий список товаров с сервера 
-    createProducs.сreateHtmlCatalog() // вызываем метод генерирующий разметку каждого товара поочерёдно
-} 
+    sendRequest('http://localhost:3000/product.json').then((product) => createProducs.getProductListServer(product)) // вызываем у этого экземпляра метод получающий список товаров с сервера  
+        .then(() => createProducs.сreateHtmlCatalog()) // вызываем метод генерирующий разметку каждого товара поочерёдно
+}
+
+
 
 window.addEventListener('load', init)

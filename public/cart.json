@@ -1,0 +1,18 @@
+[
+  {
+    "article": "000001",
+    "name": "Mango People T-shirt",
+    "price": "52",
+    "count": "1"
+  },{
+    "article": "000004",
+    "name": "Mango People Dress",
+    "price": "37",
+    "count": "3"
+  },{
+    "article": "000008",
+    "name": "Mango People Sweatshirt",
+    "price": "45",
+    "count": "2"
+  }
+]
