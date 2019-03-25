@@ -2,34 +2,34 @@
   {
     "article": "000001",
     "name": "Mango People T-shirt",
-    "price": "52"
+    "price": 52
   },{
     "article": "000002",
     "name": "Mango People Blouse",
-    "price": "68"
+    "price": 68
   },{
     "article": "000003",
     "name": "Mango People Jacket",
-    "price": "48"
+    "price": 48
   },{
     "article": "000004",
     "name": "Mango People Dress",
-    "price": "37"
+    "price": 37
   },{
     "article": "000005",
     "name": "Mango People Dress",
-    "price": "67"
+    "price": 67
   },{
     "article": "000006",
     "name": "Mango People Blazer",
-    "price": "62"
+    "price": 62
   },{
     "article": "000007",
      "name": "Mango People Pants",
-    "price": "75"
+    "price": 75
   },{
     "article": "000008",
     "name": "Mango People Sweatshirt",
-    "price": "45"
+    "price": 45
   }
 ]

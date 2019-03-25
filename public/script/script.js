@@ -1,14 +1,12 @@
-
-
 /*------------------------- Вывод каталога -------------------------*/
-class CreateProductItem {  //класс, создающий объект с указанными свойствами продукта и с методом renderHtml, который возвращающает разметку
+class CreateProductItem { //передача получаемых параметров в разметку 
     constructor(article, name, price, count) {
         this.article = article
         this.name = name
         this.price = price
         this.count = count
     }
-    renderHtmlCatalog() {  // метод возвращающий разметку элемента в каталоге
+    renderHtmlCatalog() { // метод возвращающий разметку элемента в каталоге
         return `<figure class="productItem">
                     <img src="img/product/${this.article}.jpg" alt="productFoto">
                     <div class="shadowHover">
@@ -18,38 +16,50 @@ class CreateProductItem {  //класс, создающий объект с ук
                     </figure>`
     }
 }
-
-class CreateProductList { // класс, создающий объект (экземпляр) с методом полученния массива товаров с сервера, и методом вывода этого списка по одному товару через CreateProductItem.renderHtml
+class CreateProductList { 
     constructor() {
-        this.productList = [] 
+        this.productList = []
     }
-    getProductListServer(product) {
-        this.productList = product  //запрашиваем товары для каталога
+    getProductListServer(product) { //объект product приходит после ответа с сервера через then (в init)
+        this.productList = product 
     }
     sumCart() { // суммарная стоимость всех продуктов в корзине
-        var sumPrice = this.cartList.reduce(function(sum, item) {
-            return sum + (item.price * item.count)}, 0)
+        var sumPrice = this.cartList.reduce(function (sum, item) {
+            return sum + (item.price * item.count)
+        }, 0)
     }
-    сreateHtmlCatalog() {    
+    сreateHtmlCatalog() { // создание разметки для всех товаров списка
         var htmlString = '';
-         this.productList.forEach(function(productItem) { //для каждого из массива выполнить функцию...
-                var productItem = new CreateProductItem(productItem.article, productItem.name, productItem.price, productItem.count)  // на основе класса CreateProductItem создать объект (экземпляр) и присвоить его переменной productItem
-                htmlString += productItem.renderHtmlCatalog()  // у только что созданного эксемпляра взять разметку и присвоить его строке html 
-            })
-        document.getElementById('product').innerHTML = htmlString 
+        this.productList.forEach(function (productItem) { 
+            var productItem = new CreateProductItem(productItem.article, productItem.name, productItem.price, productItem.count) 
+            htmlString += productItem.renderHtmlCatalog() 
+        })
+        document.getElementById('product').innerHTML = htmlString
+        var $buttonsAddCart = document.getElementsByClassName('addToCart')
+        for (var i = 0; i < $buttonsAddCart.length; i++) $buttonsAddCart[i].addEventListener('click', this.addToCart.bind(this))
+    }
+    addToCart(event) { //добавление товара в корзину
+        const idProduct = event.target.parentElement.parentElement.id
+        const inProductList = this.productList.find(item => item.article == idProduct)
+        const inCartList = this.cartList.find(item => item.article == idProduct)
+        if (inCartList) inCartList.count++
+            else {
+                var copyObjCart = Object.assign({}, inProductList)
+                copyObjCart.count = 1
+                this.cartList.push(copyObjCart)
+            }
     }
 }
 
-function sendRequest(url) {
+function sendRequest(url) { // запрос на сервер
     return new Promise(function (resolve, fail) {
         const xhr = new XMLHttpRequest()
         xhr.open('GET', url)
         xhr.send()
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status >= 400) fail('error' + xhr.status) 
+                if (xhr.status >= 400) fail('error' + xhr.status)
                 else resolve(JSON.parse(xhr.responseText))
-                
             }
         }
     })
@@ -57,9 +67,8 @@ function sendRequest(url) {
 
 function init() {
     const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
-    sendRequest('http://localhost:3000/product.json').then((product) => createProducs.getProductListServer(product), (error) => console.log(error)) // вызываем у этого экземпляра метод получающий список товаров с сервера
-        .then(() => createProducs.сreateHtmlCatalog()) // вызываем метод генерирующий разметку каждого товара поочерёдно
+    sendRequest('http://localhost:3000/product.json')
+        .then((product) => createProducs.getProductListServer(product), (error) => console.log(error)) // отправляем запрос на сервер, полученный список передаём в метод конструктора 
+        .then(() => createProducs.сreateHtmlCatalog()) //  метод генерирующий разметку каждого товара поочерёдно
 }
-
-
 window.addEventListener('load', init)
