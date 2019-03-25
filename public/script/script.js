@@ -7,7 +7,7 @@ class CreateProductItem { //передача получаемых парамет
         this.count = count
     }
     renderHtmlCatalog() { // метод возвращающий разметку элемента в каталоге
-        return `<figure class="productItem">
+        return `<figure class="productItem" id="${this.article}">
                     <img src="img/product/${this.article}.jpg" alt="productFoto">
                     <div class="shadowHover">
                         <button class="addToCart">&ensp;Add to Cart</button>
@@ -19,6 +19,7 @@ class CreateProductItem { //передача получаемых парамет
 class CreateProductList { 
     constructor() {
         this.productList = []
+        this.cartList = []
     }
     getProductListServer(product) { //объект product приходит после ответа с сервера через then (в init)
         this.productList = product 
@@ -48,6 +49,8 @@ class CreateProductList {
                 copyObjCart.count = 1
                 this.cartList.push(copyObjCart)
             }
+        console.log(this.cartList)
+
     }
 }
 

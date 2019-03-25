@@ -54,6 +54,8 @@ class CreateCartList {
         const inCartList = this.cartList.find(item => item.article == idProduct.id)
         inCartList.count = 0
         idProduct.remove()
+        this.sumCart()
+        console.log(this.cartList)
     }
 }
 
