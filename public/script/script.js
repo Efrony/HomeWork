@@ -22,9 +22,9 @@ class CreateProductList {
         this.cartList = []
     }
     getProductListServer() { //объект product приходит после ответа с сервера через then (в init)
-        sendRequest('http://localhost:3000/product.json')
+        fetch('http://localhost:3000/product.json')
             .then((product) => this.productList = product, (error) => console.log(error))
-            this.productList = [
+            this.productList = [    //  удалить !
                 {
                   "article": "000001",
                   "name": "Mango People T-shirt",
@@ -70,7 +70,8 @@ class CreateProductList {
     }
 }
 
-function sendRequest(url) { // запрос на сервер
+
+/*function sendRequest(url) { // запрос на сервер  //   !! заменили на  fetch(url) !! 
     return new Promise(function (resolve, fail) {
         const xhr = new XMLHttpRequest()
         xhr.open('GET', url)
@@ -82,12 +83,11 @@ function sendRequest(url) { // запрос на сервер
             }
         }
     })
-}
+}*/
 
 function init() {
     const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
      createProducs.getProductListServer() // получаем список товара с сервера
      createProducs.сreateHtmlCatalog() //  метод генерирующий разметку каждого товара поочерёдно
 }
-
 window.addEventListener('load', init)
