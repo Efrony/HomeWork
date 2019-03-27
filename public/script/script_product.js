@@ -1,0 +1,1 @@
+import {create_catalog_module} from "./script";

@@ -21,8 +21,24 @@ class CreateProductList {
         this.productList = []
         this.cartList = []
     }
-    getProductListServer(product) { //объект product приходит после ответа с сервера через then (в init)
-        this.productList = product 
+    getProductListServer() { //объект product приходит после ответа с сервера через then (в init)
+        sendRequest('http://localhost:3000/product.json')
+            .then((product) => this.productList = product, (error) => console.log(error))
+            this.productList = [
+                {
+                  "article": "000001",
+                  "name": "Mango People T-shirt",
+                  "price": 52
+                },{
+                  "article": "000002",
+                  "name": "Mango People Blouse",
+                  "price": 68
+                },{
+                  "article": "000003",
+                  "name": "Mango People Jacket",
+                  "price": 48
+                }
+              ]
     }
     sumCart() { // суммарная стоимость всех продуктов в корзине
         var sumPrice = this.cartList.reduce(function (sum, item) {
@@ -70,8 +86,8 @@ function sendRequest(url) { // запрос на сервер
 
 function init() {
     const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
-    sendRequest('http://localhost:3000/product.json')
-        .then((product) => createProducs.getProductListServer(product), (error) => console.log(error)) // отправляем запрос на сервер, полученный список передаём в метод конструктора 
-        .then(() => createProducs.сreateHtmlCatalog()) //  метод генерирующий разметку каждого товара поочерёдно
+     createProducs.getProductListServer() // получаем список товара с сервера
+     createProducs.сreateHtmlCatalog() //  метод генерирующий разметку каждого товара поочерёдно
 }
+
 window.addEventListener('load', init)
