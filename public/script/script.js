@@ -21,7 +21,7 @@ class CreateProductList {
         this.productList = []
         this.cartList = []
     }
-    getProductListServer() { //объект product приходит после ответа с сервера через then (в init)
+    getProductListServer() { //запрашиваем на сервере  список товаров
         fetch('http://localhost:3000/product.json')
             .then((product) => this.productList = product, (error) => console.log(error))
             this.productList = [    //  удалить !
