@@ -16,29 +16,15 @@ class CreateProductItem { //передача получаемых парамет
                     </figure>`
     }
 }
-class CreateProductList { 
+class CreateProductList {
     constructor() {
         this.productList = []
         this.cartList = []
     }
-    getProductListServer() { //запрашиваем на сервере  список товаров
-        fetch('http://localhost:3000/product.json')
+    getProductListServer() {
+        return sendRequest('http://localhost:3000/product.json')
             .then((product) => this.productList = product, (error) => console.log(error))
-            this.productList = [    //  удалить !
-                {
-                  "article": "000001",
-                  "name": "Mango People T-shirt",
-                  "price": 52
-                },{
-                  "article": "000002",
-                  "name": "Mango People Blouse",
-                  "price": 68
-                },{
-                  "article": "000003",
-                  "name": "Mango People Jacket",
-                  "price": 48
-                }
-              ]
+
     }
     sumCart() { // суммарная стоимость всех продуктов в корзине
         var sumPrice = this.cartList.reduce(function (sum, item) {
@@ -47,9 +33,9 @@ class CreateProductList {
     }
     сreateHtmlCatalog() { // создание разметки для всех товаров списка
         var htmlString = '';
-        this.productList.forEach(function (productItem) { 
-            var productItem = new CreateProductItem(productItem.article, productItem.name, productItem.price, productItem.count) 
-            htmlString += productItem.renderHtmlCatalog() 
+        this.productList.forEach(function (productItem) {
+            var productItem = new CreateProductItem(productItem.article, productItem.name, productItem.price, productItem.count)
+            htmlString += productItem.renderHtmlCatalog()
         })
         document.getElementById('product').innerHTML = htmlString
         var $buttonsAddCart = document.getElementsByClassName('addToCart')
@@ -60,34 +46,33 @@ class CreateProductList {
         const inProductList = this.productList.find(item => item.article == idProduct)
         const inCartList = this.cartList.find(item => item.article == idProduct)
         if (inCartList) inCartList.count++
-            else {
-                var copyObjCart = Object.assign({}, inProductList)
-                copyObjCart.count = 1
-                this.cartList.push(copyObjCart)
-            }
+        else {
+            var copyObjCart = Object.assign({}, inProductList)
+            copyObjCart.count = 1
+            this.cartList.push(copyObjCart)
+        }
         console.log(this.cartList)
 
     }
 }
 
+function sendRequest(url) {
+    return fetch(url).then(response => response.json())  // запрос на сервер
 
-/*function sendRequest(url) { // запрос на сервер  //   !! заменили на  fetch(url) !! 
-    return new Promise(function (resolve, fail) {
-        const xhr = new XMLHttpRequest()
-        xhr.open('GET', url)
-        xhr.send()
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status >= 400) fail('error' + xhr.status)
-                else resolve(JSON.parse(xhr.responseText))
-            }
-        }
-    })
-}*/
+    /* return new Promise(function (resolve, fail) { 
+         const xhr = new XMLHttpRequest()
+         xhr.open('GET', url)
+         xhr.send()
+         xhr.onreadystatechange = function () {
+             if (xhr.readyState === XMLHttpRequest.DONE) {
+                 if (xhr.status >= 400) fail('error' + xhr.status)
+                 else resolve(JSON.parse(xhr.responseText))*/
+}
+
 
 function init() {
     const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
-     createProducs.getProductListServer() // получаем список товара с сервера
-     createProducs.сreateHtmlCatalog() //  метод генерирующий разметку каждого товара поочерёдно
+    createProducs.getProductListServer() // отправляем запрос на сервер, полученный список передаём в метод конструктора 
+        .then(() => createProducs.сreateHtmlCatalog()) //  метод генерирующий разметку каждого товара поочерёдно
 }
 window.addEventListener('load', init)
