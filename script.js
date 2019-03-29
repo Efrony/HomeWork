@@ -22,9 +22,8 @@ var validation = {
     off: field => field.style.outline = "1px solid red",
 
     check: () => {
-        var $formy = document.getElementById('formy')
         var errorForm = ''
-        $formy.querySelectorAll('input, textarea').forEach(field => {
+        document.formy.querySelectorAll('input, textarea').forEach(field => {
             if (!validation.regexp[field.id].test(field.value)) {
                 errorForm += validation.error[field.id]
                 validation.off(field)
