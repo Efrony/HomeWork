@@ -1,5 +1,6 @@
 {
-  "product": [{
+  "product": [
+    {
       "id": 1,
       "article": "000001",
       "name": "Mango People T-shirt",
@@ -48,13 +49,7 @@
       "price": 45
     }
   ],
-  "cart": [{
-      "article": "000008",
-      "name": "Mango People Sweatshirt",
-      "price": 45,
-      "id": 8,
-      "count": 1
-    },
+  "cart": [
     {
       "article": "000004",
       "name": "Mango People Dress",
@@ -67,7 +62,21 @@
       "name": "Mango People Blazer",
       "price": 62,
       "id": 6,
-      "count": 1
+      "count": 100
+    },
+    {
+      "article": "000007",
+      "name": "Mango People Pants",
+      "price": 75,
+      "id": 7,
+      "count": 100
+    },
+    {
+      "article": "000001",
+      "name": "Mango People T-shirt",
+      "price": 52,
+      "id": 1,
+      "count": 2
     }
   ]
 }

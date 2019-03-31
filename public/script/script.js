@@ -79,7 +79,6 @@ class CreateProductList {
             copyObjCart.count = 1
             this.cartList.push(copyObjCart)
         }
-        this.getCartListServer()
 
     }
 }
