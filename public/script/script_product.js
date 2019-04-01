@@ -3,18 +3,17 @@ const app = new Vue({
     data: {
         productList: [],
         cartList: [],
-        filtredList: [],
         searchInput: '',
         handleSearchInput: ''
     },
     computed: {
         filtredItems() {
             const regexp = new RegExp(this.handleSearchInput, 'i')
-            return  this.productList.filter((item) => regexp.test(item.name))
+            return this.productList.filter((item) => regexp.test(item.name))
         }
     },
     methods: {
-        buttonInput () { //передача input после нажатия кнопки
+        buttonInput() { //передача input после нажатия кнопки
             this.handleSearchInput = this.searchInput
         },
 
@@ -56,59 +55,12 @@ const app = new Vue({
                 console.log('добавлен')
             }
         }
-
     },
     mounted() {
         fetch('http://localhost:3000/product')
             .then(response => response.json())
-            .then((product) => {
-                    this.productList = product
-                    this.filtredList = product
-                },
-                (error) => console.log(error))
-
-        this.filtredList = [{ // удалить .......
-                "id": 1,
-                "article": "000001",
-                "name": "Mango People T-shirt",
-                "price": 52
-            },
-            {
-                "id": 2,
-                "article": "000002",
-                "name": "Mango People Blouse",
-                "price": 68
-            },
-            {
-                "id": 3,
-                "article": "000003",
-                "name": "Mango People Jacket",
-                "price": 48
-            },
-        ]
-        this.productList = [{ // удалить .......
-                "id": 1,
-                "article": "000001",
-                "name": "Mango People T-shirt",
-                "price": 52
-            },
-            {
-                "id": 2,
-                "article": "000002",
-                "name": "Mango People Blouse",
-                "price": 68
-            },
-            {
-                "id": 3,
-                "article": "000003",
-                "name": "Mango People Jacket",
-                "price": 48
-            },
-        ]
-        // ...............................................
-
+            .then((product) => this.productList = product, (error) => console.log(error))
         fetch('http://localhost:3000/cart').then(response => response.json())
             .then((cart) => this.cartList = cart, (error) => console.log(error))
     }
-
 })
