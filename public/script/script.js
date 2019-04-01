@@ -7,13 +7,17 @@ class CreateProductItem { //передача получаемых парамет
         this.count = count
     }
     renderHtmlCatalog() { // метод возвращающий разметку элемента в каталоге
-        return `<figure class="productItem" id="${this.article}">
-                    <img src="img/product/${this.article}.jpg" alt="productFoto">
-                    <div class="shadowHover">
-                        <button class="addToCart">&ensp;Add to Cart</button>
-                    </div>
-                    <figcaption>${this.name}<p>$ ${this.price}</p></figcaption>
-                    </figure>`
+        return `<a> 
+                    <figure class="productItem" id="${this.article}">
+                        <img src="img/product/${this.article}.jpg" alt="productFoto">
+                        <div class="shadowHover">
+                            <button class="addToCart">&ensp;Add to Cart</button>
+                        </div>
+                        <figcaption>${this.name}
+                            <p>$ ${this.price}</p>
+                        </figcaption>
+                    </figure>
+                </a>`
     }
 }
 class CreateProductList {

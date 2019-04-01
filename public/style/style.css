@@ -204,6 +204,7 @@ main {
 .product a {
   text-decoration: none;
   margin-bottom: 39px;
+  cursor: default;
 }
 .product a:hover {
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
@@ -249,6 +250,8 @@ main {
   align-items: stretch;
   margin-top: 98px;
   padding: 10px 10px 3px;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 .product .shadowHover .addToCart:before {
   content: url(../img/product/Forma_1_copy.png);

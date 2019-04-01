@@ -51,32 +51,18 @@
   ],
   "cart": [
     {
-      "article": "000004",
-      "name": "Mango People Dress",
-      "price": 37,
-      "id": 4,
-      "count": 10
-    },
-    {
-      "article": "000006",
-      "name": "Mango People Blazer",
-      "price": 62,
-      "id": 6,
-      "count": 100
+      "article": "000001",
+      "name": "Mango People T-shirt",
+      "price": 52,
+      "id": 1,
+      "count": 1
     },
     {
       "article": "000007",
       "name": "Mango People Pants",
       "price": 75,
       "id": 7,
-      "count": 100
-    },
-    {
-      "article": "000001",
-      "name": "Mango People T-shirt",
-      "price": 52,
-      "id": 1,
-      "count": 2
+      "count": 1
     }
   ]
 }

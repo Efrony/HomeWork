@@ -32,7 +32,6 @@ const app = new Vue({
                         'Content-type': 'application/json',
                     }
                 }).then(() => alert('Товар уже был добавлен в корзину. Увеличено количество товара.'))
-                console.log('добавлен+1')
 
             } else {
                 fetch('http://localhost:3000/cart', { // если товара нет в корзине на сервере, создаём новый товар
@@ -52,7 +51,6 @@ const app = new Vue({
                 var copyObjCart = Object.assign({}, inProductList)
                 copyObjCart.count = 1
                 this.cartList.push(copyObjCart)
-                console.log('добавлен')
             }
         }
     },
