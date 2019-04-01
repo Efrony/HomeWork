@@ -1,78 +1,114 @@
-/*------------------------- Вывод каталога -------------------------*/
-class CreateProductItem { //передача получаемых параметров в разметку 
-    constructor(article, name, price, count) {
-        this.article = article
-        this.name = name
-        this.price = price
-        this.count = count
-    }
-    renderHtmlCatalog() { // метод возвращающий разметку элемента в каталоге
-        return `<figure class="productItem" id="${this.article}">
-                    <img src="img/product/${this.article}.jpg" alt="productFoto">
-                    <div class="shadowHover">
-                        <button class="addToCart">&ensp;Add to Cart</button>
-                    </div>
-                    <figcaption>${this.name}<p>$ ${this.price}</p></figcaption>
-                    </figure>`
-    }
-}
-class CreateProductList { 
-    constructor() {
-        this.productList = []
-        this.cartList = []
-    }
-    getProductListServer() { //объект product приходит после ответа с сервера через then (в init)
-        fetch('http://localhost:3000/product.json')
-            .then((product) => this.productList = product, (error) => console.log(error))
-            this.productList = [    //  удалить !
-                {
-                  "article": "000001",
-                  "name": "Mango People T-shirt",
-                  "price": 52
-                },{
-                  "article": "000002",
-                  "name": "Mango People Blouse",
-                  "price": 68
-                },{
-                  "article": "000003",
-                  "name": "Mango People Jacket",
-                  "price": 48
-                }
-              ]
-    }
-    sumCart() { // суммарная стоимость всех продуктов в корзине
-        var sumPrice = this.cartList.reduce(function (sum, item) {
-            return sum + (item.price * item.count)
-        }, 0)
-    }
-    сreateHtmlCatalog() { // создание разметки для всех товаров списка
-        var htmlString = '';
-        this.productList.forEach(function (productItem) { 
-            var productItem = new CreateProductItem(productItem.article, productItem.name, productItem.price, productItem.count) 
-            htmlString += productItem.renderHtmlCatalog() 
-        })
-        document.getElementById('product').innerHTML = htmlString
-        var $buttonsAddCart = document.getElementsByClassName('addToCart')
-        for (var i = 0; i < $buttonsAddCart.length; i++) $buttonsAddCart[i].addEventListener('click', this.addToCart.bind(this))
-    }
-    addToCart(event) { //добавление товара в корзину
-        const idProduct = event.target.parentElement.parentElement.id
-        const inProductList = this.productList.find(item => item.article == idProduct)
-        const inCartList = this.cartList.find(item => item.article == idProduct)
-        if (inCartList) inCartList.count++
-            else {
+const app = new Vue({
+    el: '#app',
+    data: {
+        productList: [],
+        cartList: [],
+        filtredList: [],
+        searchInput: '',
+        handleSearchInput: ''
+    },
+    computed: {
+        filtredItems() {
+            const regexp = new RegExp(this.handleSearchInput, 'i')
+            return  this.productList.filter((item) => regexp.test(item.name))
+        }
+    },
+    methods: {
+        buttonInput () { //передача input после нажатия кнопки
+            this.handleSearchInput = this.searchInput
+        },
+
+        addToCart(event) { //добавление товара в корзину
+            const idProduct = event.target.parentElement.parentElement.id
+            const inProductList = this.productList.find(item => item.article == idProduct)
+            const inCartList = this.cartList.find(item => item.article == idProduct)
+            if (inCartList) {
+                inCartList.count++
+                fetch('http://localhost:3000/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        count: inCartList.count,
+                    }),
+                    headers: {
+                        'Content-type': 'application/json',
+                    }
+                }).then(() => alert('Товар уже был добавлен в корзину. Увеличено количество товара.'))
+                console.log('добавлен+1')
+
+            } else {
+                fetch('http://localhost:3000/cart', { // если товара нет в корзине на сервере, создаём новый товар
+                    method: 'POST',
+                    body: JSON.stringify({
+                        article: inProductList.article,
+                        name: inProductList.name,
+                        price: inProductList.price,
+                        id: inProductList.id,
+                        count: 1
+                    }),
+                    headers: {
+                        'Content-type': 'application/json',
+                    }
+                }).then(() => alert('Товар добавлен в корзину!'))
+
                 var copyObjCart = Object.assign({}, inProductList)
                 copyObjCart.count = 1
                 this.cartList.push(copyObjCart)
+                console.log('добавлен')
             }
-        console.log(this.cartList)
+        }
 
+    },
+    mounted() {
+        fetch('http://localhost:3000/product')
+            .then(response => response.json())
+            .then((product) => {
+                    this.productList = product
+                    this.filtredList = product
+                },
+                (error) => console.log(error))
+
+        this.filtredList = [{ // удалить .......
+                "id": 1,
+                "article": "000001",
+                "name": "Mango People T-shirt",
+                "price": 52
+            },
+            {
+                "id": 2,
+                "article": "000002",
+                "name": "Mango People Blouse",
+                "price": 68
+            },
+            {
+                "id": 3,
+                "article": "000003",
+                "name": "Mango People Jacket",
+                "price": 48
+            },
+        ]
+        this.productList = [{ // удалить .......
+                "id": 1,
+                "article": "000001",
+                "name": "Mango People T-shirt",
+                "price": 52
+            },
+            {
+                "id": 2,
+                "article": "000002",
+                "name": "Mango People Blouse",
+                "price": 68
+            },
+            {
+                "id": 3,
+                "article": "000003",
+                "name": "Mango People Jacket",
+                "price": 48
+            },
+        ]
+        // ...............................................
+
+        fetch('http://localhost:3000/cart').then(response => response.json())
+            .then((cart) => this.cartList = cart, (error) => console.log(error))
     }
-}
 
-function init() {
-    const createProducs = new CreateProductList() // создаём экземпляр класса создающего список товара
-     createProducs.getProductListServer() // получаем список товара с сервера
-     createProducs.сreateHtmlCatalog() //  метод генерирующий разметку каждого товара поочерёдно
-}
-window.addEventListener('load', init)
+})
