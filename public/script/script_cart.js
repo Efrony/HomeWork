@@ -18,7 +18,6 @@ const app = new Vue({
             fetch('http://localhost:3000/cart/' + inCartList.id, {
                 method: 'DELETE',
             }).then(() => {
-                idProduct.remove()
                 this.cartList.splice(inCartListIndex, 1)
                 alert('Товар удалён из корзины')
             })
