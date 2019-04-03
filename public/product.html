@@ -17,10 +17,10 @@
                 <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
                 <div class="search">
                     <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
-                    <input v-model="searchInput" type="search" placeholder="Search for Item...">
-                    <button @click="buttonInput" type="button" class="searchButton"><i class="fas fa-search"></i></button>
+                    <input @keyup.enter="buttonInput" v-model="searchInput" type="search" placeholder="Search for Item...">
+                    <button  @click="buttonInput"  type="button" class="searchButton"><i class="fas fa-search"></i></button>
                 </div>
-            </div>
+            </div>  
             <div class="my">
                 <a href="cart.html"> <img src="img/Forma_1.png" alt="basket"> </a>
                 <button class="myAccount">My Account <i class="fas fa-caret-down"></i></button>
@@ -157,19 +157,8 @@
                             <option value="">09</option>
                         </select>
                     </div>
-                    <div class="productItems" id="product">
-                        <a href="" v-for="productItem in filtredItems" >
-                            <figure class="productItem" v-bind:id=productItem.article>
-                                <img v-bind:src="'img/product/'+ productItem.article + '.jpg'" alt="productFoto">
-                                <div class="shadowHover">
-                                    <button v-on:click.prevent="addToCart" class="addToCart">&ensp;Add to Cart</button>
-                                </div>
-                                <figcaption>{{productItem.name}}
-                                    <p>$ {{productItem.price}}</p>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </div>
+                    <product-list-component :product_list="filtredItems" :add_to_cart="addToCart"></product-list-component>
+
                     <div class="paginationViewAll">
                         <nav>
                             <ul class="pagination">

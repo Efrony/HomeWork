@@ -386,6 +386,17 @@ main {
   background: rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
+.productItems .shadowHover .addToCart:active {
+  border-color: #fff;
+  color: #fff;
+}
+.productItems .shadowHover .addToCart:hover {
+  border-color: #ef5b70;
+  color: #ef5b70;
+}
+.productItems .shadowHover .addToCart:focus {
+  outline: none;
+}
 .productItems .shadowHover .addToCart:before {
   content: url(../img/product/Forma_1_copy.png);
 }

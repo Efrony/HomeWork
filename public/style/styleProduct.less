@@ -335,10 +335,11 @@ main {
         div {
             display: flex;
             flex-wrap: wrap;
-    
+
             label {
                 width: 25%;
                 margin-top: 8px;
+
                 input {
                     margin-right: 8px;
                 }
@@ -349,6 +350,7 @@ main {
 
     .price {
         width: 30%;
+
         .price-interval {
             display: flex;
             justify-content: space-between;
@@ -392,6 +394,7 @@ main {
         text-decoration: none;
         margin-bottom: 20px;
         cursor: default;
+
     }
 
     a:hover {
@@ -428,6 +431,9 @@ main {
         width: 100%;
         display: none;
         justify-content: center;
+ 
+
+
 
         .addToCart {
             border: 1px solid #fff;
@@ -441,6 +447,20 @@ main {
             padding: 10px 10px 3px;
             background: rgba(0, 0, 0, 0.25);
             cursor: pointer;
+            &:active  {
+                border-color: #fff;
+                color: #fff;
+            }
+
+            &:hover {
+                border-color: @pink-color;
+                color: @pink-color;
+            }
+
+            &:focus {
+                outline: none;
+            }
+
         }
 
         .addToCart:before {
@@ -477,41 +497,48 @@ nav[aria-label] {
         }
     }
 }
+
 .paginationViewAll {
     display: flex;
     justify-content: space-between;
 }
+
 .pagination {
     list-style-type: none;
     display: flex;
+
     li {
         border: 1px solid #dee2e6;
+
         &:first-child {
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
+
         &:last-child {
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
         }
 
-        a{ display: block;
+        a {
+            display: block;
             text-decoration: none;
             color: #c4c4c4;
             font-size: 16px;
             font-weight: bold;
-            padding:8px 7px;
+            padding: 8px 7px;
 
             &:hover {
                 background-color: #d6d6d6;
                 color: @pink-color;
             }
+
             &:focus {
                 background-color: #d6d6d6;
                 color: @pink-color;
             }
 
-    
+
         }
     }
 }
@@ -540,16 +567,19 @@ nav[aria-label] {
     margin-top: 100px;
     background: #222224;
     height: 341px;
+
     .bannerDiscription {
         display: flex;
         justify-content: space-between;
         width: 1142px;
         margin: 0 auto;
+
         .discription {
             width: 33%;
             margin-top: 8%;
             padding-top: 50px;
             text-align: center;
+
             h2 {
                 color: #fbfbfb;
                 font-size: 20px;
