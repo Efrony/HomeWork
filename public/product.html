@@ -15,11 +15,7 @@
         <header>
             <div class="logoSearch">
                 <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
-                <div class="search">
-                    <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
-                    <input @keyup.enter="buttonInput" v-model="searchInput" type="search" placeholder="Search for Item...">
-                    <button  @click="buttonInput"  type="button" class="searchButton"><i class="fas fa-search"></i></button>
-                </div>
+                <search-component :button_input="buttonInput"></search-component>
             </div>  
             <div class="my">
                 <a href="cart.html"> <img src="img/Forma_1.png" alt="basket"> </a>

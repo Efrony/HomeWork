@@ -5,8 +5,7 @@ Vue.component('product-list-component', {
     template: `
     <div class="productItems" id="product" >
         <product-item-component v-for="product_item in product_list" :product_item ="product_item" :add_to_cart="add_to_cart" ></product-item-component>
-    </div>
-    `
+    </div>`
 })
 
 Vue.component('product-item-component', {
@@ -22,8 +21,17 @@ Vue.component('product-item-component', {
                 <p>$ {{product_item.price}}</p>
             </figcaption>
         </figure>
-    </a>   
-     `
+    </a>`
+})
+
+Vue.component('search-component', {
+    props: ['search_input', 'button_input'],
+    template: `
+    <div class="search">
+        <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
+        <input @keyup.enter="button_input(search_input)" v-model="search_input" type="search" placeholder="Search for Item...">
+        <button  @click.prevent="button_input(search_input)"  type="button" class="searchButton"><i class="fas fa-search"></i></button>
+    </div>`
 })
 
 const app = new Vue({
@@ -31,7 +39,6 @@ const app = new Vue({
     data: {
         productList: [],
         cartList: [],
-        searchInput: '',
         handleSearchInput: ''
     },
     computed: {
@@ -41,30 +48,33 @@ const app = new Vue({
         }
     },
     methods: {
-        buttonInput() { //передача input после нажатия кнопки
-            this.handleSearchInput = this.searchInput
+        buttonInput(searchInput) { //передача input после нажатия кнопки
+            console.log('поиск!')
+            this.handleSearchInput = searchInput
         },
 
         addToCart(productItem) { //добавление товара в корзину
             const inCartList = this.cartList.find(item => item.article === productItem.article)
-            if (inCartList) {
-                inCartList.count++
+            if (inCartList) {    
                 fetch(API_URL + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
                     method: 'PATCH',
-                    body: JSON.stringify({count: inCartList.count}),
-                    headers: {'Content-type': 'application/json',}
-                }).then(() => alert('Товар уже был добавлен в корзину. Увеличено количество товара.'))
-                console.log( this.cartList)
+                    body: JSON.stringify({count: inCartList.count+1}),
+                    headers: {'Content-type': 'application/json'}
+                }).then(() => {
+                    alert('Товар уже был добавлен в корзину. Увеличено количество товара.')
+                    inCartList.count++
+                })
             } else {
                 fetch(API_URL + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
                     method: 'POST',
-                    body: JSON.stringify({...productItem, count: 1}), 
+                    body: JSON.stringify({...productItem,count: 1}),
                     headers: {'Content-type': 'application/json'}
-                }).then(() => alert('Товар добавлен в корзину!'))
-                console.log(this.cartList)
-                var copyObjCart = Object.assign({}, productItem)
-                copyObjCart.count = 1
-                this.cartList.push(copyObjCart)
+                }).then(() => {
+                    alert('Товар добавлен в корзину!')
+                    var copyObjCart = Object.assign({}, productItem)
+                    copyObjCart.count = 1
+                    this.cartList.push(copyObjCart)
+                    })
             }
         }
     },
