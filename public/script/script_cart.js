@@ -92,33 +92,5 @@ const app = new Vue({
         fetch('http://localhost:3000/cart')
             .then(response => response.json())
             .then((cart) => this.cartList = cart, (error) => console.log(error))
-        this.cartList = [{
-                "id": 1,
-                "article": "000001",
-                "name": "Mango People T-shirt",
-                "price": 52,
-                "count": 3
-            },
-            {
-                "id": 2,
-                "article": "000002",
-                "name": "Mango People Blouse",
-                "price": 68,
-                "count": 3
-            }, {
-                "id": 7,
-                "article": "000007",
-                "name": "Mango People Pants",
-                "price": 75,
-                "count": 3
-            },
-            {
-                "id": 8,
-                "article": "000008",
-                "name": "Mango People Sweatshirt",
-                "price": 45,
-                "count": 3
-            }
-        ]
     }
 })
