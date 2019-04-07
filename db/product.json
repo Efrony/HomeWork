@@ -1,5 +1,4 @@
-{
-  "product": [
+ [
     {
       "id": 1,
       "article": "000001",
@@ -48,21 +47,4 @@
       "name": "Mango People Sweatshirt",
       "price": 45
     }
-  ],
-  "cart": [
-    {
-      "article": "000001",
-      "name": "Mango People T-shirt",
-      "price": 52,
-      "id": 1,
-      "count": 1
-    },
-    {
-      "article": "000007",
-      "name": "Mango People Pants",
-      "price": 75,
-      "id": 7,
-      "count": 1
-    }
-  ]
-}
+]

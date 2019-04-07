@@ -1,4 +1,3 @@
-/*------------------------- Вывод каталога -------------------------*/
 class CreateProductItem { //передача получаемых параметров в разметку 
     constructor(article, name, price, count) {
         this.article = article
@@ -26,11 +25,11 @@ class CreateProductList {
         this.cartList = []
     }
     getProductListServer() {
-        return fetch('http://localhost:3000/product').then(response => response.json())
+        return fetch('http://localhost:3001/product').then(response => response.json())
             .then((product) => this.productList = product, (error) => console.log(error))
     }
     getCartListServer() {
-        return fetch('http://localhost:3000/cart').then(response => response.json())
+        return fetch('http://localhost:3001/cart').then(response => response.json())
             .then((cart) => this.cartList = cart, (error) => console.log(error))
     }
     sumCart() { // суммарная стоимость всех продуктов в корзине
@@ -54,7 +53,7 @@ class CreateProductList {
         const inCartList = this.cartList.find(item => item.article == idProduct)
         if (inCartList) {
             inCartList.count++
-            fetch('http://localhost:3000/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
+            fetch('http://localhost:3001/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
                 method: 'PATCH',
                 body: JSON.stringify({
                     count: inCartList.count,
@@ -65,7 +64,7 @@ class CreateProductList {
             }).then(() => alert('Товар уже был добавлен в корзину. Увеличено количество товара.'))
 
         } else {
-            fetch('http://localhost:3000/cart', { // если товара нет в корзине на сервере, создаём новый товар
+            fetch('http://localhost:3001/cart', { // если товара нет в корзине на сервере, создаём новый товар
                 method: 'POST',
                 body: JSON.stringify({
                     article: inProductList.article,

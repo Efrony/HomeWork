@@ -1,0 +1,25 @@
+{
+  "name": "HomeWork.git",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Efrony/HomeWork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Efrony/HomeWork/issues"
+  },
+  "homepage": "https://github.com/Efrony/HomeWork#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-static": "^0.7.11",
+    "vue": "^2.6.10"
+  }
+}

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://localhost:3001'
 
 Vue.component('cart-list-component', {
     props: ['cart_list', 'delete_to_cart', 'count_input'],
@@ -62,35 +62,29 @@ const app = new Vue({
     methods: {
         deleteToCart(productItem) { // удаление товара из корзины
             const inCartListIndex = this.cartList.findIndex(item => item.article == productItem.article)
-            fetch(API_URL + '/cart/' + productItem.id, {
-                    method: 'DELETE'
+            fetch(API_URL + '/cart/' + productItem.id, { method: 'DELETE'})
+                .then((response) => response.json())
+                .then((deletedItem) => {
+                     this.cartList.splice(inCartListIndex, 1)
+                     alert(deletedItem.name +' удален из корзины')
                 })
-                .then(() => {
-                    this.cartList.splice(inCartListIndex, 1)
-                    alert('Товар удалён из корзины')
-                })
-        },
+        }
+    ,
         countInput(event) { // изменение количества через поле ввода
             const idProduct = event.target.parentElement.parentElement
             const inCartList = this.cartList.find(item => item.article == idProduct.id)
             fetch(API_URL + '/cart/' + inCartList.id, {
                 method: 'PATCH',
-                body: JSON.stringify({
-                    count: +event.target.value
-                }),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            }).then(() => {
-                inCartList.count = +event.target.value
-                alert('Количество изменено.')
-            })
+                body: JSON.stringify({count: +event.target.value }),
+                headers: {'Content-type': 'application/json'}
+            }).then((response) => response.json())
+            .then((changedItem) => inCartList.count = changedItem.count)
         }
     },
 
     mounted() {
-        fetch('http://localhost:3000/cart')
+        fetch(API_URL + '/cart')
             .then(response => response.json())
-            .then((cart) => this.cartList = cart, (error) => console.log(error))
+            .then(cart => this.cartList = cart)
     }
 })

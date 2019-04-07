@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://localhost:3001'
 
 Vue.component('product-list-component', {
     props: ['product_list', 'add_to_cart'],
@@ -54,26 +54,26 @@ const app = new Vue({
         },
 
         addToCart(productItem) { //добавление товара в корзину
-            const inCartList = this.cartList.find(item => item.article === productItem.article)
+            const inCartList = this.cartList.find(item => item.article == productItem.article)
             if (inCartList) {    
                 fetch(API_URL + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
                     method: 'PATCH',
-                    body: JSON.stringify({count: inCartList.count+1}),
+                    body: JSON.stringify({count: inCartList.count + 1}),
                     headers: {'Content-type': 'application/json'}
-                }).then(() => {
+                }).then((response) => response.json())
+                .then((response) =>{
                     alert('Товар уже был добавлен в корзину. Увеличено количество товара.')
-                    inCartList.count++
+                    inCartList.count = response.count
                 })
             } else {
                 fetch(API_URL + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
                     method: 'POST',
-                    body: JSON.stringify({...productItem,count: 1}),
+                    body: JSON.stringify({...productItem, count: 1}),
                     headers: {'Content-type': 'application/json'}
-                }).then(() => {
+                }).then((response) => response.json())
+                .then((createdItem) => {
                     alert('Товар добавлен в корзину!')
-                    var copyObjCart = Object.assign({}, productItem)
-                    copyObjCart.count = 1
-                    this.cartList.push(copyObjCart)
+                    this.cartList.push(createdItem)
                     })
             }
         }
@@ -81,8 +81,8 @@ const app = new Vue({
     mounted() {
         fetch(API_URL + '/product')
             .then(response => response.json())
-            .then((product) => this.productList = product, (error) => console.log(error))
+            .then((product) => this.productList = product)
         fetch(API_URL + '/cart').then(response => response.json())
-            .then((cart) => this.cartList = cart, (error) => console.log(error))
+            .then((cart) => this.cartList = cart)
     }
 })
