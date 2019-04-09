@@ -45,6 +45,11 @@ const app = new Vue({
         filtredItems() {
             const regexp = new RegExp(this.handleSearchInput, 'i')
             return this.productList.filter((item) => regexp.test(item.name))
+        },
+        countCart() {
+            return this.cartList.reduce(function (sum, item) {
+                return sum + item.count
+            }, 0)
         }
     },
     methods: {

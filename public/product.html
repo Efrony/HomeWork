@@ -16,21 +16,26 @@
             <div class="logoSearch">
                 <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
                 <search-component :button_input="buttonInput"></search-component>
-            </div>  
+            </div>
             <div class="my">
-                <a href="cart.html"> <img src="img/Forma_1.png" alt="basket"> </a>
-                <button class="myAccount">My Account <i class="fas fa-caret-down"></i></button>
+                <a href="cart.html">
+                    <img src="img/Forma_1.png" alt="basket">
+                    <div class="cartCount" v-if="countCart != 0">{{countCart}}</div>
+                </a>
+                <form action="myAccount.html"><button class="myAccount">My Account <i
+                            class="fas fa-caret-down"></i></button>
+                    <form></form>
             </div>
         </header>
         <nav class="nav">
             <ul>
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="#">MAN</a></li>
-                <li><a href="checkout.html">WOMEN</a></li>
+                <li><a href="singlePage.html">WOMEN</a></li>
                 <li><a href="#">KIDS</a></li>
                 <li><a href="#">ACCOSERIESE</a></li>
-                <li><a href="#">FEATURED</a></li>
-                <li><a href="singlePage.html">HOT&nbsp;DEALS</a></li>
+                <li><a href="#">HOT DEALS</a></li>
+                <li><a href="aboutUs.html">ABOUT US</a></li>
             </ul>
         </nav>
         <div class="newArrivalsBlock">
@@ -154,7 +159,7 @@
                         </select>
                     </div>
                     <product-list-component :product_list="filtredItems" :add_to_cart="addToCart"></product-list-component>
-
+                    
                     <div class="paginationViewAll">
                         <nav>
                             <ul class="pagination">

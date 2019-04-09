@@ -65,6 +65,20 @@ header .my {
 header .my a {
   margin-right: 25px;
   height: 29px;
+  position: relative;
+  text-decoration: none;
+}
+header .my a .cartCount {
+  position: absolute;
+  border-radius: 50%;
+  border-color: #ef5b70;
+  background-color: #ef5b70;
+  padding: 1px 5px;
+  font-size: 13px;
+  color: #fff;
+  font-weight: bold;
+  top: -10px;
+  right: -10px;
 }
 header .my .myAccount {
   padding: 11px 19px;
@@ -129,7 +143,7 @@ header .my .myAccount i {
 }
 .newArrivals {
   width: 1142px;
-  height: 148px;
+  padding: 50px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

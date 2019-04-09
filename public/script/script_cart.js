@@ -6,8 +6,8 @@ Vue.component('cart-list-component', {
     <div>
         <div v-if="cart_list.length == 0" class="newArrivalsBlock">
             <div class="newArrivals">
-                <p>В корзине пусто...</p>
-                <nav>Добавьте товар <span>в корзину</span></nav>
+                <p>the cart is empty...</p>
+                <nav>add <span>product</span> to cart</nav>
             </div>
         </div>
         <div v-if="cart_list.length != 0" class="cart">
@@ -57,12 +57,17 @@ const app = new Vue({
             return this.cartList.reduce(function (sum, item) {
                 return sum + (item.price * item.count)
             }, 0)
+        },
+        countCart() {
+            return this.cartList.reduce(function (sum, item) {
+                return sum + item.count
+            }, 0)
         }
     },
     methods: {
         deleteToCart(productItem) { // удаление товара из корзины
             const inCartListIndex = this.cartList.findIndex(item => item.article == productItem.article)
-            fetch(API_URL + '/cart/' + productItem.id, { method: 'DELETE'})
+            fetch(API_URL + '/cart/' + productItem.id, {method: 'DELETE'})
                 .then((response) => response.json())
                 .then((deletedItem) => {
                      this.cartList.splice(inCartListIndex, 1)
@@ -85,6 +90,6 @@ const app = new Vue({
     mounted() {
         fetch(API_URL + '/cart')
             .then(response => response.json())
-            .then(cart => this.cartList = cart)
+            .then(cart => this.cartList = cart)      
     }
 })
