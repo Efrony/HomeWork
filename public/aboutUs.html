@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/header_style.css">
     <link rel="stylesheet" href="style/aboutUs.css">
+    <link rel="stylesheet" href="style/footer_style.css">
     <title>About Us</title>
 </head>
 
@@ -22,7 +24,7 @@
         </div>
         <div class="my">
             <a href="cart.html"> <img src="img/Forma_1.png" alt="basket">
-                <div class="cartCount">1</div>
+                <div id="loginCart" class="cartCount" v-if="countCart != 0">{{countCart}}</div>
             </a>
             <form action="myAccount.html"><button class="myAccount">My Account <i
                         class="fas fa-caret-down"></i></button>
@@ -32,8 +34,8 @@
     <nav class="nav">
         <ul>
             <li><a href="index.html">HOME</a></li>
-            <li><a href="product.html">MAN</a></li>
-            <li><a href="singlePage.html">WOMEN</a></li>
+            <li><a href="man.html">MAN</a></li>
+            <li><a href="women.html">WOMEN</a></li>
             <li><a href="#">KIDS</a></li>
             <li><a href="#">ACCOSERIESE</a></li>
             <li><a href="#">HOT DEALS</a></li>
@@ -188,4 +190,6 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <script src="script/login_cart_cache.js"></script>
 </body>

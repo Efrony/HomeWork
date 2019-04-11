@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/header_style.css">
     <link rel="stylesheet" href="style/myAccount.css">
+    <link rel="stylesheet" href="style/footer_style.css">
     <title>My Account</title>
 </head>
 
@@ -25,16 +28,18 @@
         <div class="my">
             <a href="cart.html">
                 <img src="img/Forma_1.png" alt="basket">
-                <div class="cartCount">1</div>
+                <div id="loginCart" class="cartCount" v-if="countCart != 0">{{countCart}}</div>
             </a>
-            <form action="myAccount.html"><button class="myAccount">My Account <i class="fas fa-caret-down"></i></button><form></form>
+            <form action="myAccount.html"><button class="myAccount">My Account <i
+                        class="fas fa-caret-down"></i></button>
+                <form></form>
         </div>
     </header>
     <nav class="nav">
         <ul>
             <li><a href="index.html">HOME</a></li>
-            <li><a href="product.html">MAN</a></li>
-            <li><a href="singlePage.html">WOMEN</a></li>
+            <li><a href="man.html">MAN</a></li>
+            <li><a href="women.html">WOMEN</a></li>
             <li><a href="#">KIDS</a></li>
             <li><a href="#">ACCOSERIESE</a></li>
             <li><a href="checkout.html">HOT DEALS</a></li>
@@ -42,8 +47,8 @@
         </ul>
     </nav>
     <main class="women">
-        <section>
-            <form class="data-1" action="#">
+        <section id="login">
+            <form @submit=" checkRegisrt" name="registr" id="registr" class="data-1" action="#" method="post">
                 <h5>register</h5>
                 <p class="point">register and save time!</p>
                 <p class="about">Register with us for future convenience</p>
@@ -53,48 +58,51 @@
                     NAME
                     <span class="red">*</span>
                 </p>
-                <input type="text" required>
+                <input v-model="name" type="text" name="name" >
                 <p class="point inp">
                     EMAIL ADDRESS
                     <span class="red">*</span>
                 </p>
-                <input type="email" required>
+                <input v-model="email" type="email" name="email" >
                 <p class="point inp">
                     PASSWORD
                     <span class="red">*</span>
                 </p>
-                <input type="password" required>
+                <input v-model="password" type="password" name="password" >
                 <p class="point inp">
-                        PHONE
+                    PHONE
                 </p>
-                <input type="text" required>
+                <input v-model="phone" type="text" name="phone">
 
                 <div class="point">
                     <p class="point inp">
                         GENDER
                     </p>
-                    <input type="radio" name='choice' id="ch-1" checked><label for="ch-1"> M</label>
+                    <input v-model="gender" type="radio" name='choice' id="ch-1" value="m" checked><label for="ch-1"> M</label>
                     <br>
-                    <input type="radio" name='choice' id="ch-2" checked><label for="ch-2"> W</label>
+                    <input v-model="gender" type="radio" name='choice' id="ch-2" value="w" checked><label for="ch-2"> W</label>
                 </div>
                 <p>
-                        <span class="red">* Required Fileds</span>
+                    <span class="red">* Required Fileds</span>
                 </p>
+                <p v-if="errors" id="errors">{{errors}}</p>
+             
                 <input type="submit" value="register">
             </form>
-            <form class="data-2" action="#">
+            <form @submit=" checkLogin" class="data-2" action="#" >
+                <h5>sign in</h5>
                 <p class="point">Already registed?</p>
                 <p class="about">Please log in below</p>
                 <p class="point inp">
                     EMAIL ADDRESS
                     <span class="red">*</span>
                 </p>
-                <input type="email" required>
+                <input v-model="loginEmail" type="email" required>
                 <p class="point inp">
                     PASSWORD
                     <span class="red">*</span>
                 </p>
-                <input type="password" required>
+                <input v-model="loginPassword" type="password" required>
                 <p>
                     <span class="red">* Required Fileds</span>
                 </p>
@@ -102,7 +110,7 @@
             </form>
         </section>
     </main>
-  <div class="subscribeBcg">
+    <div class="subscribeBcg">
         <div class="subscribe">
             <div class="commentBlock">
                 <div class="comment">
@@ -136,7 +144,7 @@
         <div class="footer">
             <div class="aboutBrand">
                 <div class="logo">
-                     <span class="styleBran">BRAN</span>
+                    <span class="styleBran">BRAN</span>
                     <span class="styleD">D</span>
                 </div>
                 <p>
@@ -197,6 +205,9 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+    <script src="script/login_cart_cache.js"></script>
+    <script src="script/registration.js"></script>
 </body>
 
-</html> 
+</html>
