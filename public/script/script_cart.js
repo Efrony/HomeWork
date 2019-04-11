@@ -4,7 +4,8 @@ Vue.component('cart-list-component', {
     props: ['cart_list'],
     methods: {
         clear_cart() {
-            fetch(API_URL + '/cart/', {method: 'PUT'}).then(() => this.cart_list.splice(0, this.cart_list.length))
+            fetch(API_URL + '/cart/', {method: 'PUT'})
+            .then(() => this.cart_list.splice(0, this.cart_list.length))
         }
     },
     template: `

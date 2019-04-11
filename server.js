@@ -31,10 +31,8 @@ app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data
 
 app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
     if (err) res.send('Произошла ошибка' + err)
-
     const cart = JSON.parse(data)
     cart.push(req.body)
-
     stats('добавлен', req.body.article)
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(req.body))
 }))
@@ -59,19 +57,26 @@ app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (er
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(deletedItem[0]))
     }))
 
-app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify('[]'), () => stats('Корзина очищена', '')))
+app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => {
+        stats('Корзина очищена', '')
+        res.send([])
+    }))
 
-app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {
-    if (err) res.send('Произошла ошибка' + err)
-    const accounts = JSON.parse(data)
-    const inAccounts = accounts.find((account) => req.body.email == account.email)
-    if (inAccounts) {
-        res.status(403).send(req.body.email)
-    } else {
-        accounts.push(req.body)
-        stats('новый пользователь', req.body.email)
-        fs.writeFile('/db/accounts.json', JSON.stringify(accounts), () => res.status(200).send(req.body))
-    }
-}))
+app.post('/accounts', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {
+        if (err) res.send('Произошла ошибка' + err)
+        const accBody = req.body
+        const accounts = JSON.parse(data)
+        const inAccounts = accounts.find((account) => accBody.email == account.email)
+        if (inAccounts) {
+            console.log('УЖЕ ЕСТЬ')
+            res.status(403).send(accBody.email)
+        } else {
+            accBody.id = accounts.length + 1
+            accounts.push(accBody)
+            stats('новый пользователь', accBody.email)
+            fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send(accBody))
+        }
+    }))
+    
 
 app.listen(3001, () => console.log('Сервер запущен. Порт: 3001. Перейти http://localhost:3001/'))

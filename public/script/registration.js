@@ -1,3 +1,4 @@
+const API_URL1 = 'http://localhost:3001'
 const registr = new Vue({
     el: '#registr',
     data: {
@@ -10,6 +11,7 @@ const registr = new Vue({
     },
     methods: {
         checkRegisrt(e) {
+            e.preventDefault()
             const $registrForms = document.registr
             this.errors = ''
             if (!/[a-zA-Z]/.test(this.name) || !this.name) {
@@ -27,10 +29,8 @@ const registr = new Vue({
                 $registrForms.password.className = "invalidForm";
             } else $registrForms.password.className  = "validForm";
 
-            if (this.errors) {
-                e.preventDefault();
-            } else {
-                fetch('http://localhost:3001/accounts', {
+            if (!this.errors){
+                fetch(API_URL1 + '/accounts/', {
                     method: 'POST',
                     body: JSON.stringify({
                         name: this.name,
@@ -39,15 +39,19 @@ const registr = new Vue({
                         phone: this.phone,
                         gender: this.gender
                     }),
-                    headers: { 'Content-type': 'application/json'}
+                    headers: {'Content-type': 'application/json'}
                 })
                 .then(res => {
-                    if (res.status == 403) {
+                    if (res.status == 200) {
+                        alert('Регистрация прошла успешно')
+                        $registrForms.email.className  = "validForm";
+                    }
+                    else {
                         this.errors+= `Пользователь с e-mail ${this.email} уже существует`
-                        e.preventDefault();
+                        $registrForms.email.className = "invalidForm";
+
+                       
                     } 
-                    if (res.status == 200) alert('Регистрация прошла успешно')
-                    return true
                 })
             }
         }

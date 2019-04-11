@@ -1,10 +1,1 @@
-[
-    {
-        "id": 1,
-        "name": "admin",
-        "email": "admin@admin.ru",
-        "password": "admin",
-        "phone": "+7(000)000-0000",
-        "gender": "m"
-    }
-]
+[{"id":1,"name":"admin","email":"admin@admin.ru","password":"admin","phone":"+7(000)000-0000","gender":"m"},{"name":"Vitaliy","email":"efron.vit@gmail.com","password":"kkkkk","phone":null,"gender":null,"id":2},{"name":"Vitaliy","email":"efrhghgghhon.vit@gmail.com","password":"hghgh","phone":null,"gender":null,"id":3},{"name":"Vitaliy","email":"efdfdfdffron.vit@gmail.com","password":"fffff","phone":null,"gender":null,"id":4},{"name":"Vitaliy","email":"efrogggggn.vit@gmail.com","password":"gggg","phone":null,"gender":null,"id":5},{"name":"Vitaliy","email":"efrohhhhn.vit@gmail.com","password":"hhhhhh","phone":null,"gender":null,"id":6}]

@@ -8,21 +8,6 @@ const loginCar = new Vue({
         fetch(API_URL + '/cart')
             .then(response => response.json())
             .then(cart => this.cartList = cart)
-            this.cartList = [ //-----------------------TEST----------------------
-                {
-                  "id": 1,
-                  "article": "000001",
-                  "name": "Mango People T-shirt",
-                  "price": 52,
-                  "count": 3
-                },
-                {
-                  "id": 2,
-                  "article": "000002",
-                  "name": "Mango People Blouse",
-                  "price": 68,
-                  "count": 5
-                }]
     },
     computed: {
         sumCart() {
