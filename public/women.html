@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div >
+    <div id="login_cache">
         <header>
             <div class="logoSearch">
                 <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
@@ -26,12 +26,14 @@
             <div class="my">
                 <a class="cartButton" href="cart.html">
                     <img src="img/Forma_1.png" alt="basket">
-                    <div id="login_cache" class="cartCount" v-if="countCart != 0">{{countCart}}</div>
+                    <count-cart-component></count-cart-component>
                 </a>
                 <a href="myaccount.html" class="myAccount">
                     My Account
                     <i class="fas fa-caret-down"></i>
-                    <div v-if="isAuth" class="myAccountMenu auth">Exit</div>
+                    <authorized-component>
+                        <div class="myAccountMenu">Exit</div>
+                    </authorized-component>
                 </a>
             </div>
         </header>
@@ -235,5 +237,4 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
     <script src="script/login_cache.js"></script>
-    <script src="script/authorized.js"></script>
 </body>

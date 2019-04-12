@@ -73,7 +73,6 @@ app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', 
     const accBody = req.body
     const accounts = JSON.parse(data)
     if (inAccounts = accounts.find((account) => accBody.email == account.email)) {
-        console.log('УЖЕ ЕСТЬ')
         res.status(403).send(accBody.email)
     } else {
         accBody.id = accounts.length + 1
