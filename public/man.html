@@ -14,284 +14,290 @@
 
 <body>
     <div id='app'>
-        <header>
-            <div class="logoSearch">
-                <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
-                <search-component :button_input="buttonInput"></search-component>
-            </div>
-            <div class="my">
-                <a href="cart.html">
-                    <img src="img/Forma_1.png" alt="basket">
-                    <div class="cartCount" v-if="countCart != 0">{{countCart}}</div>
-                </a>
-                <form action="myAccount.html"><button class="myAccount">My Account <i
-                            class="fas fa-caret-down"></i></button>
-                    <form></form>
-            </div>
-        </header>
-        <nav class="nav">
-            <ul>
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="#">MAN</a></li>
-                <li><a href="women.html">WOMEN</a></li>
-                <li><a href="#">KIDS</a></li>
-                <li><a href="#">ACCOSERIESE</a></li>
-                <li><a href="#">HOT DEALS</a></li>
-                <li><a href="aboutUs.html">ABOUT US</a></li>
-            </ul>
-        </nav>
-        <div class="newArrivalsBlock">
-            <div class="newArrivals">
-                <p>New Arrivals</p>
-                <nav> Home / Men / <span>New Arrivals</span> </nav>
-            </div>
-        </div>
-        <main>
-            <div class="container">
-                <div class="navProduct">
-                    <details open>
-                        <summary>Category</summary>
-                        <div class="">
-                            <div>Accessories</div>
-                            <div>Bags</div>
-                            <div>Denim</div>
-                            <div>Hoodies & Sweatshirts</div>
-                            <div>Jackets & Coats</div>
-                            <div>Pants</div>
-                            <div>Polos</div>
-                            <div>Shirts</div>
-                            <div>Shoes</div>
-                            <div>Shorts</div>
-                            <div>Sweaters & Knits</div>
-                            <div>T-Shirts</div>
-                            <div>Tanks</div>
-                        </div>
-                    </details>
-                    <details class="">
-                        <summary>BRAND</summary>
-                        <div class="">
-                            <div>Accessories</div>
-                            <div>Bags</div>
-                            <div>Denim</div>
-                            <div>Hoodies & Sweatshirts</div>
-                            <div>Jackets & Coats</div>
-                            <div>Pants</div>
-                            <div>Polos</div>
-                            <div>Shirts</div>
-                            <div>Shoes</div>
-                            <div>Shorts</div>
-                            <div>Sweaters & Knits</div>
-                            <div>T-Shirts</div>
-                            <div>Tanks</div>
-                        </div>
-                    </details>
-                    <details class="">
-                        <summary>dESIGNER</summary>
-                        <div class="">
-                            <div>Accessories</div>
-                            <div>Bags</div>
-                            <div>Denim</div>
-                            <div>Hoodies & Sweatshirts</div>
-                            <div>Jackets & Coats</div>
-                            <div>Pants</div>
-                            <div>Polos</div>
-                            <div>Shirts</div>
-                            <div>Shoes</div>
-                            <div>Shorts</div>
-                            <div>Sweaters & Knits</div>
-                            <div>T-Shirts</div>
-                            <div>Tanks</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="productBlock">
-                    <div class="productFilter">
-                        <div class="trendingNow">
-                            <h3 class="h3-style">Trending now</h3>
-                            <div class="">
-                                <p>Bohemian</p>
-                                <div class="border-grey"></div>
-                                <p>Floral</p>
-                                <div class="border-grey"> </div>
-                                <p>Lace</p>
-                                <div class="border-grey"> </div>
-                                <p>Floral</p>
-                                <div class="border-grey"> </div>
-                                <p>Lace</p>
-                                <div class="border-grey"> </div>
-                                <p>Bohemian</p>
-                            </div>
-                        </div>
-                        <div class="size">
-                            <h3 class="h3-style">Size</h3>
-                            <div class="">
-                                <label for="xxs">
-                                    <input id='xxs' type="checkbox">XXS</label>
-                                <label for="xs">
-                                    <input id='xs' type="checkbox">XS</label>
-                                <label for="s">
-                                    <input id='s' type="checkbox">S</label>
-                                <label for="m">
-                                    <input id='m' type="checkbox">M</label>
-                                <label for="l">
-                                    <input id='l' type="checkbox">L</label>
-                                <label for="xl">
-                                    <input id='xl' type="checkbox">XL</label>
-                                <label for="xxl">
-                                    <input id='xxl' type="checkbox">XXL</label>
-                                <div class="col-"></div>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <h3 class="h3-style">Price</h3> <img src="img/product_bootstrap/4-layers.png" alt="">
-                            <div class="price-interval">
-                                <p>$52</p>
-                                <p>$400</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="dataBlock">
-                        <button>Sort By</button>
-                        <select name="" id="sort_by">
-                            <option value="">Name</option>
-                        </select>
-                        <button>Show</button>
-                        <select name="" id="show">
-                            <option value="">09</option>
-                        </select>
-                    </div>
-                    <product-list-component :product_list="filtredItems" :add_to_cart="addToCart"></product-list-component>
-                    
-                    <div class="paginationViewAll">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="" aria-label="Previous"> <span
-                                            aria-hidden="true">&lt;</span> </a>
-                                </li>
-                                <li><a class="page-link" href="#">1</a></li>
-                                <li><a class="page-link" href="#">2</a></li>
-                                <li><a class="page-link" href="#">3</a></li>
-                                <li><a class="page-link" href="#">3</a></li>
-                                <li><a class="page-link" href="#">4</a></li>
-                                <li><a class="page-link" href="#">5</a></li>
-                                <li><a class="page-link" href="#">6</a></li>
-                                <li><a class="page-link" href="#">...</a></li>
-                                <li><a class="page-link" href="#">20</a></li>
-                                <li>
-                                    <a class="page-link" href="#" aria-label="Next"> <span
-                                            aria-hidden="true">&gt;</span> </a>
-                                </li>
-                            </ul>
-                        </nav> <a href="#" class="viewAll">View All</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bannerDiscriptionBlock">
-                <div class="bannerDiscription ">
-                    <article class="discription1 discription">
-                        <h2>Free Delivery</h2>
-                        <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
-                            models.</p>
-                    </article>
-                    <article class="discription2 discription">
-                        <h2>Sales & discounts</h2>
-                        <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
-                            models. </p>
-                    </article>
-                    <article class="discription3 discription">
-                        <h2>Quality assurance</h2>
-                        <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
-                            models.</p>
-                    </article>
-                </div>
-            </div>
-        </main>
-        <div class="subscribeBcg">
-            <div class="subscribe">
-                <div class="commentBlock">
-                    <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                        condimentum a. Aliquam condimentum mattis neque sed pretium”
-                        <br>
-                        <address>
-                            Bin Burhan
-                            <p>Dhaka, Bd</p>
-                        </address>
-                        <div class="scroll">
-                            <a href="#"></a>
-                            <a href="#"></a>
-                            <a href="#"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="emailBlock">
-                    <div class="email">Subscribe
-                        <p>FOR OUR NEWLETTER AND PROMOTION</p>
-                        <form action="#">
-                            <input type="email" placeholder="Enter Your Email">
-                            <input type="submit" value="Subscribe"> </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer>
-            <div class="footer">
-                <div class="aboutBrand">
+        <div id="auth">
+            <header>
+                <div class="logoSearch">
                     <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
-                    <p> Objectively transition extensive data rather than cross functional solutions. Monotonectally
-                        syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an
-                        expanded array of processes and cross-unit partnerships. </p>
-                    <br>
-                    <p> Efficiently plagiarize 24/365 action items and focused infomediaries. Distinctively seize
-                        superior initiatives for wireless technologies. Dynamically optimize. </p>
+                    <search-component :button_input="buttonInput"></search-component>
                 </div>
-                <div class="aboutAll">
-                    <div>
-                        <h4>COMPANY</h4>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">How It Works</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
+                <div class="my">
+                    <a class="cartButton" href="cart.html">
+                        <img src="img/Forma_1.png" alt="basket">
+                        <div class="cartCount" v-if="countCart != 0">{{countCart}}</div>
+                    </a>
+                    <a href="myaccount.html" class="myAccount">My Account <i class="fas fa-caret-down"></i>
+                        <div v-if="isAuth()" class="myAccountMenu">Exit</div>
+                    </a>
+                </div>
+            </header>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="#">MAN</a></li>
+                    <li><a href="women.html">WOMEN</a></li>
+                    <li><a href="#">KIDS</a></li>
+                    <li><a href="#">ACCOSERIESE</a></li>
+                    <li><a href="#">HOT DEALS</a></li>
+                    <li><a href="aboutUs.html">ABOUT US</a></li>
+                </ul>
+            </nav>
+            <div class="newArrivalsBlock">
+                <div class="newArrivals">
+                    <p>New Arrivals</p>
+                    <nav> Home / Men / <span>New Arrivals</span> </nav>
+                </div>
+            </div>
+            <main>
+                <div class="container">
+                    <div class="navProduct">
+                        <details open>
+                            <summary>Category</summary>
+                            <div class="">
+                                <div>Accessories</div>
+                                <div>Bags</div>
+                                <div>Denim</div>
+                                <div>Hoodies & Sweatshirts</div>
+                                <div>Jackets & Coats</div>
+                                <div>Pants</div>
+                                <div>Polos</div>
+                                <div>Shirts</div>
+                                <div>Shoes</div>
+                                <div>Shorts</div>
+                                <div>Sweaters & Knits</div>
+                                <div>T-Shirts</div>
+                                <div>Tanks</div>
+                            </div>
+                        </details>
+                        <details class="">
+                            <summary>BRAND</summary>
+                            <div class="">
+                                <div>Accessories</div>
+                                <div>Bags</div>
+                                <div>Denim</div>
+                                <div>Hoodies & Sweatshirts</div>
+                                <div>Jackets & Coats</div>
+                                <div>Pants</div>
+                                <div>Polos</div>
+                                <div>Shirts</div>
+                                <div>Shoes</div>
+                                <div>Shorts</div>
+                                <div>Sweaters & Knits</div>
+                                <div>T-Shirts</div>
+                                <div>Tanks</div>
+                            </div>
+                        </details>
+                        <details class="">
+                            <summary>dESIGNER</summary>
+                            <div class="">
+                                <div>Accessories</div>
+                                <div>Bags</div>
+                                <div>Denim</div>
+                                <div>Hoodies & Sweatshirts</div>
+                                <div>Jackets & Coats</div>
+                                <div>Pants</div>
+                                <div>Polos</div>
+                                <div>Shirts</div>
+                                <div>Shoes</div>
+                                <div>Shorts</div>
+                                <div>Sweaters & Knits</div>
+                                <div>T-Shirts</div>
+                                <div>Tanks</div>
+                            </div>
+                        </details>
                     </div>
-                    <div>
-                        <h4>INFORMATION</h4>
-                        <ul>
-                            <li><a href="#">Tearms & Condition</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">How to Buy</a></li>
-                            <li><a href="#">How to Sell</a></li>
-                            <li><a href="#">Promotion</a></li>
-                        </ul>
+                    <div class="productBlock">
+                        <div class="productFilter">
+                            <div class="trendingNow">
+                                <h3 class="h3-style">Trending now</h3>
+                                <div class="">
+                                    <p>Bohemian</p>
+                                    <div class="border-grey"></div>
+                                    <p>Floral</p>
+                                    <div class="border-grey"> </div>
+                                    <p>Lace</p>
+                                    <div class="border-grey"> </div>
+                                    <p>Floral</p>
+                                    <div class="border-grey"> </div>
+                                    <p>Lace</p>
+                                    <div class="border-grey"> </div>
+                                    <p>Bohemian</p>
+                                </div>
+                            </div>
+                            <div class="size">
+                                <h3 class="h3-style">Size</h3>
+                                <div class="">
+                                    <label for="xxs">
+                                        <input id='xxs' type="checkbox">XXS</label>
+                                    <label for="xs">
+                                        <input id='xs' type="checkbox">XS</label>
+                                    <label for="s">
+                                        <input id='s' type="checkbox">S</label>
+                                    <label for="m">
+                                        <input id='m' type="checkbox">M</label>
+                                    <label for="l">
+                                        <input id='l' type="checkbox">L</label>
+                                    <label for="xl">
+                                        <input id='xl' type="checkbox">XL</label>
+                                    <label for="xxl">
+                                        <input id='xxl' type="checkbox">XXL</label>
+                                    <div class="col-"></div>
+                                </div>
+                            </div>
+                            <div class="price">
+                                <h3 class="h3-style">Price</h3> <img src="img/product_bootstrap/4-layers.png" alt="">
+                                <div class="price-interval">
+                                    <p>$52</p>
+                                    <p>$400</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dataBlock">
+                            <button>Sort By</button>
+                            <select name="" id="sort_by">
+                                <option value="">Name</option>
+                            </select>
+                            <button>Show</button>
+                            <select name="" id="show">
+                                <option value="">09</option>
+                            </select>
+                        </div>
+                        <product-list-component :product_list="filtredItems" :add_to_cart="addToCart">
+                        </product-list-component>
+
+                        <div class="paginationViewAll">
+                            <nav>
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="" aria-label="Previous"> <span
+                                                aria-hidden="true">&lt;</span> </a>
+                                    </li>
+                                    <li><a class="page-link" href="#">1</a></li>
+                                    <li><a class="page-link" href="#">2</a></li>
+                                    <li><a class="page-link" href="#">3</a></li>
+                                    <li><a class="page-link" href="#">3</a></li>
+                                    <li><a class="page-link" href="#">4</a></li>
+                                    <li><a class="page-link" href="#">5</a></li>
+                                    <li><a class="page-link" href="#">6</a></li>
+                                    <li><a class="page-link" href="#">...</a></li>
+                                    <li><a class="page-link" href="#">20</a></li>
+                                    <li>
+                                        <a class="page-link" href="#" aria-label="Next"> <span
+                                                aria-hidden="true">&gt;</span> </a>
+                                    </li>
+                                </ul>
+                            </nav> <a href="#" class="viewAll">View All</a>
+                        </div>
                     </div>
-                    <div>
-                        <h4>SHOP CATEGORY</h4>
-                        <ul>
-                            <li><a href="#">Men</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Child</a></li>
-                            <li><a href="#">Apparel</a></li>
-                            <li><a href="#">Brows All</a></li>
-                        </ul>
+                </div>
+                <div class="bannerDiscriptionBlock">
+                    <div class="bannerDiscription ">
+                        <article class="discription1 discription">
+                            <h2>Free Delivery</h2>
+                            <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with
+                                extensive
+                                models.</p>
+                        </article>
+                        <article class="discription2 discription">
+                            <h2>Sales & discounts</h2>
+                            <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with
+                                extensive
+                                models. </p>
+                        </article>
+                        <article class="discription3 discription">
+                            <h2>Quality assurance</h2>
+                            <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with
+                                extensive
+                                models.</p>
+                        </article>
+                    </div>
+                </div>
+            </main>
+            <div class="subscribeBcg">
+                <div class="subscribe">
+                    <div class="commentBlock">
+                        <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
+                            condimentum a. Aliquam condimentum mattis neque sed pretium”
+                            <br>
+                            <address>
+                                Bin Burhan
+                                <p>Dhaka, Bd</p>
+                            </address>
+                            <div class="scroll">
+                                <a href="#"></a>
+                                <a href="#"></a>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="emailBlock">
+                        <div class="email">Subscribe
+                            <p>FOR OUR NEWLETTER AND PROMOTION</p>
+                            <form action="#">
+                                <input type="email" placeholder="Enter Your Email">
+                                <input type="submit" value="Subscribe"> </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="copySocialBlock">
-                <div class="copySocial">
-                    <div class="copy">&copy; 2017 Brand All Rights Reserved.</div>
-                    <div class="social">
-                        <div><i class="fab fa-facebook-f"></i></div>
-                        <div><i class="fab fa-twitter"></i></div>
-                        <div><i class="fab fa-linkedin-in"></i></div>
-                        <div><i class="fab fa-pinterest-p"></i></div>
-                        <div><i class="fab fa-google-plus-g"></i></div>
+            <footer>
+                <div class="footer">
+                    <div class="aboutBrand">
+                        <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
+                        <p> Objectively transition extensive data rather than cross functional solutions. Monotonectally
+                            syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an
+                            expanded array of processes and cross-unit partnerships. </p>
+                        <br>
+                        <p> Efficiently plagiarize 24/365 action items and focused infomediaries. Distinctively seize
+                            superior initiatives for wireless technologies. Dynamically optimize. </p>
+                    </div>
+                    <div class="aboutAll">
+                        <div>
+                            <h4>COMPANY</h4>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">How It Works</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>INFORMATION</h4>
+                            <ul>
+                                <li><a href="#">Tearms & Condition</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">How to Buy</a></li>
+                                <li><a href="#">How to Sell</a></li>
+                                <li><a href="#">Promotion</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>SHOP CATEGORY</h4>
+                            <ul>
+                                <li><a href="#">Men</a></li>
+                                <li><a href="#">Women</a></li>
+                                <li><a href="#">Child</a></li>
+                                <li><a href="#">Apparel</a></li>
+                                <li><a href="#">Brows All</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+                <div class="copySocialBlock">
+                    <div class="copySocial">
+                        <div class="copy">&copy; 2017 Brand All Rights Reserved.</div>
+                        <div class="social">
+                            <div><i class="fab fa-facebook-f"></i></div>
+                            <div><i class="fab fa-twitter"></i></div>
+                            <div><i class="fab fa-linkedin-in"></i></div>
+                            <div><i class="fab fa-pinterest-p"></i></div>
+                            <div><i class="fab fa-google-plus-g"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
     <script src="script/man.js"></script>

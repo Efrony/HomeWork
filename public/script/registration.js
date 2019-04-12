@@ -1,7 +1,7 @@
-const API_URL1 = 'http://localhost:3001'
 const registr = new Vue({
     el: '#registr',
     data: {
+        API_URL: 'http://localhost:3001',
         name: null,
         email: null,
         password: null,
@@ -30,7 +30,7 @@ const registr = new Vue({
             } else $registrForms.password.className  = "validForm";
 
             if (!this.errors){
-                fetch(API_URL1 + '/accounts/', {
+                fetch(this.API_URL + '/accounts/', {
                     method: 'POST',
                     body: JSON.stringify({
                         name: this.name,
@@ -45,6 +45,7 @@ const registr = new Vue({
                     if (res.status == 200) {
                         alert('Регистрация прошла успешно')
                         $registrForms.email.className  = "validForm";
+                        $registrForms.submit() /////////////////////////////////////////test
                     }
                     else {
                         this.errors+= `Пользователь с e-mail ${this.email} уже существует`

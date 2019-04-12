@@ -13,97 +13,98 @@
 </head>
 
 <body>
-    <header>
-        <div class="logoSearch">
-            <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
-            <div class="search">
-                <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
-                <input type="search" placeholder="Search for Item...">
-                <button class="searchButton"><i class="fas fa-search"></i></button>
+    <div id="login_cache">
+        <header>
+            <div class="logoSearch">
+                <div class="logo"> <span class="styleBran">BRAN</span> <span class="styleD">D</span> </div>
+                <div class="search">
+                    <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
+                    <input type="search" placeholder="Search for Item...">
+                    <button class="searchButton"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="my">
+                <a class="cartButton" href="cart.html"> <img src="img/Forma_1.png" alt="basket">
+                    <div class="cartCount" v-if="countCart != 0">{{countCart}}</div>
+                </a>
+                <a href="myaccount.html" class="myAccount">My Account <i class="fas fa-caret-down"></i>
+                    <div v-if="isAuth" class="myAccountMenu">Exit</div>
+                </a>
+            </div>
+        </header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="man.html">MAN</a></li>
+                <li><a href="women.html">WOMEN</a></li>
+                <li><a href="#">KIDS</a></li>
+                <li><a href="#">ACCOSERIESE</a></li>
+                <li><a href="#">HOT DEALS</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+        </nav>
+        <div class="newArrivalsBlock">
+            <div class="newArrivals">
+                <p>New Arrivals</p>
+                <nav> Home / Men / <span>New Arrivals</span> </nav>
             </div>
         </div>
-        <div class="my">
-            <a href="cart.html"> <img src="img/Forma_1.png" alt="basket">
-                <div id="loginCart" class="cartCount" v-if="countCart != 0">{{countCart}}</div>
-            </a>
-            <form action="myAccount.html"><button class="myAccount">My Account <i
-                        class="fas fa-caret-down"></i></button>
-                <form></form>
-        </div>
-    </header>
-    <nav class="nav">
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="man.html">MAN</a></li>
-            <li><a href="women.html">WOMEN</a></li>
-            <li><a href="#">KIDS</a></li>
-            <li><a href="#">ACCOSERIESE</a></li>
-            <li><a href="#">HOT DEALS</a></li>
-            <li><a href="#">ABOUT US</a></li>
-        </ul>
-    </nav>
-    <div class="newArrivalsBlock">
-        <div class="newArrivals">
-            <p>New Arrivals</p>
-            <nav> Home / Men / <span>New Arrivals</span> </nav>
-        </div>
-    </div>
-    <main>
-        <article>
-            <p class="collection">ABOUT US</p> <img src="img/hot_deals/line-border-pink.png" alt="">
-            <p class="heading">comments</p>
-            <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                condimentum a. Aliquam condimentum mattis neque sed pretium”
-                <br>
-                <address>
-                    Bin Burhan
-                    <p>Dhaka, Bd</p>
-                </address>
-            </div>
-            <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                condimentum a. Aliquam condimentum mattis neque sed pretium”
-                <br>
-                <address>
-                    Bin Burhan
-                    <p>Dhaka, Bd</p>
-                </address>
-            </div>
-            <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                condimentum a. Aliquam condimentum mattis neque sed pretium”
-                <br>
-                <address>
-                    Bin Burhan
-                    <p>Dhaka, Bd</p>
-                </address>
-            </div>
-        </article>
-        <section>
-            <form class="data-1" action="#">
-                <h5>write a comment</h5>
-                <p class="point inp">
-                    NAME
-                    <span class="red">*</span>
-                </p>
-                <input type="text" required>
-                <p class="point inp">
-                    EMAIL ADDRESS
-                    <span class="red">*</span>
-                </p>
-                <input type="email" required>
+        <main>
+            <article>
+                <p class="collection">ABOUT US</p> <img src="img/hot_deals/line-border-pink.png" alt="">
+                <p class="heading">comments</p>
+                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
+                    condimentum a. Aliquam condimentum mattis neque sed pretium”
+                    <br>
+                    <address>
+                        Bin Burhan
+                        <p>Dhaka, Bd</p>
+                    </address>
+                </div>
+                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
+                    condimentum a. Aliquam condimentum mattis neque sed pretium”
+                    <br>
+                    <address>
+                        Bin Burhan
+                        <p>Dhaka, Bd</p>
+                    </address>
+                </div>
+                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
+                    condimentum a. Aliquam condimentum mattis neque sed pretium”
+                    <br>
+                    <address>
+                        Bin Burhan
+                        <p>Dhaka, Bd</p>
+                    </address>
+                </div>
+            </article>
+            <section>
+                <form class="data-1" action="#">
+                    <h5>write a comment</h5>
+                    <p class="point inp">
+                        NAME
+                        <span class="red">*</span>
+                    </p>
+                    <input type="text" required>
+                    <p class="point inp">
+                        EMAIL ADDRESS
+                        <span class="red">*</span>
+                    </p>
+                    <input type="email" required>
 
-                <p class="point inp">
-                    COMMENT
-                    <span class="red">*</span>
-                </p>
-                <textarea class="areaComment" name="" id="" cols="30" rows="10"></textarea>
-                <p>
-                    <span class="red">* Required Fileds</span>
-                </p>
-                <input type="submit" value="SEND COMMENT">
-            </form>
-        </section>
-        </div>
-        </div>
+                    <p class="point inp">
+                        COMMENT
+                        <span class="red">*</span>
+                    </p>
+                    <textarea class="areaComment" name="" id="" cols="30" rows="10"></textarea>
+                    <p>
+                        <span class="red">* Required Fileds</span>
+                    </p>
+                    <input type="submit" value="SEND COMMENT">
+                </form>
+            </section>
+    </div>
+    </div>
     </main>
     <div class="subscribeBcg">
         <div class="subscribe">
@@ -190,6 +191,8 @@
             </div>
         </div>
     </footer>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-    <script src="script/login_cart_cache.js"></script>
+    <script src="script/login_cache.js"></script>
+
 </body>

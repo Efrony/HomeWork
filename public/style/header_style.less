@@ -90,7 +90,7 @@ header {
             margin-top: 10px;
         }
 
-        a {
+        .cartButton {
             margin-right: 25px;
             height: 29px;
             position: relative;
@@ -110,17 +110,32 @@ header {
             }
         }
 
-        .myAccount {
-            padding: 11px 19px;
+        .myAccount,
+        .myAccountMenu {
+            text-decoration: none;
+            padding: 10px 19px;
             background-color: #f16d7f;
             color: #ffffff;
             font-size: 15px;
             font-weight: 400;
+            position: relative;
             border: none;
+            display: block;
             cursor: pointer;
+            &:hover .myAccountMenu{
+                display: block;
+            }
             i {
                 font-size: 14px;
             }
+        }
+        .myAccountMenu {
+            display: none;
+            position: absolute;
+            bottom: -38px;
+            left: 0;
+            width: 100%;
+            text-align: right;
         }
     }
     .logo {

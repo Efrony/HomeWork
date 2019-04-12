@@ -23,13 +23,13 @@
                 </div>
             </div>
             <div class="my">
-                <a href="cart.html">
+                <a class="cartButton" href="cart.html">
                     <img src="img/Forma_1.png" alt="basket">
                     <div class="cartCount" v-if="countCart != 0">{{countCart}}</div>
                 </a>
-                <form action="myAccount.html"><button class="myAccount">My Account <i
-                            class="fas fa-caret-down"></i></button>
-                    <form></form>
+                <a href="myaccount.html" class="myAccount">My Account <i class="fas fa-caret-down"></i>
+                    <div v-if="isAuth" class="myAccountMenu">Exit</div>
+                </a>
             </div>
         </header>
         <nav class="nav">
@@ -44,8 +44,9 @@
             </ul>
         </nav>
         <main>
-            <cart-list-component :cart_list="cartList"></cart-list-component> <!-- КОМПОНЕНТ СПИСОК КОРЗИНЫ С ВЛОЖЕННЫМИ ТОВАРАМИ -->
-            
+            <cart-list-component :cart_list="cartList"></cart-list-component>
+            <!-- КОМПОНЕНТ СПИСОК КОРЗИНЫ С ВЛОЖЕННЫМИ ТОВАРАМИ -->
+
 
             <div class="inputBlock">
                 <div class="shippingAdress"><span>Shipping Adress</span>
@@ -160,7 +161,7 @@
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-    <script src="script/script_cart.js"></script>
+    <script src="script/cart.js"></script>
 </body>
 
 </html>

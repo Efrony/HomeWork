@@ -90,13 +90,13 @@ header .my {
     margin-top: 10px;
   }
 }
-header .my a {
+header .my .cartButton {
   margin-right: 25px;
   height: 29px;
   position: relative;
   text-decoration: none;
 }
-header .my a .cartCount {
+header .my .cartButton .cartCount {
   position: absolute;
   border-radius: 50%;
   border-color: #ef5b70;
@@ -108,17 +108,34 @@ header .my a .cartCount {
   top: -10px;
   right: -10px;
 }
-header .my .myAccount {
-  padding: 11px 19px;
+header .my .myAccount,
+header .my .myAccountMenu {
+  text-decoration: none;
+  padding: 10px 19px;
   background-color: #f16d7f;
   color: #ffffff;
   font-size: 15px;
   font-weight: 400;
+  position: relative;
   border: none;
+  display: block;
   cursor: pointer;
 }
-header .my .myAccount i {
+header .my .myAccount:hover .myAccountMenu,
+header .my .myAccountMenu:hover .myAccountMenu {
+  display: block;
+}
+header .my .myAccount i,
+header .my .myAccountMenu i {
   font-size: 14px;
+}
+header .my .myAccountMenu {
+  display: none;
+  position: absolute;
+  bottom: -38px;
+  left: 0;
+  width: 100%;
+  text-align: right;
 }
 header .logo {
   background-image: url(../img/Group_2.png);

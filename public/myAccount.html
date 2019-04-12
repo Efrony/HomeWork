@@ -26,13 +26,14 @@
             </div>
         </div>
         <div class="my">
-            <a href="cart.html">
+            <a class="cartButton" href="cart.html">
                 <img src="img/Forma_1.png" alt="basket">
-                <div id="loginCart" class="cartCount" v-if="countCart != 0">{{countCart}}</div>
+                <div id="login_cache" class="cartCount" v-if="countCart != 0">{{countCart}}</div>
             </a>
-            <form action="myAccount.html"><button class="myAccount">My Account <i
-                        class="fas fa-caret-down"></i></button>
-                <form></form>
+            <a href="myAccount.html" class="myAccount">
+                My Account <i class="fas fa-caret-down"></i>
+                <div id="auth" v-if="isAuth" class="myAccountMenu">Exit</div>
+            </a>
         </div>
     </header>
     <nav class="nav">
@@ -42,12 +43,14 @@
             <li><a href="women.html">WOMEN</a></li>
             <li><a href="#">KIDS</a></li>
             <li><a href="#">ACCOSERIESE</a></li>
-            <li><a href="checkout.html">HOT DEALS</a></li>
+            <li><a href="#">HOT DEALS</a></li>
             <li><a href="aboutUs.html">ABOUT US</a></li>
         </ul>
     </nav>
-    <main class="women">
-        <section id="login">
+    <main class="women" >
+        <div id="auth2"></div>
+        <section   v-if="isAuth"> Вы авторизованы. Добро пожаловать в ЛК</section>
+        <section  v-if="!isAuth">
             <form @submit="checkRegisrt" name="registr" id="registr" class="data-1">
                 <h5>register</h5>
                 <p class="point">register and save time!</p>
@@ -58,17 +61,17 @@
                     NAME
                     <span class="red">*</span>
                 </p>
-                <input v-model="name" type="text" name="name" >
+                <input v-model="name" type="text" name="name">
                 <p class="point inp">
                     EMAIL ADDRESS
                     <span class="red">*</span>
                 </p>
-                <input v-model="email" type="email" name="email" >
+                <input v-model="email" type="email" name="email">
                 <p class="point inp">
                     PASSWORD
                     <span class="red">*</span>
                 </p>
-                <input v-model="password" type="password" name="password" >
+                <input v-model="password" type="password" name="password">
                 <p class="point inp">
                     PHONE
                 </p>
@@ -78,18 +81,20 @@
                     <p class="point inp">
                         GENDER
                     </p>
-                    <input v-model="gender" type="radio" name='choice' id="ch-1" value="m" checked><label for="ch-1"> M</label>
+                    <input v-model="gender" type="radio" name='choice' id="ch-1" value="m" checked><label for="ch-1">
+                        M</label>
                     <br>
-                    <input v-model="gender" type="radio" name='choice' id="ch-2" value="w" checked><label for="ch-2"> W</label>
+                    <input v-model="gender" type="radio" name='choice' id="ch-2" value="w" checked><label for="ch-2">
+                        W</label>
                 </div>
                 <p>
                     <span class="red">* Required Fileds</span>
                 </p>
                 <p v-if="errors" id="errors">{{errors}}</p>
-             
+
                 <input type="submit" value="register">
             </form>
-            <form @submit="checkLogin" class="data-2" >
+            <form id="login" @submit="checkLogin" class="data-2">
                 <h5>sign in</h5>
                 <p class="point">Already registed?</p>
                 <p class="about">Please log in below</p>
@@ -109,6 +114,7 @@
                 <input type="submit" value="LOG IN">
             </form>
         </section>
+        
     </main>
     <div class="subscribeBcg">
         <div class="subscribe">
@@ -205,8 +211,10 @@
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-    <script src="script/login_cart_cache.js"></script>
+    <script src="script/login_cache.js"></script>
+    <script src="script/authorized.js"></script>
     <script src="script/registration.js"></script>
 </body>
 

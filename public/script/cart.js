@@ -1,10 +1,8 @@
-const API_URL = 'http://localhost:3001'
-
 Vue.component('cart-list-component', {
     props: ['cart_list'],
     methods: {
         clear_cart() {
-            fetch(API_URL + '/cart/', {method: 'PUT'})
+            fetch(this.API_URL + '/cart/', {method: 'PUT'})
             .then(() => this.cart_list.splice(0, this.cart_list.length))
         }
     },
@@ -50,7 +48,7 @@ Vue.component('cart-item-component', {
     methods: {
         delete_to_cart(product_item) { // удаление товара из корзины
             const inCartListIndex = this.cart_list.findIndex(item => item.article == product_item.article)
-            fetch(API_URL + '/cart/' + product_item.id, {method: 'DELETE'})
+            fetch(this.API_URL + '/cart/' + product_item.id, {method: 'DELETE'})
                 .then(response => response.json())
                 .then(deletedItem => {
                     this.cart_list.splice(inCartListIndex, 1)
@@ -60,7 +58,7 @@ Vue.component('cart-item-component', {
         count_input(event) { // изменение количества через поле ввода
             const idProduct = event.target.parentElement.parentElement
             const inCartList = this.cart_list.find(item => item.article == idProduct.id)
-            fetch(API_URL + '/cart/' + inCartList.id, {
+            fetch(this.API_URL + '/cart/' + inCartList.id, {
                     method: 'PATCH',
                     body: JSON.stringify({count: +event.target.value}),
                     headers: {'Content-type': 'application/json'}
@@ -90,10 +88,11 @@ Vue.component('cart-item-component', {
 const app = new Vue({
     el: '#app',
     data: {
+        API_URL: 'http://localhost:3001',
         cartList: []
     },
     mounted() {
-        fetch(API_URL + '/cart')
+        fetch(this.API_URL + '/cart')
             .then(response => response.json())
             .then(cart => this.cartList = cart)
         },
@@ -107,6 +106,32 @@ const app = new Vue({
             return this.cartList.reduce(function (sum, item) {
                 return sum + item.count
             }, 0)
+        },
+        isAuth() {
+            return false
+            /*
+            if (localStorage.getItem('email') && localStorage.getItem('cipher')) {
+                fetch(this.API_URL + '/accounts/', {
+                    method: 'GET',
+                    body: JSON.stringify({
+                        email: localStorage.getItem('email'),
+                        cipher: localStorage.getItem('cipher')
+                    }),
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                }).then(res => {
+                    if (res.status == 200) {
+                        return true
+                    } 
+                    if (res.status == 403) {
+                        return false
+                    } 
+                })
+            } else {
+                return false
+            }*/
+
         }
     },
 })

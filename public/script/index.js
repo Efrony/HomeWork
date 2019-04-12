@@ -1,4 +1,3 @@
-const API_URL = 'http://localhost:3001'
 
 Vue.component('product-list-component', {
     props: ['product_list', 'add_to_cart'],
@@ -27,6 +26,7 @@ Vue.component('product-item-component', {
 const app = new Vue({
     el: '#app',
     data: {
+        API_URL: 'http://localhost:3001',
         productList: [],
         cartList: [],
         handleSearchInput: ''
@@ -51,7 +51,7 @@ const app = new Vue({
         addToCart(productItem) { //добавление товара в корзину
             const inCartList = this.cartList.find(item => item.article == productItem.article)
             if (inCartList) {    
-                fetch(API_URL + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
+                fetch(this.API_URL + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
                     method: 'PATCH',
                     body: JSON.stringify({count: inCartList.count + 1}),
                     headers: {'Content-type': 'application/json'}
@@ -61,7 +61,7 @@ const app = new Vue({
                     inCartList.count = response.count
                 })
             } else {
-                fetch(API_URL + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
+                fetch(this.API_URL + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
                     method: 'POST',
                     body: JSON.stringify({...productItem, count: 1}),
                     headers: {'Content-type': 'application/json'}
@@ -71,13 +71,39 @@ const app = new Vue({
                     this.cartList.push(createdItem)
                     })
             }
+        },
+        isAuth() {
+            return true
+            /*
+            if (localStorage.getItem('email') && localStorage.getItem('cipher')) {
+                fetch(this.API_URL + '/accounts/', {
+                    method: 'GET',
+                    body: JSON.stringify({
+                        email: localStorage.getItem('email'),
+                        cipher: localStorage.getItem('cipher')
+                    }),
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                }).then(res => {
+                    if (res.status == 200) {
+                        return true
+                    } 
+                    if (res.status == 403) {
+                        return false
+                    } 
+                })
+            } else {
+                return false
+            }*/
+
         }
     },
     mounted() {
-        fetch(API_URL + '/product')
+        fetch(this.API_URL + '/product')
             .then(response => response.json())
             .then((product) => this.productList = product)
-        fetch(API_URL + '/cart').then(response => response.json())
+        fetch(this.API_URL + '/cart').then(response => response.json())
             .then((cart) => this.cartList = cart)
     }
 })
