@@ -45,7 +45,7 @@ const registr = new Vue({
                     if (res.status == 200) {
                         alert('Регистрация прошла успешно')
                         $registrForms.email.className  = "validForm";
-                        $registrForms.submit() /////////////////////////////////////////test
+                        //$registrForms.submit() /////////////////////////////////////////test
                     }
                     else {
                         this.errors+= `Пользователь с e-mail ${this.email} уже существует`

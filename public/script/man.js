@@ -33,7 +33,6 @@ const app = new Vue({
                     headers: {'Content-type': 'application/json'}
                 }).then((response) => response.json())
                 .then((response) =>{
-                    alert('Товар уже был добавлен в корзину. Увеличено количество товара.')
                     inCartList.count = response.count
                 })
             } else {
@@ -43,7 +42,6 @@ const app = new Vue({
                     headers: {'Content-type': 'application/json'}
                 }).then((response) => response.json())
                 .then((createdItem) => {
-                    alert('Товар добавлен в корзину!')
                     this.cartList.push(createdItem)
                     })
             }

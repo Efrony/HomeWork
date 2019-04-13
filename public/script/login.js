@@ -1,10 +1,10 @@
 const login = new Vue({
     el: '#login',
     data: {
-        API_URL: 'http://localhost:3001',
         loginEmail: '',
         loginPassword: '',
-        logincache: ''
+        logincache: '',
+        errorsLogin: ''
     },
     methods: {
         checkLogin() {
