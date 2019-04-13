@@ -32,7 +32,9 @@
                     My Account
                     <i class="fas fa-caret-down"></i>
                     <authorized-component>
-                        <div class="myAccountMenu">Exit</div>
+                            <template v-slot:login_component>
+                                <div class="myAccountMenu">Exit</div>
+                            </template>
                     </authorized-component>
                 </a>
             </div>

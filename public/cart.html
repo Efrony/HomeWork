@@ -30,8 +30,10 @@
                 <a href="myaccount.html" class="myAccount">
                     My Account 
                     <i class="fas fa-caret-down"></i>
-                    <authorized-component :cart_list="cartList" :api_url="API_URL">
-                        <div class="myAccountMenu">Exit</div>
+                    <authorized-component>
+                            <template v-slot:login_component>
+                                <div class="myAccountMenu">Exit</div>
+                            </template>
                     </authorized-component>
                 </a>
             </div>

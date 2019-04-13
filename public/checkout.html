@@ -31,9 +31,13 @@
                     <img src="img/Forma_1.png" alt="basket">
                     <count-cart-component></count-cart-component>
                 </a>
-                <a href="myaccount.html" class="myAccount">My Account <i class="fas fa-caret-down"></i>
+                <a href="myaccount.html" class="myAccount">
+                    My Account 
+                    <i class="fas fa-caret-down"></i>
                     <authorized-component>
-                        <div class="myAccountMenu">Exit</div>
+                            <template v-slot:login_component>
+                                <div class="myAccountMenu">Exit</div>
+                            </template>
                     </authorized-component>
                 </a>
             </div>

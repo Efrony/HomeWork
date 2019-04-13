@@ -27,7 +27,8 @@ Vue.component('count-cart-component', {
             }, 0)
         }
     },
-    template: `<div class="cartCount" v-if="countCart != 0">{{countCart}}</div>`
+    template: `<div class="cartCount" v-if="countCart != 0">{{countCart}}</div>
+    `
 })
 
 Vue.component('authorized-component', {
@@ -63,9 +64,8 @@ Vue.component('authorized-component', {
     template: 
     `
     <div>
-        <slot name="section_login" v-if="isAuth"></slot>
-        <slot name="section_logout" v-if="!isAuth"></slot>
-        <slot name="exit_login" v-if="isAuth"></slot>
+        <slot name="login_component" v-if="isAuth"></slot>
+        <slot name="logout_component" v-if="!isAuth"></slot>
     </div>
     `
 })
@@ -109,7 +109,7 @@ Vue.component('cart-list-component', {
             <a @click.prevent="clear_cart" href="#">
                 <div class="clearCart">cLEAR SHOPPING CART</div>
             </a>
-                <a href="man.html">
+            <a href="man.html">
                 <div class="continueCart">cONTINUE sHOPPING</div>
             </a>
         </div>
@@ -334,9 +334,6 @@ Vue.component('registr-component', {
     </form>
     `
 })
-
-
-
 
 const login_cache = new Vue({
     el: '#login_cache',
