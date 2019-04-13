@@ -68,7 +68,7 @@ app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]
     res.send([])
 }))
 
-app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => { //регистрация
+app.post('/accounts/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => { //регистрация
     if (err) res.send('Произошла ошибка' + err)
     const accBody = req.body
     const accounts = JSON.parse(data)
@@ -82,14 +82,17 @@ app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', 
     }
 }))
 
-app.path('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // авторизация 
+app.patch('/accounts/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // авторизация 
     if (err) res.send('Произошла ошибка' + err)
-    const loginBody = req.body
     const accounts = JSON.parse(data)
-    const inAccountList = accounts.find((account) => account.email == loginBody.email)
-    if (!inAccountList) res.status(403).send(loginBody.email) // пользователь с такие e-mail не зарегистрирован
+    console.log(req.body.email)
+    const inAccountList = accounts.find((account) => {
+        account.email == req.body.email
+    })
+    console.log(inAccountList)
+    if (!inAccountList) res.status(403).send(req.body.email) // пользователь с такие e-mail не зарегистрирован
     else {
-        if (!inAccountList.password == loginBody.password) res.status(403).send(loginBody.email) // неверный пароль
+        if (!inAccountList.password == req.body.password) res.status(403).send(req.body.email) // неверный пароль
         else {
             if (!inAccountList.cipher) { // если пользователь нигде не авторизован генерируем ключ
                 var cipher = ''
@@ -101,7 +104,7 @@ app.path('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', 
     }
 }))
 
-app.get('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // проверка авторизации
+app.patch('/login/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // проверка авторизации
     if (err) res.send('Произошла ошибка' + err)
     const authBody = req.body
     const accounts = JSON.parse(data)

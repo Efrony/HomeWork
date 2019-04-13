@@ -38,7 +38,7 @@ Vue.component('authorized-component', {
             return false
             /*
             if (localStorage.getItem('email') && localStorage.getItem('cipher')) {
-                fetch(this.api_url + '/accounts/', {
+                fetch(this.api_url + '/login/', {
                     method: 'GET',
                     body: JSON.stringify({
                         email: localStorage.getItem('email'),
@@ -125,10 +125,7 @@ Vue.component('cart-item-component', {
                     method: 'DELETE'
                 })
                 .then(response => response.json())
-                .then(deletedItem => {
-                    this.cart_list.splice(inCartListIndex, 1)
-                    alert(deletedItem.name + ' удален из корзины')
-                })
+                .then(deletedItem => this.cart_list.splice(inCartListIndex, 1))
         },
         count_input(event) { // изменение количества через поле ввода
             const idProduct = event.target.parentElement.parentElement
@@ -176,35 +173,33 @@ Vue.component('login-component', {
         }
     },
     methods: {
-        checkLogin() {
-            this.errors = ''
-            fetch(this.api_url + '/accounts/', {
-                    method: 'GET',
-                    body: JSON.stringify({
-                        email: this.loginPassword,
-                        password: this.loginPassword
-                    }),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
+        checkLogin(e) {
+            e.preventDefault()
+            this.errorsLogin = ''
+            fetch(this.api_url + '/accounts/2', { 
+                method: 'PATCH',
+                body: JSON.stringify({password: this.loginPassword, email: this.loginEmail}),
+                headers: {'Content-type': 'application/json'}
                 }).then(res => {
                     if (res.status == 403) {
                         this.errorsLogin += `Неверно указан логин или пароль`
                         document.loginForm.email.className = "invalidForm";
                         document.loginForm.password.className = "invalidForm";
                     } else {
-                        return res
+                        console.log(res.json())
+                        return res.json()
                     }
                 })
-                .then(res => res.json())
                 .then(identity => {
+                    document.loginForm.email.className = "validForm";
+                    document.loginForm.password.className = "validForm";
                     localStorage.setItem('email', identity.email)
                     localStorage.setItem('cipher', identity.cipher)
                 })
         }
     },
     template: `
-                <form id="login" @submit="checkLogin" class="data-2" name="loginForm">
+                <form id="login" @submit.prevent="checkLogin" class="data-2" name="loginForm">
                     <h5>sign in</h5>
                     <p class="point">Already registed?</p>
                     <p class="about">Please log in below</p>
@@ -335,15 +330,95 @@ Vue.component('registr-component', {
     `
 })
 
+Vue.component('product-item-component', {
+    props: ['cart_list', 'api_url', 'product_item'],
+    methods: {
+        add_to_cart(productItem) { //добавление товара в корзину
+            const inCartList = this.cart_list.find(item => item.article == productItem.article)
+            if (inCartList) {    
+                fetch(this.api_url + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
+                    method: 'PATCH',
+                    body: JSON.stringify({count: inCartList.count + 1}),
+                    headers: {'Content-type': 'application/json'}
+                }).then((response) => response.json())
+                .then((response) => inCartList.count = response.count)
+            } else {
+                fetch(this.api_url + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
+                    method: 'POST',
+                    body: JSON.stringify({...productItem, count: 1}),
+                    headers: {'Content-type': 'application/json'}
+                }).then((response) => response.json())
+                .then((createdItem) => this.cart_list.push(createdItem))
+            }}
+    },
+    template: `
+    <a  href="#">
+        <figure class="productItem" :id=product_item.article>
+            <img :src="'img/product/'+ product_item.article + '.jpg'" alt="productFoto">
+            <div class="shadowHover">
+                <button  @click.prevent="add_to_cart(product_item)" class="addToCart">&ensp;Add to Cart</button>
+            </div>
+            <figcaption>{{product_item.name}}
+                <p>$ {{product_item.price}}</p>
+            </figcaption>
+        </figure>
+    </a>`
+})
+
+Vue.component('search-component', {
+    props: ['product_list'],
+    data() {
+        return{
+            handleSearchInput: '',
+            search_input: '',
+
+        }
+    },
+    methods: {
+        button_input(searchInput) { //передача input после нажатия кнопки
+            this.handleSearchInput = searchInput
+            this.$emit('filter', this.filtredItems)
+
+        }
+    },
+    computed: {
+        filtredItems() {
+            const regexp = new RegExp(this.handleSearchInput, 'i')
+            return this.product_list.filter((item) => regexp.test(item.name))
+        }
+    },
+    template: `
+    <div class="search">
+        <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
+        <input @keyup.enter="button_input(search_input)" v-model="search_input" type="search" placeholder="Search for Item...">
+        <button  @click.prevent="button_input(search_input)" type="button" class="searchButton"><i class="fas fa-search"></i></button>
+    </div>`
+})
+
+
 const login_cache = new Vue({
     el: '#login_cache',
     data: {
         API_URL: 'http://localhost:3001',
-        cartList: []
+        cartList: [],
+        productList: [],
+        filtredItems: []
+    },
+    methods: {
+        getFiltredItems(filtredItems) { 
+            this.filtredItems = filtredItems
+        }
     },
     mounted() {
         fetch(this.API_URL + '/cart')
             .then(response => response.json())
             .then(cart => this.cartList = cart)
+        fetch(this.API_URL + '/product')
+            .then(response => response.json())
+            .then(product => this.productList = product)
+            .then(()=>{
+            this.filtredItems = this.productList
+        })
+
     }
 })

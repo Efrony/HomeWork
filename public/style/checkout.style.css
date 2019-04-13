@@ -31,8 +31,7 @@ body {
   display: block;
   padding: 17px 10px;
 }
-.nav ul a:hover,
-.nav ul li:nth-child(6) a {
+.nav ul a:hover {
   border-bottom: 3px solid #ef5b70;
 }
 @media (max-width: 700px) {
