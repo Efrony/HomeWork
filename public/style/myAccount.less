@@ -111,9 +111,12 @@ body {
 section {
     display: flex;
     border-bottom: 1px solid #eaeaea;
+    & > div {
+        display: flex;
+        width: 100%;
+    }
     .data-1 {
-        width: 50%;
-
+        width: 100%;
         padding-left: 25px;
         margin-top: 85px;
         input[type='submit'] {
@@ -121,7 +124,7 @@ section {
         }
     }
     .data-2 {
-        width: 50%;
+        width: 100%;
         margin-top: 110px;
     }
     h5 {

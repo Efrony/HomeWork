@@ -34,8 +34,10 @@
                 <a href="myAccount.html" class="myAccount">
                     My Account
                     <i class="fas fa-caret-down"></i>
-                    <authorized-component :api_url="API_URL">
-                        <div class="myAccountMenu">Exit</div>
+                    <authorized-component>
+                            <template v-slot:exit_login>
+                                <div class="myAccountMenu">Exit</div>
+                            </template>
                     </authorized-component>
                 </a>
             </div>
@@ -52,13 +54,21 @@
             </ul>
         </nav>
         <main class="women">
-            <section> Вы авторизованы. Добро пожаловать в ЛК</section>
-            <not-authorized-component :api_url="API_URL">
-            <section>
+        <section>
+            <authorized-component>
+                <template v-slot:section_login>
+                    Вы авторизованы. Добро пожаловать в ЛК
+                </template>
+            </authorized-component>
+        </section>
+        <section>
+            <authorized-component>
+                <template v-slot:section_logout>
                     <registr-component :api_url="API_URL"></registr-component>
                     <login-component :api_url="API_URL"></login-component>
-            </section>
-        </not-authorized-component>
+                </template>
+            </authorized-component>
+        </section>
 
         </main>
         <div class="subscribeBcg">

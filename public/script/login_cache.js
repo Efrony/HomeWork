@@ -34,39 +34,6 @@ Vue.component('authorized-component', {
     props: ['api_url'],
     computed: {
         isAuth() {
-            return true
-            /*
-            if (localStorage.getItem('email') && localStorage.getItem('cipher')) {
-                fetch(this.api_url + '/accounts/', {
-                    method: 'GET',
-                    body: JSON.stringify({
-                        email: localStorage.getItem('email'),
-                        cipher: localStorage.getItem('cipher')
-                    }),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                }).then(res => {
-                    if (res.status == 200) {
-                        return true
-                    } 
-                    if (res.status == 403) {
-                        return false
-                    } 
-                })
-            } else {
-                return false
-            }*/
-
-        }
-    },
-    template: `<div v-if="isAuth"><slot></slot></div>`
-})
-
-Vue.component('not-authorized-component', {
-    props: ['api_url'],
-    computed: {
-        notIsAuth() {
             return false
             /*
             if (localStorage.getItem('email') && localStorage.getItem('cipher')) {
@@ -93,8 +60,16 @@ Vue.component('not-authorized-component', {
 
         }
     },
-    template: `<div v-if="notIsAuth"><slot></slot></div>`
+    template: 
+    `
+    <div>
+        <slot name="section_login" v-if="isAuth"></slot>
+        <slot name="section_logout" v-if="!isAuth"></slot>
+        <slot name="exit_login" v-if="isAuth"></slot>
+    </div>
+    `
 })
+
 
 Vue.component('cart-list-component', {
     props: ['cart_list', 'api_url'],
