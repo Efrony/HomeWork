@@ -29,7 +29,7 @@
                 <a href="myAccount.html" class="myAccount">
                     My Account
                     <i class="fas fa-caret-down"></i>
-                    <authorized-component>
+                    <authorized-component :api_url="API_URL">
                         <template v-slot:login_component>
                             <div class="myAccountMenu">Exit</div>
                         </template>

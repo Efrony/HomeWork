@@ -31,45 +31,6 @@ Vue.component('count-cart-component', {
     `
 })
 
-Vue.component('authorized-component', {
-    props: ['api_url'],
-    computed: {
-        isAuth() {
-            return false
-            /*
-            if (localStorage.getItem('email') && localStorage.getItem('cipher')) {
-                fetch(this.api_url + '/login/', {
-                    method: 'GET',
-                    body: JSON.stringify({
-                        email: localStorage.getItem('email'),
-                        cipher: localStorage.getItem('cipher')
-                    }),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                }).then(res => {
-                    if (res.status == 200) {
-                        return true
-                    } 
-                    if (res.status == 403) {
-                        return false
-                    } 
-                })
-            } else {
-                return false
-            }*/
-
-        }
-    },
-    template: 
-    `
-    <div>
-        <slot name="login_component" v-if="isAuth"></slot>
-        <slot name="logout_component" v-if="!isAuth"></slot>
-    </div>
-    `
-})
-
 
 Vue.component('cart-list-component', {
     props: ['cart_list', 'api_url'],
@@ -173,33 +134,38 @@ Vue.component('login-component', {
         }
     },
     methods: {
-        checkLogin(e) {
-            e.preventDefault()
+        checkLogin(event) {
+            console.log(event)
             this.errorsLogin = ''
-            fetch(this.api_url + '/accounts/2', { 
+            fetch(this.api_url + '/login/' + this.loginEmail, {
                 method: 'PATCH',
-                body: JSON.stringify({password: this.loginPassword, email: this.loginEmail}),
-                headers: {'Content-type': 'application/json'}
-                }).then(res => {
-                    if (res.status == 403) {
-                        this.errorsLogin += `Неверно указан логин или пароль`
-                        document.loginForm.email.className = "invalidForm";
-                        document.loginForm.password.className = "invalidForm";
-                    } else {
-                        console.log(res.json())
-                        return res.json()
-                    }
-                })
-                .then(identity => {
-                    document.loginForm.email.className = "validForm";
-                    document.loginForm.password.className = "validForm";
-                    localStorage.setItem('email', identity.email)
-                    localStorage.setItem('cipher', identity.cipher)
-                })
+                body: JSON.stringify({
+                    password: this.loginPassword,
+                    email: this.loginEmail
+                }),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }).then(res => {
+                if (res.status == 403) {
+                    this.errorsLogin += `Неверно указан логин или пароль`
+                    document.loginForm.email.className = "invalidForm";
+                    document.loginForm.password.className = "invalidForm";
+                    event.preventDefault()
+                } else {
+                    res.json()
+                        .then(identity => {
+                            document.loginForm.email.className = "validForm";
+                            document.loginForm.password.className = "validForm";
+                            localStorage.setItem('email', identity.email)
+                            localStorage.setItem('cipher', identity.cipher)
+                        })
+                }
+            })
         }
     },
     template: `
-                <form id="login" @submit.prevent="checkLogin" class="data-2" name="loginForm">
+                <form id="login" @submit="checkLogin" class="data-2" name="loginForm">
                     <h5>sign in</h5>
                     <p class="point">Already registed?</p>
                     <p class="about">Please log in below</p>
@@ -221,6 +187,24 @@ Vue.component('login-component', {
                 </form>
                 `
 })
+
+
+
+Vue.component('authorized-component', {
+    props: ['api_url'],
+    computed: {
+        is_local_starage() {
+            return localStorage.getItem("email") && localStorage.getItem("cipher")
+        }
+    },
+    template: `
+    <div>
+        <slot name="login_component" v-if="is_local_starage"></slot>
+        <slot name="logout_component" v-if="!is_local_starage"></slot>
+    </div>
+    `
+})
+
 
 Vue.component('registr-component', {
     props: ['api_url'],
@@ -335,21 +319,31 @@ Vue.component('product-item-component', {
     methods: {
         add_to_cart(productItem) { //добавление товара в корзину
             const inCartList = this.cart_list.find(item => item.article == productItem.article)
-            if (inCartList) {    
+            if (inCartList) {
                 fetch(this.api_url + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
-                    method: 'PATCH',
-                    body: JSON.stringify({count: inCartList.count + 1}),
-                    headers: {'Content-type': 'application/json'}
-                }).then((response) => response.json())
-                .then((response) => inCartList.count = response.count)
+                        method: 'PATCH',
+                        body: JSON.stringify({
+                            count: inCartList.count + 1
+                        }),
+                        headers: {
+                            'Content-type': 'application/json'
+                        }
+                    }).then((response) => response.json())
+                    .then((response) => inCartList.count = response.count)
             } else {
                 fetch(this.api_url + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
-                    method: 'POST',
-                    body: JSON.stringify({...productItem, count: 1}),
-                    headers: {'Content-type': 'application/json'}
-                }).then((response) => response.json())
-                .then((createdItem) => this.cart_list.push(createdItem))
-            }}
+                        method: 'POST',
+                        body: JSON.stringify({
+                            ...productItem,
+                            count: 1
+                        }),
+                        headers: {
+                            'Content-type': 'application/json'
+                        }
+                    }).then((response) => response.json())
+                    .then((createdItem) => this.cart_list.push(createdItem))
+            }
+        }
     },
     template: `
     <a  href="#">
@@ -368,10 +362,9 @@ Vue.component('product-item-component', {
 Vue.component('search-component', {
     props: ['product_list'],
     data() {
-        return{
+        return {
             handleSearchInput: '',
             search_input: '',
-
         }
     },
     methods: {
@@ -405,8 +398,18 @@ const login_cache = new Vue({
         filtredItems: []
     },
     methods: {
-        getFiltredItems(filtredItems) { 
-            this.filtredItems = filtredItems
+        getFiltredItems(filtred) {
+            this.filtredItems = filtred
+        },
+        logout() {
+            fetch(this.API_URL + '/logout/' + localStorage.getItem('email'), {
+                method: 'PATCH',
+                body: JSON.stringify({ email: localStorage.getItem('email')}),
+                headers: {'Content-type': 'application/json'}
+            }).then( res => {
+                localStorage.removeItem("email")
+                localStorage.removeItem("cipher")
+            })
         }
     },
     mounted() {
@@ -416,9 +419,9 @@ const login_cache = new Vue({
         fetch(this.API_URL + '/product')
             .then(response => response.json())
             .then(product => this.productList = product)
-            .then(()=>{
-            this.filtredItems = this.productList
-        })
+            .then(() => {
+                this.filtredItems = this.productList
+            })
 
-    }
+    },
 })

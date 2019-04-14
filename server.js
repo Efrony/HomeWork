@@ -68,7 +68,7 @@ app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]
     res.send([])
 }))
 
-app.post('/accounts/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => { //регистрация
+app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => { //регистрация
     if (err) res.send('Произошла ошибка' + err)
     const accBody = req.body
     const accounts = JSON.parse(data)
@@ -82,17 +82,13 @@ app.post('/accounts/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8
     }
 }))
 
-app.patch('/accounts/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // авторизация 
+app.patch('/login/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // авторизация 
     if (err) res.send('Произошла ошибка' + err)
     const accounts = JSON.parse(data)
-    console.log(req.body.email)
-    const inAccountList = accounts.find((account) => {
-        account.email == req.body.email
-    })
-    console.log(inAccountList)
+    const inAccountList = accounts.find(account => account.email == req.body.email)
     if (!inAccountList) res.status(403).send(req.body.email) // пользователь с такие e-mail не зарегистрирован
     else {
-        if (!inAccountList.password == req.body.password) res.status(403).send(req.body.email) // неверный пароль
+        if (inAccountList.password != req.body.password) res.status(403).send(req.body.email) // неверный пароль
         else {
             if (!inAccountList.cipher) { // если пользователь нигде не авторизован генерируем ключ
                 var cipher = ''
@@ -104,16 +100,12 @@ app.patch('/accounts/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-
     }
 }))
 
-app.patch('/login/:id', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // проверка авторизации
+app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // выход 
     if (err) res.send('Произошла ошибка' + err)
-    const authBody = req.body
     const accounts = JSON.parse(data)
-    const inAccountList = accounts.find((account) => account.email == authBody.email) 
-    if (!inAccountList) res.status(403).send(authBody.email) // пользователь c e-mail не зарегистрирован 
-    else { 
-        if (!inAccountList.cipher == authBody.cipher) res.status(403).send(authBody.email) // неверный пароль
-        else res.status(200).send(authBody.email)
-    }
+    const inAccountList = accounts.find((account) => account.email == req.body.email) 
+    inAccountList.cipher = null
+    fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send())
 }))
 
 
