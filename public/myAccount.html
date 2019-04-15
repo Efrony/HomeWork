@@ -27,6 +27,11 @@
                 </div>
             </div>
             <div class="my">
+                    <authorized-component :api_url="API_URL">
+                            <template v-slot:login_component>
+                                <p>Вы авторизованы! </p>
+                            </template>
+                    </authorized-component>
                 <a class="cartButton" href="cart.html">
                     <img src="img/Forma_1.png" alt="basket">
                     <count-cart-component :cart_list="cartList" :api_url="API_URL"></count-cart-component>
@@ -36,7 +41,7 @@
                     <i class="fas fa-caret-down"></i>
                     <authorized-component :api_url="API_URL">
                             <template v-slot:login_component>
-                                <div @click="logout" class="myAccountMenu">Exit</div>
+                                <div @click.prevent="logout" class="myAccountMenu">Exit</div>
                             </template>
                     </authorized-component>
                 </a>

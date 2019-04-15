@@ -35,11 +35,6 @@ app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data
     res.send(data)
 }))
 
-app.get('/comments', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
-    if (err) res.send('Произошла ошибка' + err)
-    res.send(data)
-}))
-
 app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
@@ -113,6 +108,31 @@ app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf
     inAccountList.cipher = null
     stats('выход пользователя', req.body.email)
     fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send())
+}))
+
+/*----------------------------------------------------КОММЕНТАРИИ--------------------------------------------------------*/ 
+app.get('/comments', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+    if (err) res.send('Произошла ошибка' + err)
+    res.send(data)
+}))
+
+app.post('/comments/', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+    if (err) res.send('Произошла ошибка' + err)
+    const comment = req.body
+    const comments = JSON.parse(data)
+    comment.id = comments.length + 1
+    comments.push(comment)
+    stats('добавлен комментарий', comment.message)
+    fs.writeFile('./db/comments.json', JSON.stringify(comments), () => res.status(200).send(comment))
+}))
+
+app.delete('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+    if (err) res.send('Произошла ошибка' + err)
+    const comments = JSON.parse(data)
+    const inCommentListIndex = comments.findIndex(item => item.id == req.params.id)
+    const deletedItem = comments.splice(inCommentListIndex, 1)
+    stats('удалён комментарий', deletedItem[0].message)
+    fs.writeFile('./db/comments.json', JSON.stringify(comments), () => res.send(deletedItem[0]))
 }))
 
 app.listen(3001, () => console.log('СЕРВЕР ЗАПУЩЕН. Порт: 3001. ПЕРЕЙТИ http://localhost:3001/'))

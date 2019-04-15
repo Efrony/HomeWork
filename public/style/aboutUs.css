@@ -120,10 +120,12 @@ main .content .contentBcg aside {
   }
 }
 .comments {
-  padding: 50px 250px 50px;
+  padding: 50px 50px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
+  width: 1140px;
 }
 @media (max-width: 1142px) {
   .comments {
@@ -139,6 +141,7 @@ main .content .contentBcg aside {
   font-style: italic;
   line-height: 26px;
   letter-spacing: 0.4px;
+  width: 100%;
 }
 .comments .comment address {
   color: #f16d7f;
@@ -154,6 +157,23 @@ main .content .contentBcg aside {
   font-weight: 300;
   letter-spacing: 0.3px;
   line-height: 14px;
+}
+.comments .comment button {
+  padding: 0px 20px;
+  text-decoration: none !important;
+  display: block;
+  color: #ef5b70;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 3px;
+  border: 1px solid #ef5b70;
+  width: 150px;
+  height: 20px;
+  line-height: 20px;
+}
+.comments .comment button:hover {
+  background-color: #ef5b70;
+  color: #fff;
 }
 .comments .collection {
   color: #f16d7f;

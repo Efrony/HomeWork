@@ -233,7 +233,7 @@ Vue.component('login-component', {
                             document.loginForm.password.className = "validForm";
                             localStorage.setItem('email', identity.email)
                             localStorage.setItem('cipher', identity.cipher)
-                            location.reload() ///////////////////////////////////////////////////
+                            location.reload() 
                         })
                 }
             })
@@ -314,6 +314,7 @@ Vue.component('registr-component', {
                         if (res.status == 200) {
                             alert('Регистрация прошла успешно')
                             $registrForms.email.className = "validForm";
+                            location.reload() 
                         } else {
                             this.errors += `Пользователь с e-mail ${this.email} уже существует`
                             $registrForms.email.className = "invalidForm";
@@ -361,26 +362,36 @@ Vue.component('comments-list-render-component', {
             .then(comments => this.commentsList = comments)
     },
     template: `
-    <div>
-        <comment-render-component :comments_list="commentsList" v-for="comment in commentsList" :comment="comment"></comment-render-component>
-    </div>`
+    <comment-render-component :api_url="api_url" :comments_list="commentsList" v-for="comment in commentsList" :comment="comment"></comment-render-component>
+    `
 })
 
 Vue.component('comment-render-component', {
-    props: ['comment'], 
-    data() {
-        return{
-
+    props: ['comment', 'comments_list', 'api_url'], 
+    methods: {
+        delete_comment(comment) { 
+            const inCommentListIndex = this.comments_list.findIndex(item => item.message == comment.message)
+            fetch(this.api_url + '/comments/' + comment.id, {
+                method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(deletedItem => this.comments_list.splice(inCommentListIndex, 1))
+        }},
+    computed: {
+        is_local_starage() {
+            return localStorage.getItem("email") && localStorage.getItem("cipher")
         }
     },
     template: `
-    <article class="comment" v-if="comment.approved"> 
+    <article class="comment" v-if="comment.approved || is_local_starage"> 
         “{{comment.message}}”
         <br>
         <address>
             {{comment.name}}
-            <p><slot>DATE</slot></p>
-        </address>
+            <p>{{comment.date}}</p>
+        </address> 
+        <button v-if="!comment.approved && is_local_starage" >Одобрить</button>
+        <button v-if="is_local_starage" @click.prevent="delete_comment(comment)">Удалить</button>
     </article>`
 })
 
@@ -388,39 +399,37 @@ Vue.component('comments-post-component', {
     props: ['api_url'],
     data() {
         return{
-           
             nameComment: null,
             emailComment: null,
             messageComment: null,
         }
     },
+
     methods: {
-        send_comment() {
+        send_comment(e) {
+            e.preventDefault()
             var dT = new Date()
             fetch(this.api_url + '/comments/', {
                 method: 'POST',
                 body: JSON.stringify({
                     name: this.nameComment,
                     email: this.emailComment,
-                    message: this.password,
+                    message: this.messageComment,
                     date: `${dT.getDate()}.${dT.getMonth()+1}.${dT.getFullYear()}`,
                     approved: false
                 }),
                 headers: {'Content-type': 'application/json'}
             })
-            .then(res => { ////////////////////////////////////////////
+            .then(res => { 
                 if (res.status == 200) {
-                    alert('Регистрация прошла успешно')
-                    $registrForms.email.className = "validForm";
-                } else {
-                    this.errors += `Пользователь с e-mail ${this.email} уже существует`
-                    $registrForms.email.className = "invalidForm";
+                    alert('Комментарий будет добавлен после одобрения')
+                    location.reload()
                 }
             })
         }
     },
     template: `
-    <form class="data-1" action="#" @submit="sensComment">
+    <form class="data-1" @submit="send_comment">
         <h5>write a comment</h5>
         <p class="point inp">NAME <span class="red">*</span></p>
         <input v-model="nameComment" type="text" required>
@@ -455,6 +464,7 @@ const login_cache = new Vue({
             }).then( res => {
                 localStorage.removeItem("email")
                 localStorage.removeItem("cipher")
+                location.reload()
             })
         }
     },
@@ -466,7 +476,7 @@ const login_cache = new Vue({
             .then(response => response.json())
             .then(product => this.productList = product)
             .then(() => {
-                this.searchItems = this.productList
+                this.searchedItems = this.productList
             })         
 
     },

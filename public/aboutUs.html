@@ -24,6 +24,11 @@
                 </div>
             </div>
             <div class="my">
+                <authorized-component :api_url="API_URL">
+                    <template v-slot:login_component>
+                        <p>Вы авторизованы! </p>
+                    </template>
+                </authorized-component>
                 <a class="cartButton" href="cart.html"> <img src="img/Forma_1.png" alt="basket">
                     <count-cart-component :cart_list="cartList" :api_url="API_URL"></count-cart-component>
                 </a>
@@ -32,7 +37,7 @@
                     <i class="fas fa-caret-down"></i>
                     <authorized-component :api_url="API_URL">
                         <template v-slot:login_component>
-                            <div class="myAccountMenu">Exit</div>
+                            <div @click.prevent="logout" class="myAccountMenu">Exit</div>
                         </template>
                     </authorized-component>
                 </a>
@@ -66,37 +71,11 @@
                             Bin Burhan
                             <p>Dhaka, Bd</p>
                         </address>
-                    </article>
-                <comments-list-render-component></comments-list-render-component>
+                </article>
+                <comments-list-render-component :api_url="API_URL"></comments-list-render-component>
             </article>
             <section>
-
-
-                <form class="data-1" action="#">
-                    <h5>write a comment</h5>
-                    <p class="point inp">
-                        NAME
-                        <span class="red">*</span>
-                    </p>
-                    <input type="text" required>
-                    <p class="point inp">
-                        EMAIL ADDRESS
-                        <span class="red">*</span>
-                    </p>
-                    <input type="email" required>
-
-                    <p class="point inp">
-                        COMMENT
-                        <span class="red">*</span>
-                    </p>
-                    <textarea class="areaComment" name="" id="" cols="30" rows="10"></textarea>
-                    <p>
-                        <span class="red">* Required Fileds</span>
-                    </p>
-                    <input type="submit" value="SEND COMMENT">
-                </form>
-
-
+                <comments-post-component :api_url="API_URL" ></comments-post-component> 
             </section>
     </div>
     </div>

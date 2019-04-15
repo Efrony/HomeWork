@@ -3,7 +3,7 @@
 body {
     font-family: Lato, sans-serif;
 }
-
+@pink-color: #ef5b70;
 * {
     margin: 0;
     padding: 0;
@@ -136,11 +136,12 @@ main {
 }
 
 .comments {
-    padding: 50px 250px 50px;
+    padding: 50px 50px 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin: 0 auto;
+    width: 1140px;
     @media (max-width: 1142px) {
         padding: 10px;
     }
@@ -154,6 +155,7 @@ main {
         font-style: italic;
         line-height: 26px;
         letter-spacing: 0.4px;
+        width: 100%;
 
         address {
             color: #f16d7f;
@@ -169,6 +171,24 @@ main {
                 font-weight: 300;
                 letter-spacing: 0.3px;
                 line-height: 14px;
+            }
+        }
+        button {
+            padding: 0px 20px;
+            text-decoration: none !important;
+            display: block;
+            color: @pink-color;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 3px;
+            border: 1px solid @pink-color;
+            width: 150px;
+            height: 20px;
+            line-height: 20px;
+        
+            &:hover {
+                background-color: @pink-color;
+                color: #fff;
             }
         }
     }
@@ -194,6 +214,8 @@ main {
     }
 
 }
+
+
 
 section {
     width: 1140px;
