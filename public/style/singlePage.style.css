@@ -231,23 +231,25 @@ aside form input[type="submit"]:before {
   line-height: 20px;
   text-transform: uppercase;
 }
-.productLikeAlso {
+.product {
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
 }
-.productLikeAlso a {
+.product a {
   text-decoration: none;
   margin-bottom: 39px;
+  cursor: default;
 }
-.productLikeAlso a:hover {
+.product a:hover {
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
 }
-.productLikeAlso figure {
+.product figure {
   position: relative;
+  overflow: hidden;
 }
-.productLikeAlso figcaption {
-  color: #6f6e6e;
+.product figcaption {
+  color: #222222;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -255,14 +257,14 @@ aside form input[type="submit"]:before {
   max-width: 261px;
   overflow: hidden;
 }
-.productLikeAlso figcaption p {
+.product figcaption p {
   color: #f16d7f;
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   padding-top: 13px;
 }
-.productLikeAlso .shadowHover {
+.product .shadowHover {
   position: absolute;
   top: 0;
   background-image: url(../img/product/Background.png);
@@ -271,8 +273,9 @@ aside form input[type="submit"]:before {
   width: 100%;
   display: none;
   justify-content: center;
+  overflow: hidden;
 }
-.productLikeAlso .shadowHover .addToCart {
+.product .shadowHover .addToCart {
   border: 1px solid #fff;
   position: absolute;
   color: #fff;
@@ -282,10 +285,12 @@ aside form input[type="submit"]:before {
   align-items: stretch;
   margin-top: 98px;
   padding: 10px 10px 3px;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
-.productLikeAlso .shadowHover .addToCart:before {
+.product .shadowHover .addToCart:before {
   content: url(../img/product/Forma_1_copy.png);
 }
-.productLikeAlso a:hover .shadowHover {
+.product a:hover .shadowHover {
   display: flex;
 }

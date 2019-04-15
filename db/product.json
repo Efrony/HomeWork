@@ -2,49 +2,86 @@
     {
       "id": 1,
       "article": "000001",
-      "name": "Mango People T-shirt",
-      "price": 52
+      "name": "T-shirt",
+      "price": 52,
+      "category": ["home_page", "white", "xs"]
     },
     {
       "id": 2,
       "article": "000002",
-      "name": "Mango People Blouse",
-      "price": 68
+      "name": "Blouse",
+      "price": 68,
+      "category": ["home_page", "red", "xs"]
     },
     {
       "id": 3,
       "article": "000003",
-      "name": "Mango People Jacket",
-      "price": 48
+      "name": "Jacket",
+      "price": 48,
+      "category": ["home_page", "blue", "s"]
     },
     {
       "id": 4,
       "article": "000004",
-      "name": "Mango People Dress",
-      "price": 37
+      "name": "Dress",
+      "price": 37,
+      "category": ["home_page", "white", "s"]
     },
     {
       "id": 5,
       "article": "000005",
-      "name": "Mango People Dress",
-      "price": 67
+      "name": "Black & White Dress",
+      "price": 67,
+      "category": ["home_page", "black", "white", "m"]
     },
     {
       "id": 6,
       "article": "000006",
-      "name": "Mango People Blazer",
-      "price": 62
+      "name": "Blazer",
+      "price": 62,
+      "category": ["home_page", "beige", "m"]
     },
     {
       "id": 7,
       "article": "000007",
-      "name": "Mango People Pants",
-      "price": 75
+      "name": "Pants",
+      "price": 75,
+      "category": ["home_page", "white", "l"]
     },
     {
       "id": 8,
       "article": "000008",
-      "name": "Mango People Sweatshirt",
-      "price": 45
+      "name": " Sweatshirt",
+      "price": 45,
+      "category": ["home_page", "blue", "l"]
+    },
+    {
+      "id": 9,
+      "article": "000009",
+      "name": "Black Classic Suit",
+      "price": 45,
+      "category": ["women_page", "black", "xl"]
+    },
+    {
+      "id": 10,
+      "article": "000010",
+      "name": "Flower Skirt",
+      "price": 45,
+      "category": ["women_page", "color", "xl"]
+      
+    },
+    {
+      "id": 11,
+      "article": "000011",
+      "name": "Bandage",
+      "price": 45,
+      "category": ["women_page", "green", "xxl"]
+    },
+    {
+      "id": 12,
+      "article": "000012",
+      "name": "Gray Sweater",
+      "price": 45,
+      "category": ["women_page", "gray", "xxl"]
     }
 ]

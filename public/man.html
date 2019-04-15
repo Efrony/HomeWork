@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style/header_style.css">
     <link rel="stylesheet" href="style/styleProduct.css">
     <link rel="stylesheet" href="style/footer_style.css">
-    <title>Product</title>
+    <title>Man</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
                     <span class="styleBran">BRAN</span>
                     <span class="styleD">D</span>
                 </div>
-                <search-component :product_list="productList" v-on:filter="getFiltredItems"></search-component>
+                <search-component :product_list="productList" v-on:search="getSearchItems"></search-component>
             </div>
             <div class="my">
                 <a class="cartButton" href="cart.html">
@@ -169,8 +169,8 @@
                             <option value="">09</option>
                         </select>
                     </div>
-                    <div class="productItems" id="product">
-                        <product-item-component :cart_list="cartList" :api_url="API_URL" v-for="product_item in filtredItems" :product_item="product_item"></product-item-component>
+                    <div class="product" id="product">
+                        <product-item-component :cart_list="cartList" :api_url="API_URL" v-for="product_item in searchedItems" :product_item="product_item"></product-item-component>
                         <!-- КОМПОНЕНТ ВЫВОДА СПИСКА ОТФИЛЬТРОВАННЫХ ТОВАРОВ -->
                     </div>
                     <div class="paginationViewAll">

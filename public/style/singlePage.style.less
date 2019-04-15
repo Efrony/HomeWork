@@ -230,23 +230,24 @@ aside {
     text-transform: uppercase;
 }
 
-.productLikeAlso {
+.product {
     display: flex;
     flex-flow: wrap;
     justify-content: space-between;
     a {
         text-decoration: none;
         margin-bottom: 39px;
+        cursor: default;
     }
     a:hover {
         box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
     }
     figure {
         position: relative;
+        overflow: hidden;
     }
     figcaption {
-        color: #6f6e6e;
-        ;
+        color: #222222;
         font-size: 13px;
         font-weight: 700;
         text-transform: uppercase;
@@ -270,6 +271,8 @@ aside {
         width: 100%;
         display: none;
         justify-content: center;
+        overflow: hidden;
+        
         .addToCart {
             border: 1px solid #fff;
             position: absolute;
@@ -280,6 +283,8 @@ aside {
             align-items: stretch;
             margin-top: 98px;
             padding: 10px 10px 3px;
+            background: rgba(0, 0, 0, 0.25);
+            cursor: pointer;
         }
         .addToCart:before {
             content: url(../img/product/Forma_1_copy.png)

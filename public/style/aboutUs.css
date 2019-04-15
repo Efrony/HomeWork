@@ -119,18 +119,18 @@ main .content .contentBcg aside {
     width: 100%;
   }
 }
-article {
+.comments {
   padding: 50px 250px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 @media (max-width: 1142px) {
-  article {
+  .comments {
     padding: 10px;
   }
 }
-article .comment {
+.comments .comment {
   margin-top: 20px;
   background: url(../img/foto_comment.png) no-repeat;
   padding: 10px 70px 30px 111px;
@@ -140,7 +140,7 @@ article .comment {
   line-height: 26px;
   letter-spacing: 0.4px;
 }
-article .comment address {
+.comments .comment address {
   color: #f16d7f;
   font-size: 16px;
   font-weight: 700;
@@ -148,24 +148,24 @@ article .comment address {
   line-height: 26px;
   font-style: normal;
 }
-article .comment address p {
+.comments .comment address p {
   color: #222224;
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.3px;
   line-height: 14px;
 }
-article .collection {
+.comments .collection {
   color: #f16d7f;
   font-size: 14px;
   font-weight: 700;
   line-height: 24px;
   text-transform: uppercase;
 }
-article img {
+.comments img {
   margin: 16px;
 }
-article .heading {
+.comments .heading {
   color: #4d4d4d;
   font-size: 18px;
   font-weight: 900;

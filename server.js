@@ -35,6 +35,11 @@ app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data
     res.send(data)
 }))
 
+app.get('/comments', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+    if (err) res.send('Произошла ошибка' + err)
+    res.send(data)
+}))
+
 app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
@@ -64,7 +69,7 @@ app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (er
 }))
 
 app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => {
-    stats('Корзина очищена', '')
+    stats('Корзина пользователя очищена', '')
     res.send([])
 }))
 
@@ -77,7 +82,7 @@ app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', 
     } else {
         accBody.id = accounts.length + 1
         accounts.push(accBody)
-        stats('новый пользователь', accBody.email)
+        stats('регистрация нового пользователя', accBody.email)
         fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send(accBody))
     }
 }))
@@ -95,6 +100,7 @@ app.patch('/login/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-
                 for(var i = 0; i < 20; i++) cipher += Math.round(Math.random()*10)
                 inAccountList.cipher = cipher
             }
+            stats('авторизация пользователя', req.body.email)
             fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send({email: inAccountList.email, cipher: inAccountList.cipher}))
         }
     }
@@ -105,8 +111,8 @@ app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf
     const accounts = JSON.parse(data)
     const inAccountList = accounts.find((account) => account.email == req.body.email) 
     inAccountList.cipher = null
+    stats('выход пользователя', req.body.email)
     fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send())
 }))
-
 
 app.listen(3001, () => console.log('СЕРВЕР ЗАПУЩЕН. Порт: 3001. ПЕРЕЙТИ http://localhost:3001/'))

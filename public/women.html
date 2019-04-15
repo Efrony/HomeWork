@@ -105,48 +105,8 @@
                     </aside>
                 </div>
                 <div class="likeAlso">you may like also</div>
-                <div class="productLikeAlso">
-                    <a href="">
-                        <figure> <img src="img/hot_deals/like1.jpg" alt="productFoto">
-                            <div class="shadowHover">
-                                <div class="addToCart">&ensp;Add to Cart</div>
-                            </div>
-                            <figcaption>BLAZE LEGGINGS
-                                <p>$52.00</p>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <a href="">
-                        <figure><img src="img/hot_deals/like2.jpg" alt="productFoto">
-                            <div class="shadowHover">
-                                <div class="addToCart">&ensp;Add to Cart</div>
-                            </div>
-                            <figcaption>ALEXA SWEATER
-                                <p>$52.00</p>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <a href="">
-                        <figure><img src="img/hot_deals/like3.jpg" alt="productFoto">
-                            <div class="shadowHover">
-                                <div class="addToCart">&ensp;Add to Cart</div>
-                            </div>
-                            <figcaption>AGNES TOP
-                                <p>$52.00</p>
-                            </figcaption>
-                        </figure>
-                    </a>
-                    <a href="">
-                        <figure><img src="img/hot_deals/like4.jpg" alt="productFoto">
-                            <div class="shadowHover">
-                                <div class="addToCart">&ensp;Add to Cart</div>
-                            </div>
-                            <figcaption>SYLVA SWEATER
-                                <p>$52.00</p>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </div>
+                <filter-product-list-component :product_list="productList" :cart_list="cartList" :api_url="API_URL" :сategory="'women_page'"></filter-product-list-component> 
+                <!-- КОМПОНЕНТ ВЫВОДА СПИСКА ОТФИЛЬТРОВАННЫХ ТОВАРОВ -->
             </div>
         </main>
         <div class="subscribeBcg">

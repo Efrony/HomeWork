@@ -19,7 +19,7 @@
                     <span class="styleBran">BRAN</span>
                     <span class="styleD">D</span>
                 </div>
-                <search-component :product_list="productList" v-on:filter="getFiltredItems"></search-component>
+                <search-component :product_list="productList" v-on:search="getSearchItems"></search-component>
             </div>
             <div class="my">
                 <a class="cartButton" href="cart.html">
@@ -90,10 +90,10 @@
                 <h1>Fetured Items</h1>
                 <p>Shop for items based on what we featured in this week</p>
             </div>
-            <div class="product" id="product" >
-                <product-item-component :cart_list="cartList" :api_url="API_URL" v-for="product_item in filtredItems" :product_item="product_item"></product-item-component>
-                        <!-- КОМПОНЕНТ ВЫВОДА СПИСКА ОТФИЛЬТРОВАННЫХ ТОВАРОВ -->
-            </div>`
+            <div class="product" id="product">
+                    <filter-product-list-component :product_list="productList" :cart_list="cartList" :api_url="API_URL" :сategory="'home_page'"></filter-product-list-component> 
+            <!-- КОМПОНЕНТ ВЫВОДА СПИСКА ОТФИЛЬТРОВАННЫХ ТОВАРОВ -->
+            </div>
             <button class="browseAll">Browse All Product <i class="fas fa-long-arrow-alt-right"></i></button>
             <div class="banner">
                 <div class="bannerImg">

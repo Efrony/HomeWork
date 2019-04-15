@@ -28,12 +28,12 @@
                     <count-cart-component :cart_list="cartList" :api_url="API_URL"></count-cart-component>
                 </a>
                 <a href="myaccount.html" class="myAccount">
-                    My Account 
+                    My Account
                     <i class="fas fa-caret-down"></i>
                     <authorized-component :api_url="API_URL">
-                            <template v-slot:login_component>
-                                <div class="myAccountMenu">Exit</div>
-                            </template>
+                        <template v-slot:login_component>
+                            <div class="myAccountMenu">Exit</div>
+                        </template>
                     </authorized-component>
                 </a>
             </div>
@@ -56,35 +56,22 @@
             </div>
         </div>
         <main>
-            <article>
+            <article class="comments">
                 <p class="collection">ABOUT US</p> <img src="img/hot_deals/line-border-pink.png" alt="">
                 <p class="heading">comments</p>
-                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                    condimentum a. Aliquam condimentum mattis neque sed pretium”
-                    <br>
-                    <address>
-                        Bin Burhan
-                        <p>Dhaka, Bd</p>
-                    </address>
-                </div>
-                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                    condimentum a. Aliquam condimentum mattis neque sed pretium”
-                    <br>
-                    <address>
-                        Bin Burhan
-                        <p>Dhaka, Bd</p>
-                    </address>
-                </div>
-                <div class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                    condimentum a. Aliquam condimentum mattis neque sed pretium”
-                    <br>
-                    <address>
-                        Bin Burhan
-                        <p>Dhaka, Bd</p>
-                    </address>
-                </div>
+                <article class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
+                        condimentum a. Aliquam condimentum mattis neque sed pretium”
+                        <br>
+                        <address>
+                            Bin Burhan
+                            <p>Dhaka, Bd</p>
+                        </address>
+                    </article>
+                <comments-list-render-component></comments-list-render-component>
             </article>
             <section>
+
+
                 <form class="data-1" action="#">
                     <h5>write a comment</h5>
                     <p class="point inp">
@@ -108,6 +95,8 @@
                     </p>
                     <input type="submit" value="SEND COMMENT">
                 </form>
+
+
             </section>
     </div>
     </div>

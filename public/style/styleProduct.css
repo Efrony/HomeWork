@@ -203,25 +203,25 @@ main {
 .dataBlock button {
   margin-left: 10px;
 }
-.productItems {
+.product {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 48px 0 0 0;
 }
-.productItems a {
+.product a {
   text-decoration: none;
   margin-bottom: 20px;
   cursor: default;
 }
-.productItems a:hover {
+.product a:hover {
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
 }
-.productItems figure {
+.product figure {
   position: relative;
   min-width: 261px;
 }
-.productItems figcaption {
+.product figcaption {
   color: #222222;
   font-size: 13px;
   font-weight: 700;
@@ -229,14 +229,14 @@ main {
   padding: 15px 13px 0;
   overflow: hidden;
 }
-.productItems figcaption p {
+.product figcaption p {
   color: #f16d7f;
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   padding: 13px 0 20px 0;
 }
-.productItems .shadowHover {
+.product .shadowHover {
   position: absolute;
   top: 0;
   background: url(../img/product/Background.png) no-repeat;
@@ -245,7 +245,7 @@ main {
   display: none;
   justify-content: center;
 }
-.productItems .shadowHover .addToCart {
+.product .shadowHover .addToCart {
   border: 1px solid #fff;
   position: absolute;
   color: #fff;
@@ -258,21 +258,21 @@ main {
   background: rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
-.productItems .shadowHover .addToCart:active {
+.product .shadowHover .addToCart:active {
   border-color: #fff;
   color: #fff;
 }
-.productItems .shadowHover .addToCart:hover {
+.product .shadowHover .addToCart:hover {
   border-color: #ef5b70;
   color: #ef5b70;
 }
-.productItems .shadowHover .addToCart:focus {
+.product .shadowHover .addToCart:focus {
   outline: none;
 }
-.productItems .shadowHover .addToCart:before {
+.product .shadowHover .addToCart:before {
   content: url(../img/product/Forma_1_copy.png);
 }
-.productItems a:hover .shadowHover {
+.product a:hover .shadowHover {
   display: flex;
 }
 nav[aria-label] {

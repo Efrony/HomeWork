@@ -1,0 +1,24 @@
+[
+    {
+      "name": "Bin Burhan",
+      "email": "admin@admin.ru",
+      "message": "Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus condimentum a. Aliquam condimentum mattis neque sed pretium",
+      "date": "15.04.2019",
+      "approved": true
+    }, 
+    {
+        "name": "Mariana",
+        "email": "admin@admin.ru",
+        "message": "Aliquam condimentum mattis neque sed pretiumVestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus condimentum a.",
+        "date": "15.04.2019",
+
+        "approved": true
+    }, 
+    {
+        "name": "Anastasya Efron",
+        "email": "admin@admin.ru",
+        "message": "Quisque viverra nunc mi, a pulvinar purus condimentum a. Aliquam condimentum mattis neque sed pretiumVestibulum quis porttitor dui!",
+        "date": "15.04.2019",
+        "approved": false
+    }
+]

@@ -1,3 +1,80 @@
+/*----------------------------------------------------СПИСКИ ТОВАРОВ-------------------------------------------------------*/ 
+Vue.component('product-item-component', {
+    props: ['cart_list', 'api_url', 'product_item'],
+    methods: {
+        add_to_cart(productItem) { 
+            const inCartList = this.cart_list.find(item => item.article == productItem.article)
+            if (inCartList) {
+                fetch(this.api_url + '/cart/' + inCartList.id, { 
+                        method: 'PATCH',
+                        body: JSON.stringify({count: inCartList.count + 1}),
+                        headers: {'Content-type': 'application/json'}
+                    }).then((response) => response.json())
+                    .then((response) => inCartList.count = response.count)
+            } else {
+                fetch(this.api_url + '/cart/', { 
+                        method: 'POST',
+                        body: JSON.stringify({...productItem,count: 1}),
+                        headers: {'Content-type': 'application/json'}
+                    }).then((response) => response.json())
+                    .then((createdItem) => this.cart_list.push(createdItem))
+            }
+        },
+    },
+    template: `
+    <a  href="#">
+        <figure class="productItem" :id=product_item.article>
+            <img :src="'img/product/'+ product_item.article + '.jpg'" alt="productFoto">
+            <div class="shadowHover">
+                <button  @click.prevent="add_to_cart(product_item)" class="addToCart">&ensp;Add to Cart</button>
+            </div>
+            <figcaption>{{product_item.name}}
+                <p>$ {{product_item.price}}</p>
+            </figcaption>
+        </figure>
+    </a>`
+})
+
+Vue.component('filter-product-list-component', {
+    props: ['product_list', 'cart_list', 'api_url', 'сategory'],
+    computed: {filter_product() {return this.product_list.filter((item) => item.category.includes(this.сategory))}},
+    template: `
+    <div class="product">
+        <product-item-component :cart_list="cart_list" :api_url="api_url" v-for="product_item in filter_product" :product_item="product_item"></product-item-component>
+    </div>`
+})
+
+/*----------------------------------------------------ПОИСК--------------------------------------------------------*/ 
+Vue.component('search-component', {
+    props: ['product_list'],
+    data() {
+        return {
+            handleSearchInput: '',
+            search_input: '',
+        }
+    },
+    methods: {
+        button_input(searchInput) { //передача input после нажатия кнопки
+            this.handleSearchInput = searchInput
+            this.$emit('search', this.searchItems)
+        }
+    },
+    computed: {
+        searchItems() {
+            const regexp = new RegExp(this.handleSearchInput, 'i')
+            return this.product_list.filter((item) => regexp.test(item.name))
+        }
+    },
+    template: `
+    <div class="search">
+        <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
+        <input @keyup.enter="button_input(search_input)" v-model="search_input" type="search" placeholder="Search for Item...">
+        <button  @click.prevent="button_input(search_input)" type="button" class="searchButton"><i class="fas fa-search"></i></button>
+    </div>`
+})
+
+
+/*----------------------------------------------------КОРЗИНА--------------------------------------------------------*/ 
 Vue.component('sum-cart-component', {
     props: ['cart_list', 'api_url'],
     computed: {
@@ -31,7 +108,6 @@ Vue.component('count-cart-component', {
     `
 })
 
-
 Vue.component('cart-list-component', {
     props: ['cart_list', 'api_url'],
     methods: {
@@ -42,7 +118,6 @@ Vue.component('cart-list-component', {
                 .then(() => this.cart_list.splice(0, this.cart_list.length))
         }
     },
-
     template: `
     <div>
         <div>
@@ -122,7 +197,7 @@ Vue.component('cart-item-component', {
     </div>`
 })
 
-
+/*----------------------------------------------------АВТОРИЗАЦИЯ--------------------------------------------------------*/ 
 Vue.component('login-component', {
     props: ['api_url'],
     data() {
@@ -135,7 +210,7 @@ Vue.component('login-component', {
     },
     methods: {
         checkLogin(event) {
-            console.log(event)
+            event.preventDefault()
             this.errorsLogin = ''
             fetch(this.api_url + '/login/' + this.loginEmail, {
                 method: 'PATCH',
@@ -151,7 +226,6 @@ Vue.component('login-component', {
                     this.errorsLogin += `Неверно указан логин или пароль`
                     document.loginForm.email.className = "invalidForm";
                     document.loginForm.password.className = "invalidForm";
-                    event.preventDefault()
                 } else {
                     res.json()
                         .then(identity => {
@@ -159,6 +233,7 @@ Vue.component('login-component', {
                             document.loginForm.password.className = "validForm";
                             localStorage.setItem('email', identity.email)
                             localStorage.setItem('cipher', identity.cipher)
+                            location.reload() ///////////////////////////////////////////////////
                         })
                 }
             })
@@ -169,40 +244,25 @@ Vue.component('login-component', {
                     <h5>sign in</h5>
                     <p class="point">Already registed?</p>
                     <p class="about">Please log in below</p>
-                    <p class="point inp">
-                        EMAIL ADDRESS
-                        <span class="red">*</span>
-                    </p>
+                    <p class="point inp"> EMAIL ADDRESS <span class="red">*</span></p>
                     <input v-model="loginEmail" type="email" name="email" required>
-                    <p class="point inp">
-                        PASSWORD
-                        <span class="red">*</span>
-                    </p>
+                    <p class="point inp"> PASSWORD <span class="red">*</span></p>
                     <input v-model="loginPassword" type="password" name="password" required>
                     <p v-if="errorsLogin" id="errors">{{errorsLogin}}</p>
-                    <p>
-                        <span class="red">* Required Fileds</span>
-                    </p>
+                    <p><span class="red">* Required Fileds</span></p>
                     <input type="submit" value="LOG IN">
                 </form>
                 `
 })
 
-
-
 Vue.component('authorized-component', {
     props: ['api_url'],
-    computed: {
-        is_local_starage() {
-            return localStorage.getItem("email") && localStorage.getItem("cipher")
-        }
-    },
+    computed: {is_local_starage() {return localStorage.getItem("email") && localStorage.getItem("cipher")} },
     template: `
     <div>
         <slot name="login_component" v-if="is_local_starage"></slot>
         <slot name="logout_component" v-if="!is_local_starage"></slot>
-    </div>
-    `
+    </div>`
 })
 
 
@@ -248,15 +308,12 @@ Vue.component('registr-component', {
                             phone: this.phone,
                             gender: this.gender
                         }),
-                        headers: {
-                            'Content-type': 'application/json'
-                        }
+                        headers: {'Content-type': 'application/json'}
                     })
                     .then(res => {
                         if (res.status == 200) {
                             alert('Регистрация прошла успешно')
                             $registrForms.email.className = "validForm";
-                            //$registrForms.submit() /////////////////////////////////////////test
                         } else {
                             this.errors += `Пользователь с e-mail ${this.email} уже существует`
                             $registrForms.email.className = "invalidForm";
@@ -272,122 +329,111 @@ Vue.component('registr-component', {
         <p class="about">Register with us for future convenience</p>
         <p class="about"> >> Fast and easy checkout</p>
         <p class="about aboutLast"> >> Easy access to your order history and status</p>
-        <p class="point inp">
-            NAME
-            <span class="red">*</span>
-        </p>
+        <p class="point inp"> NAME <span class="red">*</span></p>
         <input v-model="name" type="text" name="name">
-        <p class="point inp">
-            EMAIL ADDRESS
-            <span class="red">*</span>
-        </p>
+        <p class="point inp">EMAIL ADDRESS<span class="red">*</span></p>
         <input v-model="email" type="email" name="email">
-        <p class="point inp">
-            PASSWORD
-            <span class="red">*</span>
-        </p>
+        <p class="point inp"> PASSWORD <span class="red">*</span></p>
         <input v-model="password" type="password" name="password">
-        <p class="point inp">
-            PHONE
-        </p>
+        <p class="point inp">PHONE</p>
         <input v-model="phone" type="text" name="phone">
-
         <div class="point">
-            <p class="point inp">
-                GENDER
-            </p>
-            <input v-model="gender" type="radio" name='choice' id="ch-1" value="m" checked><label
-                for="ch-1">
-                M</label>
-            <br>
-            <input v-model="gender" type="radio" name='choice' id="ch-2" value="w" checked><label
-                for="ch-2">
-                W</label>
+            <p class="point inp">GENDER</p>
+            <input v-model="gender" type="radio" name='choice' id="ch-1" value="m" checked>
+            <label for="ch-1">M</label><br>
+            <input v-model="gender" type="radio" name='choice' id="ch-2" value="w" checked>
+            <label for="ch-2">W</label>
         </div>
-        <p>
-            <span class="red">* Required Fileds</span>
-        </p>
+        <p><span class="red">* Required Fileds</span></p>
         <p v-if="errors" id="errors">{{errors}}</p>
-
         <input type="submit" value="register">
+    </form>`
+})
+
+
+/*----------------------------------------------------КОММЕНТАРИИ--------------------------------------------------------*/ 
+Vue.component('comments-list-render-component', {
+    props: ['api_url'], 
+    data() { return{ commentsList : [] }},
+    mounted() {
+        fetch(this.api_url + '/comments')
+            .then(response => response.json())
+            .then(comments => this.commentsList = comments)
+    },
+    template: `
+    <div>
+        <comment-render-component :comments_list="commentsList" v-for="comment in commentsList" :comment="comment"></comment-render-component>
+    </div>`
+})
+
+Vue.component('comment-render-component', {
+    props: ['comment'], 
+    data() {
+        return{
+
+        }
+    },
+    template: `
+    <article class="comment" v-if="comment.approved"> 
+        “{{comment.message}}”
+        <br>
+        <address>
+            {{comment.name}}
+            <p><slot>DATE</slot></p>
+        </address>
+    </article>`
+})
+
+Vue.component('comments-post-component', {
+    props: ['api_url'],
+    data() {
+        return{
+           
+            nameComment: null,
+            emailComment: null,
+            messageComment: null,
+        }
+    },
+    methods: {
+        send_comment() {
+            var dT = new Date()
+            fetch(this.api_url + '/comments/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: this.nameComment,
+                    email: this.emailComment,
+                    message: this.password,
+                    date: `${dT.getDate()}.${dT.getMonth()+1}.${dT.getFullYear()}`,
+                    approved: false
+                }),
+                headers: {'Content-type': 'application/json'}
+            })
+            .then(res => { ////////////////////////////////////////////
+                if (res.status == 200) {
+                    alert('Регистрация прошла успешно')
+                    $registrForms.email.className = "validForm";
+                } else {
+                    this.errors += `Пользователь с e-mail ${this.email} уже существует`
+                    $registrForms.email.className = "invalidForm";
+                }
+            })
+        }
+    },
+    template: `
+    <form class="data-1" action="#" @submit="sensComment">
+        <h5>write a comment</h5>
+        <p class="point inp">NAME <span class="red">*</span></p>
+        <input v-model="nameComment" type="text" required>
+        <p class="point inp">EMAIL ADDRESS <span class="red">*</span></p>
+        <input v-model="emailComment" type="email" required><p class="point inp">COMMENT<span class="red">*</span></p>
+        <textarea v-model="messageComment" class="areaComment" name="" id="" cols="30" rows="10" required></textarea>
+        <p><span class="red">* Required Fileds</span></p>
+        <input type="submit" value="SEND COMMENT">
     </form>
     `
 })
 
-Vue.component('product-item-component', {
-    props: ['cart_list', 'api_url', 'product_item'],
-    methods: {
-        add_to_cart(productItem) { //добавление товара в корзину
-            const inCartList = this.cart_list.find(item => item.article == productItem.article)
-            if (inCartList) {
-                fetch(this.api_url + '/cart/' + inCartList.id, { // если товар  в корзине на сервере, добавляем количество ++
-                        method: 'PATCH',
-                        body: JSON.stringify({
-                            count: inCartList.count + 1
-                        }),
-                        headers: {
-                            'Content-type': 'application/json'
-                        }
-                    }).then((response) => response.json())
-                    .then((response) => inCartList.count = response.count)
-            } else {
-                fetch(this.api_url + '/cart/', { // если товара нет в корзине на сервере, создаём новый товар
-                        method: 'POST',
-                        body: JSON.stringify({
-                            ...productItem,
-                            count: 1
-                        }),
-                        headers: {
-                            'Content-type': 'application/json'
-                        }
-                    }).then((response) => response.json())
-                    .then((createdItem) => this.cart_list.push(createdItem))
-            }
-        }
-    },
-    template: `
-    <a  href="#">
-        <figure class="productItem" :id=product_item.article>
-            <img :src="'img/product/'+ product_item.article + '.jpg'" alt="productFoto">
-            <div class="shadowHover">
-                <button  @click.prevent="add_to_cart(product_item)" class="addToCart">&ensp;Add to Cart</button>
-            </div>
-            <figcaption>{{product_item.name}}
-                <p>$ {{product_item.price}}</p>
-            </figcaption>
-        </figure>
-    </a>`
-})
-
-Vue.component('search-component', {
-    props: ['product_list'],
-    data() {
-        return {
-            handleSearchInput: '',
-            search_input: '',
-        }
-    },
-    methods: {
-        button_input(searchInput) { //передача input после нажатия кнопки
-            this.handleSearchInput = searchInput
-            this.$emit('filter', this.filtredItems)
-
-        }
-    },
-    computed: {
-        filtredItems() {
-            const regexp = new RegExp(this.handleSearchInput, 'i')
-            return this.product_list.filter((item) => regexp.test(item.name))
-        }
-    },
-    template: `
-    <div class="search">
-        <button class="browse">Browse <i class="fas fa-caret-down"></i></button>
-        <input @keyup.enter="button_input(search_input)" v-model="search_input" type="search" placeholder="Search for Item...">
-        <button  @click.prevent="button_input(search_input)" type="button" class="searchButton"><i class="fas fa-search"></i></button>
-    </div>`
-})
-
+/*----------------------------------------------------APP--------------------------------------------------------*/ 
 
 const login_cache = new Vue({
     el: '#login_cache',
@@ -395,11 +441,11 @@ const login_cache = new Vue({
         API_URL: 'http://localhost:3001',
         cartList: [],
         productList: [],
-        filtredItems: []
+        searchedItems: [],
     },
     methods: {
-        getFiltredItems(filtred) {
-            this.filtredItems = filtred
+        getSearchItems(filtred) {
+            this.searchItems = filtred
         },
         logout() {
             fetch(this.API_URL + '/logout/' + localStorage.getItem('email'), {
@@ -420,8 +466,8 @@ const login_cache = new Vue({
             .then(response => response.json())
             .then(product => this.productList = product)
             .then(() => {
-                this.filtredItems = this.productList
-            })
+                this.searchItems = this.productList
+            })         
 
     },
 })
