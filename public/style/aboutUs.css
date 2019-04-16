@@ -158,6 +158,10 @@ main .content .contentBcg aside {
   letter-spacing: 0.3px;
   line-height: 14px;
 }
+.comments .comment .buttons {
+  display: flex;
+  justify-content: space-around;
+}
 .comments .comment button {
   padding: 0px 20px;
   text-decoration: none !important;
@@ -170,6 +174,7 @@ main .content .contentBcg aside {
   width: 150px;
   height: 20px;
   line-height: 20px;
+  cursor: pointer;
 }
 .comments .comment button:hover {
   background-color: #ef5b70;

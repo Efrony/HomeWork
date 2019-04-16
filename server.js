@@ -6,7 +6,7 @@ const app = express()
 app.use(express.static('./public'))
 app.use(bodyParser.json())
 
-
+/*----------------------------------------------------ЛОГ--------------------------------------------------------*/ 
 function stats(event, article) {
     const dT = new Date();
     const dT_time = `${dT.getHours()}:${dT.getMinutes()}:${dT.getSeconds()}` // moment модуль
@@ -24,18 +24,19 @@ function stats(event, article) {
         fs.writeFile('./db/stats.json', JSON.stringify(stats), () => {})
     })
 }
-
+/*----------------------------------------------------КАТАЛОГ--------------------------------------------------------*/ 
 app.get('/product', (req, res) => fs.readFile('./db/product.json', 'utf-8', (err, data) => {
     if (err) res.send('Произошла ошибка' + err)
     res.send(data)
 }))
 
-app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
+/*----------------------------------------------------КОРЗИНА--------------------------------------------------------*/ 
+app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {  // получение списка корзины
     if (err) res.send('Произошла ошибка' + err)
     res.send(data)
 }))
 
-app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
+app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // добавление нового товара в корзину
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
     cart.push(req.body)
@@ -43,18 +44,16 @@ app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, dat
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(req.body))
 }))
 
-app.patch('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
+app.patch('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // изменение количества товара в корзине
     if (err) res.send('Произошла ошибка' + err)
-
-    let cart = JSON.parse(data)
+    const cart = JSON.parse(data)
     const inCartListItem = cart.find(item => item.id == req.params.id)
     inCartListItem.count = req.body.count
     stats('изменён', inCartListItem.article)
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(inCartListItem))
 }))
 
-
-app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => {
+app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // удаление товара из корзины
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
     const inCartListIndex = cart.findIndex(item => item.id == req.params.id)
@@ -63,10 +62,12 @@ app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (er
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(deletedItem[0]))
 }))
 
-app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => {
+app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => { // полная очистка корзины
     stats('Корзина пользователя очищена', '')
     res.send([])
 }))
+
+/*----------------------------------------------------РЕГИСТРАЦИЯ--------------------------------------------------------*/ 
 
 app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => { //регистрация
     if (err) res.send('Произошла ошибка' + err)
@@ -82,7 +83,8 @@ app.post('/accounts/', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', 
     }
 }))
 
-app.patch('/login/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // авторизация 
+/*----------------------------------------------------АВТОРИЗАЦИЯ--------------------------------------------------------*/ 
+app.patch('/login/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  
     if (err) res.send('Произошла ошибка' + err)
     const accounts = JSON.parse(data)
     const inAccountList = accounts.find(account => account.email == req.body.email)
@@ -101,7 +103,7 @@ app.patch('/login/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-
     }
 }))
 
-app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // выход 
+app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-8', (err, data) => {  // выход из аккаунта
     if (err) res.send('Произошла ошибка' + err)
     const accounts = JSON.parse(data)
     const inAccountList = accounts.find((account) => account.email == req.body.email) 
@@ -111,12 +113,12 @@ app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf
 }))
 
 /*----------------------------------------------------КОММЕНТАРИИ--------------------------------------------------------*/ 
-app.get('/comments', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+app.get('/comments', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => { // получение списка комментариев
     if (err) res.send('Произошла ошибка' + err)
     res.send(data)
 }))
 
-app.post('/comments/', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+app.post('/comments/', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => { // добавление нового комментария
     if (err) res.send('Произошла ошибка' + err)
     const comment = req.body
     const comments = JSON.parse(data)
@@ -126,13 +128,22 @@ app.post('/comments/', (req, res) => fs.readFile('./db/comments.json', 'utf-8', 
     fs.writeFile('./db/comments.json', JSON.stringify(comments), () => res.status(200).send(comment))
 }))
 
-app.delete('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {
+app.delete('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => { // удаление комментария
     if (err) res.send('Произошла ошибка' + err)
     const comments = JSON.parse(data)
     const inCommentListIndex = comments.findIndex(item => item.id == req.params.id)
     const deletedItem = comments.splice(inCommentListIndex, 1)
     stats('удалён комментарий', deletedItem[0].message)
     fs.writeFile('./db/comments.json', JSON.stringify(comments), () => res.send(deletedItem[0]))
+}))
+
+app.patch('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {  // выход из аккаунта  //////////////////// test
+    if (err) res.send('Произошла ошибка' + err)
+    const comments = JSON.parse(data)
+    const inCommentList = comments.find((account) => comments.id == req.body.id) 
+    inCommentList.approved = true
+    stats('одобрен комментарий', comment.message)
+    fs.writeFile('./db/accounts.json', JSON.stringify(comment), () => res.status(200).send(comment))
 }))
 
 app.listen(3001, () => console.log('СЕРВЕР ЗАПУЩЕН. Порт: 3001. ПЕРЕЙТИ http://localhost:3001/'))

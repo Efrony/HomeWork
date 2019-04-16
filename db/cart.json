@@ -1,1 +1,8 @@
-[{"id":3,"article":"000003","name":"Jacket","price":48,"category":["home_page","blue","s"],"count":1}]
+[{
+    "id": 3,
+    "article": "000003",
+    "name": "Jacket",
+    "price": 48,
+    "category": ["home_page", "blue", "s"],
+    "count": 1
+}]

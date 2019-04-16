@@ -4,42 +4,42 @@
       "article": "000001",
       "name": "T-shirt",
       "price": 52,
-      "category": ["home_page", "white", "xs"]
+      "category": ["home_page", "white", "xs", "m"]
     },
     {
       "id": 2,
       "article": "000002",
       "name": "Blouse",
       "price": 68,
-      "category": ["home_page", "red", "xs"]
+      "category": ["home_page", "red", "xs", "m"]
     },
     {
       "id": 3,
       "article": "000003",
       "name": "Jacket",
       "price": 48,
-      "category": ["home_page", "blue", "s"]
+      "category": ["home_page", "blue", "xs", "s", "l"]
     },
     {
       "id": 4,
       "article": "000004",
       "name": "Dress",
       "price": 37,
-      "category": ["home_page", "white", "s"]
+      "category": ["home_page", "white", "xs", "s"]
     },
     {
       "id": 5,
       "article": "000005",
       "name": "Black & White Dress",
       "price": 67,
-      "category": ["home_page", "black", "white", "m"]
+      "category": ["home_page", "black", "white", "xs", "m", "l"]
     },
     {
       "id": 6,
       "article": "000006",
       "name": "Blazer",
       "price": 62,
-      "category": ["home_page", "beige", "m"]
+      "category": ["home_page", "beige", "xs","m" ,"xxl"]
     },
     {
       "id": 7,
@@ -53,7 +53,7 @@
       "article": "000008",
       "name": " Sweatshirt",
       "price": 45,
-      "category": ["home_page", "blue", "l"]
+      "category": ["home_page", "blue", "xs","m" ,"xxl", "l"]
     },
     {
       "id": 9,
@@ -75,13 +75,13 @@
       "article": "000011",
       "name": "Bandage",
       "price": 45,
-      "category": ["women_page", "green", "xxl"]
+      "category": ["women_page", "green", "xs","m" ,"xxl"]
     },
     {
       "id": 12,
       "article": "000012",
       "name": "Gray Sweater",
       "price": 45,
-      "category": ["women_page", "gray", "xxl"]
+      "category": ["women_page", "gray", "xl", "xxl"]
     }
 ]

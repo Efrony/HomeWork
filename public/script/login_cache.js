@@ -1,5 +1,5 @@
 /*----------------------------------------------------СПИСКИ ТОВАРОВ-------------------------------------------------------*/ 
-Vue.component('product-item-component', {
+Vue.component('product-item-component', {   // карточка товара 
     props: ['cart_list', 'api_url', 'product_item'],
     methods: {
         add_to_cart(productItem) { 
@@ -35,7 +35,7 @@ Vue.component('product-item-component', {
     </a>`
 })
 
-Vue.component('filter-product-list-component', {
+Vue.component('filter-product-list-component', { // список товара после поиска
     props: ['product_list', 'cart_list', 'api_url', 'сategory'],
     computed: {filter_product() {return this.product_list.filter((item) => item.category.includes(this.сategory))}},
     template: `
@@ -45,7 +45,7 @@ Vue.component('filter-product-list-component', {
 })
 
 /*----------------------------------------------------ПОИСК--------------------------------------------------------*/ 
-Vue.component('search-component', {
+Vue.component('search-component', { 
     props: ['product_list'],
     data() {
         return {
@@ -54,7 +54,7 @@ Vue.component('search-component', {
         }
     },
     methods: {
-        button_input(searchInput) { //передача input после нажатия кнопки
+        button_input(searchInput) { 
             this.handleSearchInput = searchInput
             this.$emit('search', this.searchItems)
         }
@@ -75,7 +75,7 @@ Vue.component('search-component', {
 
 
 /*----------------------------------------------------КОРЗИНА--------------------------------------------------------*/ 
-Vue.component('sum-cart-component', {
+Vue.component('sum-cart-component', { // подсчёт суммы всех товаров в корзине
     props: ['cart_list', 'api_url'],
     computed: {
         sumCart() {
@@ -95,7 +95,7 @@ Vue.component('sum-cart-component', {
     </div>`
 })
 
-Vue.component('count-cart-component', {
+Vue.component('count-cart-component', { // количество товаров в корзине
     props: ['cart_list', 'api_url'],
     computed: {
         countCart() {
@@ -108,7 +108,7 @@ Vue.component('count-cart-component', {
     `
 })
 
-Vue.component('cart-list-component', {
+Vue.component('cart-list-component', { // список товаров в корзине
     props: ['cart_list', 'api_url'],
     methods: {
         clear_cart() {
@@ -152,10 +152,10 @@ Vue.component('cart-list-component', {
     </div>
     `
 })
-Vue.component('cart-item-component', {
+Vue.component('cart-item-component', { // карточка товара в корзине
     props: ['product_item', 'cart_list', 'api_url'],
     methods: {
-        delete_to_cart(product_item) { // удаление товара из корзины
+        delete_to_cart(product_item) { 
             const inCartListIndex = this.cart_list.findIndex(item => item.article == product_item.article)
             fetch(this.api_url + '/cart/' + product_item.id, {
                     method: 'DELETE'
@@ -163,17 +163,13 @@ Vue.component('cart-item-component', {
                 .then(response => response.json())
                 .then(deletedItem => this.cart_list.splice(inCartListIndex, 1))
         },
-        count_input(event) { // изменение количества через поле ввода
+        count_input(event) { 
             const idProduct = event.target.parentElement.parentElement
             const inCartList = this.cart_list.find(item => item.article == idProduct.id)
             fetch(this.api_url + '/cart/' + inCartList.id, {
                     method: 'PATCH',
-                    body: JSON.stringify({
-                        count: +event.target.value
-                    }),
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
+                    body: JSON.stringify({count: +event.target.value}),
+                    headers: {'Content-type': 'application/json'}
                 }).then(response => response.json())
                 .then(changedItem => inCartList.count = changedItem.count)
         }
@@ -198,7 +194,7 @@ Vue.component('cart-item-component', {
 })
 
 /*----------------------------------------------------АВТОРИЗАЦИЯ--------------------------------------------------------*/ 
-Vue.component('login-component', {
+Vue.component('login-component', { // вход в личный кабинет
     props: ['api_url'],
     data() {
         return {
@@ -255,7 +251,7 @@ Vue.component('login-component', {
                 `
 })
 
-Vue.component('authorized-component', {
+Vue.component('authorized-component', {  // проверка авторизации
     props: ['api_url'],
     computed: {is_local_starage() {return localStorage.getItem("email") && localStorage.getItem("cipher")} },
     template: `
@@ -266,7 +262,7 @@ Vue.component('authorized-component', {
 })
 
 
-Vue.component('registr-component', {
+Vue.component('registr-component', { // регистрация
     props: ['api_url'],
     data() {
         return {
@@ -351,22 +347,43 @@ Vue.component('registr-component', {
     </form>`
 })
 
+Vue.component('logout-component', { // выход из личного кабинета
+    props: ['api_url'],
+    methods: {
+        logout() {
+            fetch(this.api_url + '/logout/' + localStorage.getItem('email'), {
+                method: 'PATCH',
+                body: JSON.stringify({ email: localStorage.getItem('email')}),
+                headers: {'Content-type': 'application/json'}
+            }).then( res => {
+                localStorage.removeItem("email") 
+                localStorage.removeItem("cipher") 
+                location.reload()
+            })
+        }
+    },
+    template: `<div @click.prevent="logout" class="myAccountMenu">Exit</div>`
+})
+
 
 /*----------------------------------------------------КОММЕНТАРИИ--------------------------------------------------------*/ 
-Vue.component('comments-list-render-component', {
+Vue.component('comments-list-render-component', { // список комментариев
     props: ['api_url'], 
     data() { return{ commentsList : [] }},
     mounted() {
+        this.commentsList = [{"name":"Анастасия","email":"efron.vit@gmail.com","message":"!","date":"16.4.2019","approved": false,"id":1}, {"name":"Анастасия","email":"efron.vit@gmail.com","message":"Привет!","date":"16.4.2019","approved": false,"id":2}]
         fetch(this.api_url + '/comments')
             .then(response => response.json())
             .then(comments => this.commentsList = comments)
     },
     template: `
-    <comment-render-component :api_url="api_url" :comments_list="commentsList" v-for="comment in commentsList" :comment="comment"></comment-render-component>
+    <div> 
+        <comment-render-component :api_url="api_url" :comments_list="commentsList" v-for="comment in commentsList" :comment="comment"></comment-render-component>
+    </div> 
     `
 })
 
-Vue.component('comment-render-component', {
+Vue.component('comment-render-component', { // комментарий с кнопками одобрить/удалить
     props: ['comment', 'comments_list', 'api_url'], 
     methods: {
         delete_comment(comment) { 
@@ -376,7 +393,17 @@ Vue.component('comment-render-component', {
                 })
                 .then(response => response.json())
                 .then(deletedItem => this.comments_list.splice(inCommentListIndex, 1))
-        }},
+        },
+        approved_comment(comment) { 
+            const inCommentList = this.comments_list.find(item => item.message == comment.message)  ////////////////////////////// test
+            fetch(this.api_url + '/comments/' + comment.id, { 
+                    method: 'PATCH',
+                    body: JSON.stringify({approved: true}),
+                    headers: {'Content-type': 'application/json'}
+                }).then((response) => response.json())
+                .then((response) => inCommentList.approved = response.approved)
+        },
+    },
     computed: {
         is_local_starage() {
             return localStorage.getItem("email") && localStorage.getItem("cipher")
@@ -389,13 +416,14 @@ Vue.component('comment-render-component', {
         <address>
             {{comment.name}}
             <p>{{comment.date}}</p>
-        </address> 
-        <button v-if="!comment.approved && is_local_starage" >Одобрить</button>
-        <button v-if="is_local_starage" @click.prevent="delete_comment(comment)">Удалить</button>
+        </address><div class="buttons">
+            <button v-if="!comment.approved && is_local_starage" @click.prevent="approved_comment(comment)">Одобрить</button>
+            <button v-if="is_local_starage" @click.prevent="delete_comment(comment)">Удалить</button>
+        </div>
     </article>`
 })
 
-Vue.component('comments-post-component', {
+Vue.component('comments-post-component', { // размещение нового комментария
     props: ['api_url'],
     data() {
         return{
@@ -451,6 +479,7 @@ const login_cache = new Vue({
         cartList: [],
         productList: [],
         searchedItems: [],
+        email: localStorage.getItem('email')
     },
     methods: {
         getSearchItems(filtred) {
@@ -477,7 +506,18 @@ const login_cache = new Vue({
             .then(product => this.productList = product)
             .then(() => {
                 this.searchedItems = this.productList
-            })         
+            })
+            localStorage.setItem('email', 'identity.email') ///////////////////////////////////////////////////// УДАЛИТЬ
+            localStorage.setItem('cipher', 'identity.cipher') ///////////////////////////////////////////////////// УДАЛИТЬ
+            this.cartList = [{ ///////////////////////////////////////////////////// УДАЛИТЬ
+                "id": 3,
+                "article": "000003",
+                "name": "Jacket",
+                "price": 48,
+                "category": ["home_page", "blue", "s"],
+                "count": 1
+            }]
+
 
     },
 })

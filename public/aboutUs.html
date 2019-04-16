@@ -26,7 +26,7 @@
             <div class="my">
                 <authorized-component :api_url="API_URL">
                     <template v-slot:login_component>
-                        <p>Вы авторизованы! </p>
+                        <a class="authEmail" href="myaccount.html">{{email}}</a>
                     </template>
                 </authorized-component>
                 <a class="cartButton" href="cart.html"> <img src="img/Forma_1.png" alt="basket">
@@ -37,7 +37,7 @@
                     <i class="fas fa-caret-down"></i>
                     <authorized-component :api_url="API_URL">
                         <template v-slot:login_component>
-                            <div @click.prevent="logout" class="myAccountMenu">Exit</div>
+                            <logout-component :api_url="API_URL">Exit</logout-component>
                         </template>
                     </authorized-component>
                 </a>
@@ -61,22 +61,17 @@
             </div>
         </div>
         <main>
-            <article class="comments">
+            <section class="comments">
                 <p class="collection">ABOUT US</p> <img src="img/hot_deals/line-border-pink.png" alt="">
                 <p class="heading">comments</p>
-                <article class="comment"> “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
-                        condimentum a. Aliquam condimentum mattis neque sed pretium”
-                        <br>
-                        <address>
-                            Bin Burhan
-                            <p>Dhaka, Bd</p>
-                        </address>
-                </article>
+
                 <comments-list-render-component :api_url="API_URL"></comments-list-render-component>
-            </article>
+            </section>
             <section>
                 <comments-post-component :api_url="API_URL" ></comments-post-component> 
             </section>
+            <div class="buttons"></div>
+
     </div>
     </div>
     </main>

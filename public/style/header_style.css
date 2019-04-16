@@ -80,6 +80,7 @@ header .search .searchButton {
   font-weight: 400;
   width: 38px;
   margin-left: -1px;
+  cursor: pointer;
 }
 header .my {
   display: flex;
@@ -89,6 +90,13 @@ header .my {
   header .my {
     margin-top: 10px;
   }
+}
+header .my .authEmail {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #ef5b70;
+  font-weight: bold;
+  line-height: 29px;
 }
 header .my .cartButton {
   margin-right: 25px;
