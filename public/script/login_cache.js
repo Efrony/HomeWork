@@ -1,20 +1,21 @@
 /*----------------------------------------------------СПИСКИ ТОВАРОВ-------------------------------------------------------*/ 
 Vue.component('product-item-component', {   // карточка товара 
-    props: ['cart_list', 'api_url', 'product_item'],
+    props: ['cart_list', 'api_url', 'product_item', 'cart_number'],
     methods: {
         add_to_cart(productItem) { 
+            const cart_id = localStorage.getItem('cartNumber')
             const inCartList = this.cart_list.find(item => item.article == productItem.article)
             if (inCartList) {
-                fetch(this.api_url + '/cart/' + inCartList.id, { 
+                fetch(`${this.api_url}/cart/${cart_id}/${inCartList.id}`, { 
                         method: 'PATCH',
-                        body: JSON.stringify({count: inCartList.count + 1}),
+                        body: JSON.stringify({cart_id:{count: inCartList.count + 1}}),
                         headers: {'Content-type': 'application/json'}
                     }).then((response) => response.json())
                     .then((response) => inCartList.count = response.count)
             } else {
-                fetch(this.api_url + '/cart/', { 
+                fetch(`${this.api_url}/cart/${cart_id}`, { 
                         method: 'POST',
-                        body: JSON.stringify({...productItem,count: 1}),
+                        body: JSON.stringify({cart_id:{...productItem, count: 1}}),
                         headers: {'Content-type': 'application/json'}
                     }).then((response) => response.json())
                     .then((createdItem) => this.cart_list.push(createdItem))
@@ -112,9 +113,7 @@ Vue.component('cart-list-component', { // список товаров в кор�
     props: ['cart_list', 'api_url'],
     methods: {
         clear_cart() {
-            fetch(this.api_url + '/cart/', {
-                    method: 'PUT'
-                })
+            fetch(this.api_url + '/cart/', {method: 'PUT'})
                 .then(() => this.cart_list.splice(0, this.cart_list.length))
         }
     },
@@ -228,7 +227,7 @@ Vue.component('login-component', { // вход в личный кабинет
                             document.loginForm.email.className = "validForm";
                             document.loginForm.password.className = "validForm";
                             localStorage.setItem('email', identity.email)
-                            localStorage.setItem('cipher', identity.cipher)
+                            localStorage.setItem('cookie', identity.cookie)
                             location.reload() 
                         })
                 }
@@ -253,7 +252,7 @@ Vue.component('login-component', { // вход в личный кабинет
 
 Vue.component('authorized-component', {  // проверка авторизации
     props: ['api_url'],
-    computed: {is_local_starage() {return localStorage.getItem("email") && localStorage.getItem("cipher")} },
+    computed: {is_local_starage() {return localStorage.getItem("email") && localStorage.getItem("cookie")} },
     template: `
     <div>
         <slot name="login_component" v-if="is_local_starage"></slot>
@@ -357,7 +356,7 @@ Vue.component('logout-component', { // выход из личного кабин
                 headers: {'Content-type': 'application/json'}
             }).then( res => {
                 localStorage.removeItem("email") 
-                localStorage.removeItem("cipher") 
+                localStorage.removeItem("cookie") 
                 location.reload()
             })
         }
@@ -406,7 +405,7 @@ Vue.component('comment-render-component', { // комментарий с кно�
     },
     computed: {
         is_local_starage() {
-            return localStorage.getItem("email") && localStorage.getItem("cipher")
+            return localStorage.getItem("email") && localStorage.getItem("cookie")
         }
     },
     template: `
@@ -479,23 +478,16 @@ const login_cache = new Vue({
         cartList: [],
         productList: [],
         searchedItems: [],
-        email: localStorage.getItem('email')
+        email: localStorage.getItem('email'),
+        cart_id: null,
+    },
+    computed: {
+
     },
     methods: {
         getSearchItems(filtred) {
             this.searchItems = filtred
         },
-        logout() {
-            fetch(this.API_URL + '/logout/' + localStorage.getItem('email'), {
-                method: 'PATCH',
-                body: JSON.stringify({ email: localStorage.getItem('email')}),
-                headers: {'Content-type': 'application/json'}
-            }).then( res => {
-                localStorage.removeItem("email")
-                localStorage.removeItem("cipher")
-                location.reload()
-            })
-        }
     },
     mounted() {
         fetch(this.API_URL + '/cart')
@@ -507,8 +499,15 @@ const login_cache = new Vue({
             .then(() => {
                 this.searchedItems = this.productList
             })
+            if (!localStorage.getItem('cartNumber')) {
+                var cartNumber = 'cart_'
+                for(var i = 0; i < 10; i++) cartNumber += Math.round(Math.random()*10)
+                localStorage.setItem('cartNumber', cartNumber)
+            } else cartNumber = localStorage.getItem('cartNumber')
+
+
             localStorage.setItem('email', 'identity.email') ///////////////////////////////////////////////////// УДАЛИТЬ
-            localStorage.setItem('cipher', 'identity.cipher') ///////////////////////////////////////////////////// УДАЛИТЬ
+            localStorage.setItem('cookie', 'identity.cookie') ///////////////////////////////////////////////////// УДАЛИТЬ
             this.cartList = [{ ///////////////////////////////////////////////////// УДАЛИТЬ
                 "id": 3,
                 "article": "000003",
@@ -521,3 +520,4 @@ const login_cache = new Vue({
 
     },
 })
+

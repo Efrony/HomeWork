@@ -25,7 +25,7 @@ function stats(event, article) {
     })
 }
 /*----------------------------------------------------КАТАЛОГ--------------------------------------------------------*/ 
-app.get('/product', (req, res) => fs.readFile('./db/product.json', 'utf-8', (err, data) => {
+app.get('/product/', (req, res) => fs.readFile('./db/product.json', 'utf-8', (err, data) => {
     if (err) res.send('Произошла ошибка' + err)
     res.send(data)
 }))
@@ -36,24 +36,24 @@ app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data
     res.send(data)
 }))
 
-app.post('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // добавление нового товара в корзину
+app.post('/cart/:cart_id/', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // добавление нового товара в корзину
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
     cart.push(req.body)
-    stats('добавлен', req.body.article)
+    stats('добавлен', req.body.cart_id.article)
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(req.body))
 }))
 
-app.patch('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // изменение количества товара в корзине
+app.patch('/cart/:cart_id/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // изменение количества товара в корзине
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
-    const inCartListItem = cart.find(item => item.id == req.params.id)
-    inCartListItem.count = req.body.count
+    const inCartListItem = cart.find(item => item.cart_id.id == req.params.id)
+    inCartListItem.cart_id.count = req.body.cart_id.count
     stats('изменён', inCartListItem.article)
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(inCartListItem))
 }))
 
-app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // удаление товара из корзины
+app.delete('/cart/:cart_id/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // удаление товара из корзины
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
     const inCartListIndex = cart.findIndex(item => item.id == req.params.id)
@@ -62,7 +62,7 @@ app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (er
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(deletedItem[0]))
 }))
 
-app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => { // полная очистка корзины
+app.put('/cart/:cart_id/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => { // полная очистка корзины
     stats('Корзина пользователя очищена', '')
     res.send([])
 }))
@@ -92,13 +92,13 @@ app.patch('/login/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf-
     else {
         if (inAccountList.password != req.body.password) res.status(403).send(req.body.email) // неверный пароль
         else {
-            if (!inAccountList.cipher) { // если пользователь нигде не авторизован генерируем ключ
-                var cipher = ''
-                for(var i = 0; i < 20; i++) cipher += Math.round(Math.random()*10)
-                inAccountList.cipher = cipher
+            if (!inAccountList.cookie) { // если пользователь нигде не авторизован генерируем ключ
+                var cookie = 'pass_'
+                for(var i = 0; i < 20; i++) cookie += Math.round(Math.random()*10)
+                inAccountList.cookie = cookie
             }
             stats('авторизация пользователя', req.body.email)
-            fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send({email: inAccountList.email, cipher: inAccountList.cipher}))
+            fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send({email: inAccountList.email, cookie: inAccountList.cookie}))
         }
     }
 }))
@@ -107,7 +107,7 @@ app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf
     if (err) res.send('Произошла ошибка' + err)
     const accounts = JSON.parse(data)
     const inAccountList = accounts.find((account) => account.email == req.body.email) 
-    inAccountList.cipher = null
+    inAccountList.cookie = null
     stats('выход пользователя', req.body.email)
     fs.writeFile('./db/accounts.json', JSON.stringify(accounts), () => res.status(200).send())
 }))
