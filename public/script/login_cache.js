@@ -3,17 +3,17 @@ Vue.component('product-item-component', {   // карточка товара
     props: ['cart_list', 'api_url', 'product_item'],
     methods: {
         add_to_cart(productItem) { 
-            const cart_id = localStorage.getItem('cartNumber')
+
             const inCartList = this.cart_list.find(item => item.article == productItem.article)
             if (inCartList) {
-                fetch(`${this.api_url}/cart/${inCartList.id}`, { 
+                fetch(`${this.api_url}/cart/${localStorage.getItem('cart_id')}/${inCartList.id}`, { 
                         method: 'PATCH',
                         body: JSON.stringify({count: inCartList.count + 1}),
                         headers: {'Content-type': 'application/json'}
                     }).then((response) => response.json())
                     .then((response) => inCartList.count = response.count)
             } else {
-                fetch(`${this.api_url}/cart/`, { 
+                fetch(`${this.api_url}/cart/${localStorage.getItem('cart_id')}/`, { 
                         method: 'POST',
                         body: JSON.stringify({...productItem, count: 1}),
                         headers: {'Content-type': 'application/json'}
@@ -113,7 +113,7 @@ Vue.component('cart-list-component', { // список товаров в кор�
     props: ['cart_list', 'api_url'],
     methods: {
         clear_cart() {
-            fetch(this.api_url + '/cart/', {method: 'PUT'})
+            fetch(`${this.api_url}/cart/${localStorage.getItem('cart_id')}/`, {method: 'PUT'})
                 .then(() => this.cart_list.splice(0, this.cart_list.length))
         }
     },
@@ -156,7 +156,7 @@ Vue.component('cart-item-component', { // карточка товара в ко�
     methods: {
         delete_to_cart(product_item) { 
             const inCartListIndex = this.cart_list.findIndex(item => item.article == product_item.article)
-            fetch(this.api_url + '/cart/' + product_item.id, {
+            fetch(`${this.api_url}/cart/${localStorage.getItem('cart_id')}/${product_item.id}`, {
                     method: 'DELETE'
                 })
                 .then(response => response.json())
@@ -165,7 +165,7 @@ Vue.component('cart-item-component', { // карточка товара в ко�
         count_input(event) { 
             const idProduct = event.target.parentElement.parentElement
             const inCartList = this.cart_list.find(item => item.article == idProduct.id)
-            fetch(this.api_url + '/cart/' + inCartList.id, {
+            fetch(`${this.api_url}/cart/${localStorage.getItem('cart_id')}/${inCartList.id}`, {
                     method: 'PATCH',
                     body: JSON.stringify({count: +event.target.value}),
                     headers: {'Content-type': 'application/json'}
@@ -211,7 +211,8 @@ Vue.component('login-component', { // вход в личный кабинет
                 method: 'PATCH',
                 body: JSON.stringify({
                     password: this.loginPassword,
-                    email: this.loginEmail
+                    email: this.loginEmail,
+                    cookie: {cart_id: localStorage.getItem("cart_id")}
                 }),
                 headers: {
                     'Content-type': 'application/json'
@@ -227,7 +228,8 @@ Vue.component('login-component', { // вход в личный кабинет
                             document.loginForm.email.className = "validForm";
                             document.loginForm.password.className = "validForm";
                             localStorage.setItem('email', identity.email)
-                            localStorage.setItem('cookie', identity.cookie)
+                            localStorage.setItem('cookie_pass', identity.cookie.pass)
+                            localStorage.setItem('cart_id', identity.cookie.cart_id)
                             location.reload() 
                         })
                 }
@@ -252,7 +254,7 @@ Vue.component('login-component', { // вход в личный кабинет
 
 Vue.component('authorized-component', {  // проверка авторизации
     props: ['api_url'],
-    computed: {is_local_starage() {return localStorage.getItem("email") && localStorage.getItem("cookie")} },
+    computed: {is_local_starage() {return localStorage.getItem("email") && localStorage.getItem("cookie_pass")} },
     template: `
     <div>
         <slot name="login_component" v-if="is_local_starage"></slot>
@@ -301,7 +303,11 @@ Vue.component('registr-component', { // регистрация
                             email: this.email,
                             password: this.password,
                             phone: this.phone,
-                            gender: this.gender
+                            gender: this.gender,
+                            cookie: {   
+                                pass: '',
+                                cart_id: ''
+                            }
                         }),
                         headers: {'Content-type': 'application/json'}
                     })
@@ -356,7 +362,7 @@ Vue.component('logout-component', { // выход из личного кабин
                 headers: {'Content-type': 'application/json'}
             }).then( res => {
                 localStorage.removeItem("email") 
-                localStorage.removeItem("cookie") 
+                localStorage.removeItem("cookie_pass") 
                 location.reload()
             })
         }
@@ -408,7 +414,7 @@ Vue.component('comment-render-component', { // комментарий с кно�
     },
     computed: {
         is_local_starage() {
-            return localStorage.getItem("email") && localStorage.getItem("cookie")
+            return localStorage.getItem("email") && localStorage.getItem("cookie_pass")
         }
     },
     template: `
@@ -482,7 +488,7 @@ const login_cache = new Vue({
         productList: [],
         searchedItems: [],
         email: localStorage.getItem('email'),
-        cart_id: null,
+        cart_id: 'cart_',
     },
     methods: {
         getSearchItems(filtred) {
@@ -490,20 +496,22 @@ const login_cache = new Vue({
         },
     },
     mounted() {
-        fetch(this.API_URL + '/cart')
+        if (!localStorage.getItem('cart_id')) {
+            const d_t = new Date()
+            this.cart_id += d_t.getTime()
+            localStorage.setItem('cart_id', this.cart_id)
+        } else this.cart_id = localStorage.getItem('cart_id')
+
+        fetch(`${this.API_URL}/cart/${this.cart_id}`)
             .then(response => response.json())
             .then(cart => this.cartList = cart)
-        fetch(this.API_URL + '/product')
+        fetch(`${this.API_URL}/product`)
             .then(response => response.json())
             .then(product => this.productList = product)
             .then(() => {
                 this.searchedItems = this.productList
             })
-            if (!localStorage.getItem('cartNumber')) {
-                var cartNumber = 'cart_'
-                for(var i = 0; i < 10; i++) cartNumber += Math.round(Math.random()*10)
-                localStorage.setItem('cartNumber', cartNumber)
-            } else cartNumber = localStorage.getItem('cartNumber')
+
     },
 })
 
