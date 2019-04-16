@@ -1,21 +1,21 @@
 /*----------------------------------------------------СПИСКИ ТОВАРОВ-------------------------------------------------------*/ 
 Vue.component('product-item-component', {   // карточка товара 
-    props: ['cart_list', 'api_url', 'product_item', 'cart_number'],
+    props: ['cart_list', 'api_url', 'product_item'],
     methods: {
         add_to_cart(productItem) { 
             const cart_id = localStorage.getItem('cartNumber')
             const inCartList = this.cart_list.find(item => item.article == productItem.article)
             if (inCartList) {
-                fetch(`${this.api_url}/cart/${cart_id}/${inCartList.id}`, { 
+                fetch(`${this.api_url}/cart/${inCartList.id}`, { 
                         method: 'PATCH',
-                        body: JSON.stringify({cart_id:{count: inCartList.count + 1}}),
+                        body: JSON.stringify({count: inCartList.count + 1}),
                         headers: {'Content-type': 'application/json'}
                     }).then((response) => response.json())
                     .then((response) => inCartList.count = response.count)
             } else {
-                fetch(`${this.api_url}/cart/${cart_id}`, { 
+                fetch(`${this.api_url}/cart/`, { 
                         method: 'POST',
-                        body: JSON.stringify({cart_id:{...productItem, count: 1}}),
+                        body: JSON.stringify({...productItem, count: 1}),
                         headers: {'Content-type': 'application/json'}
                     }).then((response) => response.json())
                     .then((createdItem) => this.cart_list.push(createdItem))
@@ -368,10 +368,13 @@ Vue.component('logout-component', { // выход из личного кабин
 /*----------------------------------------------------КОММЕНТАРИИ--------------------------------------------------------*/ 
 Vue.component('comments-list-render-component', { // список комментариев
     props: ['api_url'], 
-    data() { return{ commentsList : [] }},
+    data() { 
+        return{ 
+            commentsList : [] 
+        }
+    },
     mounted() {
-        this.commentsList = [{"name":"Анастасия","email":"efron.vit@gmail.com","message":"!","date":"16.4.2019","approved": false,"id":1}, {"name":"Анастасия","email":"efron.vit@gmail.com","message":"Привет!","date":"16.4.2019","approved": false,"id":2}]
-        fetch(this.api_url + '/comments')
+        fetch(this.api_url + '/comments/')
             .then(response => response.json())
             .then(comments => this.commentsList = comments)
     },
@@ -386,7 +389,7 @@ Vue.component('comment-render-component', { // комментарий с кно�
     props: ['comment', 'comments_list', 'api_url'], 
     methods: {
         delete_comment(comment) { 
-            const inCommentListIndex = this.comments_list.findIndex(item => item.message == comment.message)
+            const inCommentListIndex = this.comments_list.findIndex(item => item.id == comment.id)
             fetch(this.api_url + '/comments/' + comment.id, {
                 method: 'DELETE'
                 })
@@ -394,8 +397,8 @@ Vue.component('comment-render-component', { // комментарий с кно�
                 .then(deletedItem => this.comments_list.splice(inCommentListIndex, 1))
         },
         approved_comment(comment) { 
-            const inCommentList = this.comments_list.find(item => item.message == comment.message)  ////////////////////////////// test
-            fetch(this.api_url + '/comments/' + comment.id, { 
+            const inCommentList = this.comments_list.find(item => item.id == comment.id)  ////////////////////////////// test
+            fetch(this.api_url + '/comments/' + comment.id, {
                     method: 'PATCH',
                     body: JSON.stringify({approved: true}),
                     headers: {'Content-type': 'application/json'}
@@ -481,9 +484,6 @@ const login_cache = new Vue({
         email: localStorage.getItem('email'),
         cart_id: null,
     },
-    computed: {
-
-    },
     methods: {
         getSearchItems(filtred) {
             this.searchItems = filtred
@@ -504,20 +504,6 @@ const login_cache = new Vue({
                 for(var i = 0; i < 10; i++) cartNumber += Math.round(Math.random()*10)
                 localStorage.setItem('cartNumber', cartNumber)
             } else cartNumber = localStorage.getItem('cartNumber')
-
-
-            localStorage.setItem('email', 'identity.email') ///////////////////////////////////////////////////// УДАЛИТЬ
-            localStorage.setItem('cookie', 'identity.cookie') ///////////////////////////////////////////////////// УДАЛИТЬ
-            this.cartList = [{ ///////////////////////////////////////////////////// УДАЛИТЬ
-                "id": 3,
-                "article": "000003",
-                "name": "Jacket",
-                "price": 48,
-                "category": ["home_page", "blue", "s"],
-                "count": 1
-            }]
-
-
     },
 })
 

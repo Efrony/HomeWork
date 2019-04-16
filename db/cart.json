@@ -1,1 +1,8 @@
-[]
+[{
+    "id": 1,
+    "article": "000001",
+    "name": "T-shirt",
+    "price": 52,
+    "category": ["home_page", "white", "xs", "m"],
+    "count": 4
+}]

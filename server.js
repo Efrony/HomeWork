@@ -36,24 +36,24 @@ app.get('/cart', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data
     res.send(data)
 }))
 
-app.post('/cart/:cart_id/', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // добавление нового товара в корзину
+app.post('/cart/', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // добавление нового товара в корзину
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
     cart.push(req.body)
-    stats('добавлен', req.body.cart_id.article)
+    stats('добавлен', req.body.article)
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(req.body))
 }))
 
-app.patch('/cart/:cart_id/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // изменение количества товара в корзине
+app.patch('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // изменение количества товара в корзине
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
-    const inCartListItem = cart.find(item => item.cart_id.id == req.params.id)
-    inCartListItem.cart_id.count = req.body.cart_id.count
+    const inCartListItem = cart.find(item => item.id == req.params.id)
+    inCartListItem.count = req.body.count
     stats('изменён', inCartListItem.article)
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(inCartListItem))
 }))
 
-app.delete('/cart/:cart_id/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // удаление товара из корзины
+app.delete('/cart/:id', (req, res) => fs.readFile('./db/cart.json', 'utf-8', (err, data) => { // удаление товара из корзины
     if (err) res.send('Произошла ошибка' + err)
     const cart = JSON.parse(data)
     const inCartListIndex = cart.findIndex(item => item.id == req.params.id)
@@ -62,7 +62,7 @@ app.delete('/cart/:cart_id/:id', (req, res) => fs.readFile('./db/cart.json', 'ut
     fs.writeFile('./db/cart.json', JSON.stringify(cart), () => res.send(deletedItem[0]))
 }))
 
-app.put('/cart/:cart_id/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => { // полная очистка корзины
+app.put('/cart/', (req, res) => fs.writeFile('./db/cart.json', JSON.stringify([]), () => { // полная очистка корзины
     stats('Корзина пользователя очищена', '')
     res.send([])
 }))
@@ -113,7 +113,7 @@ app.patch('/logout/:email', (req, res) => fs.readFile('./db/accounts.json', 'utf
 }))
 
 /*----------------------------------------------------КОММЕНТАРИИ--------------------------------------------------------*/ 
-app.get('/comments', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => { // получение списка комментариев
+app.get('/comments/', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => { // получение списка комментариев
     if (err) res.send('Произошла ошибка' + err)
     res.send(data)
 }))
@@ -137,13 +137,14 @@ app.delete('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf
     fs.writeFile('./db/comments.json', JSON.stringify(comments), () => res.send(deletedItem[0]))
 }))
 
-app.patch('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {  // выход из аккаунта  //////////////////// test
+
+app.patch('/comments/:id', (req, res) => fs.readFile('./db/comments.json', 'utf-8', (err, data) => {  // одобрение комментария  //////////////////// test
     if (err) res.send('Произошла ошибка' + err)
     const comments = JSON.parse(data)
-    const inCommentList = comments.find((account) => comments.id == req.body.id) 
+    const inCommentList = comments.find(item => item.id == req.params.id) 
     inCommentList.approved = true
-    stats('одобрен комментарий', comment.message)
-    fs.writeFile('./db/accounts.json', JSON.stringify(comment), () => res.status(200).send(comment))
+    stats('одобрен комментарий', comments.message)
+    fs.writeFile('./db/comments.json', JSON.stringify(comments), () => res.send(inCommentList))
 }))
 
 app.listen(3001, () => console.log('СЕРВЕР ЗАПУЩЕН. Порт: 3001. ПЕРЕЙТИ http://localhost:3001/'))
