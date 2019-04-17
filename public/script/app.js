@@ -480,8 +480,8 @@ Vue.component('comments-post-component', { // размещение нового 
 
 /*----------------------------------------------------APP--------------------------------------------------------*/ 
 
-const login_cache = new Vue({
-    el: '#login_cache',
+const app = new Vue({
+    el: '#app',
     data: {
         API_URL: 'http://localhost:3001',
         cartList: [],
