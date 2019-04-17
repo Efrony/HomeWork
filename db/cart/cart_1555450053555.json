@@ -1,0 +1,8 @@
+[{
+    "id": 6,
+    "article": "000006",
+    "name": "Blazer",
+    "price": 62,
+    "category": ["home_page", "beige", "xs", "m", "xxl"],
+    "count": 1
+}]

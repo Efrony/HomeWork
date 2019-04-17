@@ -1,0 +1,23 @@
+[{
+    "name": "vitaliy",
+    "email": "efron.vit@gmail.com",
+    "password": "1111",
+    "phone": "",
+    "gender": "m",
+    "id": 1,
+    "cookie": {
+        "pass": "pass_1555450383410",
+        "cart_id": "cart_1555450053555"
+    }
+}, {
+    "name": "admin",
+    "email": "admin@admin.com",
+    "password": "1111",
+    "phone": null,
+    "gender": "m",
+    "cookie": {
+        "pass": null,
+        "cart_id": "cart_1555445210337"
+    },
+    "id": 2
+}]

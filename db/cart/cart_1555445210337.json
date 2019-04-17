@@ -1,0 +1,15 @@
+[{
+    "id": 2,
+    "article": "000002",
+    "name": "Blouse",
+    "price": 68,
+    "category": ["home_page", "red", "xs", "m"],
+    "count": 1
+}, {
+    "id": 3,
+    "article": "000003",
+    "name": "Jacket",
+    "price": 48,
+    "category": ["home_page", "blue", "xs", "s", "l"],
+    "count": 5
+}]
