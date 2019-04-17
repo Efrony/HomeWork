@@ -95,6 +95,31 @@ body {
     width: auto;
   }
 }
+.welcome {
+  padding: 50px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 1140px;
+}
+.welcome .collection {
+  color: #f16d7f;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+.welcome img {
+  margin: 16px;
+}
+.welcome .heading {
+  color: #4d4d4d;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 24px;
+  text-transform: uppercase;
+}
 section {
   display: flex;
   border-bottom: 1px solid #eaeaea;

@@ -62,7 +62,30 @@
         <section>
             <authorized-component  :api_url="API_URL">
                 <template v-slot:login_component>
-                    Вы авторизованы. Добро пожаловать в ЛК
+                    <div class="welcome">
+                        <p class="collection">MY ACCOUNT</p> <img src="img/hot_deals/line-border-pink.png" alt="">
+                        <p class="heading">WELCOME</p>
+                    
+                    <form name="registr" id="registr" class="data-1">
+                            <p class="point inp"> NAME</p>
+                            <input type="text" name="name">
+                            <p class="point inp">EMAIL ADDRESS</p>
+                            <input  type="email" name="email">
+                            <p class="point inp"> PASSWORD</p>
+                            <input type="password" name="password">
+                            <p class="point inp">PHONE</p>
+                            <input type="text" name="phone">
+                            <div class="point">
+                                <p class="point inp">GENDER</p>
+                                <input type="radio" name='choice' id="ch-1" value="m" checked>
+                                <label for="ch-1">M</label><br>
+                                <input type="radio" name='choice' id="ch-2" value="w" checked>
+                                <label for="ch-2">W</label>
+                            </div>
+                            <p id="errors"></p>
+                            <input type="submit" value="CHANGE">
+                        </form>
+                    </div>
                 </template>
             </authorized-component>
         </section>

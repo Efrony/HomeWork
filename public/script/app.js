@@ -440,7 +440,6 @@ Vue.component('comments-post-component', { // размещение нового 
             messageComment: null,
         }
     },
-
     methods: {
         send_comment(e) {
             e.preventDefault()
@@ -511,7 +510,6 @@ const app = new Vue({
             .then(() => {
                 this.searchedItems = this.productList
             })
-
     },
 })
 

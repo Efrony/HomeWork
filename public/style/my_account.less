@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
+
 body {
     font-family: Lato, sans-serif;
 }
@@ -13,6 +14,7 @@ body {
     height: 56px;
     border: 1px solid #ececec;
     background-color: #ffffff;
+
     ul {
         margin: 0 auto;
         width: 680px;
@@ -20,8 +22,10 @@ body {
         justify-content: space-between;
         align-items: center;
         list-style-type: none;
+
         li {
             height: 56px;
+
             a {
                 text-decoration: none;
                 color: #222222;
@@ -31,7 +35,8 @@ body {
                 padding: 17px 10px;
             }
         }
-        a:hover{
+
+        a:hover {
             border-bottom: 3px solid #ef5b70;
         }
     }
@@ -68,17 +73,20 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     p {
         color: #f16d7f;
         font-size: 24px;
         font-weight: 900;
         text-transform: uppercase;
     }
+
     nav {
         font-size: 14px;
         text-transform: uppercase;
         color: #636363;
         font-weight: 300;
+
         span {
             font-weight: 700;
             color: #f16d7f;
@@ -108,25 +116,58 @@ body {
     }
 }
 
+.welcome {
+    padding: 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 1140px;
+    .collection {
+        color: #f16d7f;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 24px;
+        text-transform: uppercase;
+    }
+
+    img {
+        margin: 16px;
+    }
+
+    .heading {
+        color: #4d4d4d;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 24px;
+        text-transform: uppercase;
+    }
+}
+
 section {
     display: flex;
     border-bottom: 1px solid #eaeaea;
-    & > div {
+
+    &>div {
         display: flex;
         width: 100%;
     }
+
     .data-1 {
         width: 100%;
         padding-left: 25px;
         margin-top: 85px;
+
         input[type='submit'] {
             margin-top: 10px;
         }
     }
+
     .data-2 {
         width: 100%;
         margin-top: 110px;
     }
+
     h5 {
         margin: 0 0 33px -25px;
         color: #222222;
@@ -134,33 +175,40 @@ section {
         font-weight: 900;
         text-transform: uppercase;
     }
+
     .point {
         color: #222222;
         font-size: 13px;
         font-weight: 700;
         text-transform: uppercase;
         margin: 27px 0 8px 0;
+
         input {
             margin-bottom: 10px;
         }
     }
+
     .about {
         color: #b3b2b2;
         font-size: 13px;
         font-weight: 400;
         margin-bottom: 20px;
     }
+
     .aboutLast {
         margin-top: -15px;
     }
+
     .red {
         color: #ff0d0d;
         font-size: 13px;
         font-weight: 400;
     }
+
     .inp {
         margin-top: 20px;
     }
+
     input[type='submit'] {
         margin: 30px 0 75px 0;
         border: 1px solid #eaeaea;
@@ -171,11 +219,13 @@ section {
         font-weight: 700;
         text-transform: uppercase;
         cursor: pointer;
+
         &:hover {
             background-color: #f16d7f;
             color: #fff;
         }
     }
+
     input[type='text'],
     input[type='email'],
     input[type='password'] {
@@ -185,6 +235,7 @@ section {
         padding: 0 15px;
         width: 70%;
     }
+
     #errors {
         color: red;
         font-weight: bold;
@@ -216,10 +267,12 @@ details summary::-webkit-details-marker {
 }
 
 @media (max-width: 630px) {
+
     section .data-1,
     section .data-2 {
         margin: 15px;
     }
+
     section input[type='submit'] {
         margin: 15px;
     }
